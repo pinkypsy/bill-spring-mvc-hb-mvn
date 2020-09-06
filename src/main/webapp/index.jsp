@@ -1,0 +1,1 @@
+<%response.sendRedirect("bill/addIndicationsForm");%>
