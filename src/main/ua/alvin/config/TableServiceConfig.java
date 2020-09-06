@@ -1,4 +1,4 @@
-package main.ua.alvin.config;
+/*package main.ua.alvin.config;
 
 import main.ua.alvin.service.TableService;
 import main.ua.alvin.service.TariffsTableService;
@@ -17,3 +17,4 @@ public class TableServiceConfig {
     }
 
 }
+*/

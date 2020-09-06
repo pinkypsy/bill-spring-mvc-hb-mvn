@@ -15,6 +15,7 @@ public class TariffsTableService implements TableService{
 //    @Qualifier(value = "tablesDAOImpl")//not necessary clarification, but for the readability purpose
     private TablesDAO tablesDAO;
 
+
     @Transactional
     @Override
     public void save(BillTable billTable) {

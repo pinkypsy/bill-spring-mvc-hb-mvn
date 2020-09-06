@@ -11,6 +11,12 @@ public class TablesDAOImpl implements TablesDAO{
     @Autowired
     private SessionFactory sessionFactory;
 
+
+    public TablesDAOImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+        System.out.println(2);
+    }
+
     @Override
     public void save(BillTable billTable) {
 

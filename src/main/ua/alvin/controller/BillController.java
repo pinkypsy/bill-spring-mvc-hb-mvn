@@ -1,6 +1,5 @@
 package main.ua.alvin.controller;
 
-import main.ua.alvin.config.TableServiceConfig;
 import main.ua.alvin.entity.CountedBillTable;
 import main.ua.alvin.entity.FixedBillTable;
 import main.ua.alvin.entity.TariffsTable;
@@ -25,8 +24,8 @@ public class BillController {
 //            "applicationContextMVC.xml"
 //    );
 
-//    @Autowired
-//     TableService tableService = new TariffsTableService();
+    @Autowired
+     TableService tableService;
 
     @GetMapping("/checkPage")
     public String checkPage() {
@@ -50,7 +49,7 @@ public class BillController {
 
     @RequestMapping("/saveTariffs")
     public String saveTariffs(@ModelAttribute("tariffsTable") TariffsTable tariffsTable){
-        TableService tableService = new TariffsTableService();
+//        TableService tableService = new TariffsTableService();
 
 //        tableService = context.getBean("tariffsTableService", TariffsTableService.class);
         System.out.println("tariffsTable " + tariffsTable);
