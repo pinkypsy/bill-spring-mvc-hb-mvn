@@ -3,6 +3,7 @@ package main.ua.alvin.service;
 import main.ua.alvin.dao.TablesDAO;
 import main.ua.alvin.dao.TablesDAOImpl;
 import main.ua.alvin.entity.BillTable;
+import main.ua.alvin.entity.CountedBillTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -24,4 +25,14 @@ public class TariffsTableService implements TableService{
         tablesDAO.save(billTable);
 
     }
+
+    @Override
+    public CountedBillTable getPreviousCountedBill() {
+        return new CountedBillTable();//temp null object
+    }
+
+//    @Override
+//    public CountedBillTable getPreviousCountableBill(int id) {
+//        return null;
+//    }
 }

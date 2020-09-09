@@ -41,6 +41,10 @@ public class TariffsTable implements BillTable {
     @Column(name = "valid_by_date")
     private Date dateTariffIsValid;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "result_id")
+    private ResultBillTable resultBillTable;
+
     public int getId() {
         return id;
     }

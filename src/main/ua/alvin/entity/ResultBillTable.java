@@ -1,8 +1,14 @@
 package main.ua.alvin.entity;
 
+import main.ua.alvin.service.ResultBillTableService;
+import main.ua.alvin.service.TableService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.beans.factory.annotation.Qualifier;
+
 import javax.persistence.*;
 import java.util.Date;
-
+//@Configurable
 @Entity
 @Table(name = "result_bill")
 public class ResultBillTable implements BillTable {
@@ -44,6 +50,14 @@ public class ResultBillTable implements BillTable {
 
     @OneToOne(mappedBy = "resultBillTable", cascade = CascadeType.ALL)
     private FixedBillTable fixedBillTable;
+
+    @OneToOne(mappedBy = "resultBillTable", cascade = CascadeType.ALL)
+    private TariffsTable tariffsTable;
+
+   /* @Qualifier(value = "resultBillTableService")
+    @Transient
+    @Autowired
+    private TableService tableService;*/
 
     public int getId() {
         return id;
@@ -141,6 +155,14 @@ public class ResultBillTable implements BillTable {
         this.fixedBillTable = fixedBillTable;
     }
 
+    public TariffsTable getTariffsTable() {
+        return tariffsTable;
+    }
+
+    public void setTariffsTable(TariffsTable tariffsTable) {
+        this.tariffsTable = tariffsTable;
+    }
+
     @Override
     public String toString() {
         return "ResultBillTable{" +
@@ -157,5 +179,27 @@ public class ResultBillTable implements BillTable {
                 ", countedBillTable=" + countedBillTable +
                 ", fixedBillTable=" + fixedBillTable +
                 '}';
+    }
+
+    public void computeResult(ResultBillTable resultBillTable, CountedBillTable countedBillTable, TableService tableService /*, int id*/) {
+
+        System.out.println(resultBillTable);
+
+        CountedBillTable previousMonthBill = tableService.getPreviousCountedBill(/*id*/);
+
+        System.out.println("previousMonthBill " + previousMonthBill);
+
+
+        System.out.println("countedBillTable " + countedBillTable);
+
+        int resultColdWater =
+                (countedBillTable.getColdWater() - previousMonthBill.getColdWater()) *
+                        resultBillTable.getTariffsTable().getColdWaterTariff();
+
+        resultBillTable.setColdWater(resultColdWater);
+
+        tableService.save(resultBillTable);
+
+        System.out.println("COMPUTE");
     }
 }
