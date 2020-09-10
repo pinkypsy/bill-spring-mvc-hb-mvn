@@ -39,8 +39,8 @@ public class BillController {
         return "check";
     }
 
+//    @ModelAttribute("cat")
     @RequestMapping("/addIndicationsForm")
-//    public String addIndications(Model model) {
     public String addIndications(Model model) {
 
         model.addAttribute("tariffsTable", new TariffsTable());
@@ -52,6 +52,13 @@ public class BillController {
         
         return "bill-form";
     }
+
+//    @ModelAttribute
+//    public void setAttributes(Model model) {
+//        model.addAttribute("tariffsTable", new TariffsTable());
+//        model.addAttribute("countedBillTable", new CountedBillTable());
+//        model.addAttribute("fixedBillTable", new FixedBillTable());
+//    }
 
     @RequestMapping("/saveTariffs")
     public String saveTariffs(

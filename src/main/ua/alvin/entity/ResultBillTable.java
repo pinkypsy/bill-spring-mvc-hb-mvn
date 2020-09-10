@@ -198,6 +198,8 @@ public class ResultBillTable implements BillTable {
 
         resultBillTable.setColdWater(resultColdWater);
 
+        resultBillTable.setGarbageRemoval(resultBillTable.getFixedBillTable().getGarbageRemovalPrice());
+
         tableService.save(resultBillTable);
 
         System.out.println("COMPUTE");
