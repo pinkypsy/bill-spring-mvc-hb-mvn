@@ -3,13 +3,13 @@
 <html>
 <head>
 
-<%--    <link rel="stylesheet" type="text/css"--%>
-<%--    &lt;%&ndash;the proper app name in curly braces&ndash;%&gt;--%>
-<%--          href="${pageContext.request.contextPath}/resources/css/style.css">--%>
+    <%--    <link rel="stylesheet" type="text/css"--%>
+    <%--    &lt;%&ndash;the proper app name in curly braces&ndash;%&gt;--%>
+    <%--          href="${pageContext.request.contextPath}/resources/css/style.css">--%>
 
-<%--    <link rel="stylesheet" type="text/css"--%>
-<%--    &lt;%&ndash;the proper app name in curly braces&ndash;%&gt;--%>
-<%--          href="${pageContext.request.contextPath}/resources/css/add-customer-style.css">--%>
+    <%--    <link rel="stylesheet" type="text/css"--%>
+    <%--    &lt;%&ndash;the proper app name in curly braces&ndash;%&gt;--%>
+    <%--          href="${pageContext.request.contextPath}/resources/css/add-customer-style.css">--%>
 
     <title>
         Utility Service Indications
@@ -17,120 +17,128 @@
 </head>
 <body>
 
-<div id = "wrapper">
-    <div id = "header">
+<div id="wrapper">
+    <div id="header">
         <h2>Utility Service Indications</h2>
     </div>
 </div>
 
-<div id = "container">
-    <div id = "content">
+<div id="container">
+    <div id="content">
 
 
-
-        <form:form action="saveTariffs"  modelAttribute="tariffsTable" method="POST">
-
+        <form:form action="saveTariffs" method="POST">
             <table>
                 <tbody>
 
                 <tr>
                     <td><label>${message}</label></td>
                 </tr>
+<%--                <tr>--%>
+<%--                    <td><label>Cold water tariff:</label></td>--%>
+<%--                    <td><form:input path="${tariffsTable.coldWaterTariff}" /></td>--%>
+<%--                </tr>--%>
                 <tr>
-                    <td><label>Cold water tariff:</label></td>
-                    <td><form:input path="coldWaterTariff"/></td>
+                    <td><label>Cold water indication:</label></td>
+                    <td><jsp:useBean id="coldWater" scope="request" type="main.ua.alvin.entity.CountedBillTable"/>
+                    <form:input path="${coldWater}" modelAttribute="countedBillTable"/></td>
                 </tr>
+<%--                <tr>--%>
+<%--                    <td><label>Garbage Removal Price:</label></td>--%>
+<%--                    <td><form:input path="${fixedBillTable.garbageRemovalPrice}" /></td>--%>
+<%--                </tr>--%>
 
                 <tr>
-                    <td><label></label></td>
-                    <td><input type="submit" value="Save" class="save"></td>
+                <td><label></label></td>
+                <td><input type="submit" value="Save" class="save"></td>
                 </tr>
 
                 </tbody>
             </table>
 
-            <form:form action="saveTariffs"  modelAttribute="countedBillTable" method="POST">
-<%--                <form:hidden path="id"/>--%>
-                <table>
-                    <tbody>
+            <%--            <form:form action="saveTariffs" modelAttribute="countedBillTable" method="POST">--%>
+            <%--                &lt;%&ndash;                <form:hidden path="id"/>&ndash;%&gt;--%>
+            <%--                <table>--%>
+            <%--                    <tbody>--%>
 
-                    <tr>
-                        <td><label>${message}</label></td>
-                    </tr>
-                    <tr>
-                        <td><label>Cold water indicat:</label></td>
-                        <td><form:input path="coldWater"/></td>
-                    </tr>
+            <%--                    <tr>--%>
+            <%--                        <td><label>${message}</label></td>--%>
+            <%--                    </tr>--%>
+            <%--                    <tr>--%>
+            <%--                        <td><label>Cold water indicat:</label></td>--%>
+            <%--                        <td><form:input path="coldWater"/></td>--%>
+            <%--                    </tr>--%>
 
-                    <tr>
-                        <td><label></label></td>
-                    </tr>
 
-                    </tbody>
-                </table>
+            <%--                    </tbody>--%>
+            <%--                </table>--%>
 
-            </form:form>
+            <%--            </form:form>--%>
 
-            <form:form action="saveTariffs"  modelAttribute="fixedBillTable" method="POST">--%>
+            <%--            <form:form action="saveTariffs" modelAttribute="fixedBillTable" method="POST">--%>
 
-                            <table>
-                                <tbody>
+            <%--                <table>--%>
+            <%--                    <tbody>--%>
 
-                                <tr>
-                                    <td><label>Garbage Removal Price:</label></td>
-                                    <td><form:input path="garbageRemovalPrice"/></td>
-                                </tr>
+            <%--                    <tr>--%>
+            <%--                        <td><label>${message}</label></td>--%>
+            <%--                    </tr>--%>
+            <%--                    <tr>--%>
+            <%--                        <td><label>Garbage Removal Price:</label></td>--%>
+            <%--                        <td><form:input path="garbageRemovalPrice"/></td>--%>
+            <%--                    </tr>--%>
+            <%--                    <tr>--%>
+            <%--                        <td><label></label></td>--%>
+            <%--                        <td><input type="submit" value="Save" class="save"></td>--%>
+            <%--                    </tr>--%>
 
-                                <tr>
-                                    <td><label></label></td>
-                                </tr>
+            <%--                    </tbody>--%>
+            <%--                </table>--%>
 
-                                </tbody>
-                            </table>
+            <%--            </form:form>--%>
 
-                        </form:form>
 
         </form:form>
 
-<%--        <form:form action="saveIndicationsCounted"  modelAttribute="countedBillTable" method="POST">--%>
+        <%--        <form:form action="saveIndicationsCounted"  modelAttribute="countedBillTable" method="POST">--%>
 
-<%--            <table>--%>
-<%--                <tbody>--%>
+        <%--            <table>--%>
+        <%--                <tbody>--%>
 
-<%--                <tr>--%>
-<%--                    <td><label>Cold water indications:</label></td>--%>
-<%--                    <td><form:input path="coldWater"/></td>--%>
-<%--                </tr>--%>
+        <%--                <tr>--%>
+        <%--                    <td><label>Cold water indications:</label></td>--%>
+        <%--                    <td><form:input path="coldWater"/></td>--%>
+        <%--                </tr>--%>
 
-<%--                <tr>--%>
-<%--                    <td><label></label></td>--%>
-<%--                    <td><input type="submit" value="Save" class="save"></td>--%>
-<%--                </tr>--%>
+        <%--                <tr>--%>
+        <%--                    <td><label></label></td>--%>
+        <%--                    <td><input type="submit" value="Save" class="save"></td>--%>
+        <%--                </tr>--%>
 
-<%--                </tbody>--%>
-<%--            </table>--%>
+        <%--                </tbody>--%>
+        <%--            </table>--%>
 
-<%--        </form:form>--%>
+        <%--        </form:form>--%>
 
-<%--        <form:form action="saveFixedValues"  modelAttribute="fixedBillTable" method="POST">--%>
+        <%--        <form:form action="saveFixedValues"  modelAttribute="fixedBillTable" method="POST">--%>
 
-<%--            <table>--%>
-<%--                <tbody>--%>
+        <%--            <table>--%>
+        <%--                <tbody>--%>
 
-<%--                <tr>--%>
-<%--                    <td><label>Garbage Removal Price:</label></td>--%>
-<%--                    <td><form:input path="garbageRemovalPrice"/></td>--%>
-<%--                </tr>--%>
+        <%--                <tr>--%>
+        <%--                    <td><label>Garbage Removal Price:</label></td>--%>
+        <%--                    <td><form:input path="garbageRemovalPrice"/></td>--%>
+        <%--                </tr>--%>
 
-<%--                <tr>--%>
-<%--                    <td><label></label></td>--%>
-<%--                    <td><input type="submit" value="Save" class="save"></td>--%>
-<%--                </tr>--%>
+        <%--                <tr>--%>
+        <%--                    <td><label></label></td>--%>
+        <%--                    <td><input type="submit" value="Save" class="save"></td>--%>
+        <%--                </tr>--%>
 
-<%--                </tbody>--%>
-<%--            </table>--%>
+        <%--                </tbody>--%>
+        <%--            </table>--%>
 
-<%--        </form:form>--%>
+        <%--        </form:form>--%>
 
     </div>
 </div>
