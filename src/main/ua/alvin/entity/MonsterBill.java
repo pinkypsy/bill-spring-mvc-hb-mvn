@@ -4,7 +4,8 @@ import main.ua.alvin.service.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import javax.persistence.Column;
+import java.time.LocalTime;
+import java.util.Calendar;
 import java.util.Date;
 
 //!!!instantly delete when realize how to save in multiple entities fields by one form:form save button!!!
@@ -175,7 +176,67 @@ public class MonsterBill {
         this.billFillingDate = billFillingDate;
     }
 
-    public void computeAndSaveResult() {
+    public ResultBillTable initializeAndReturnResultBillTable() throws Exception {
+        resultBillTable = new ResultBillTable();
+
+        if (initializeAndSaveCountedBillTable() &&
+                initializeAndSaveFixedBillTable() &&
+                initializeAndSaveTariffsTable()) {
+
+            computeResultBill();
+
+            resultBillTable.setCountedBillTable(countedBillTable);
+            resultBillTable.setTariffsTable(tariffsTable);
+            resultBillTable.setFixedBillTable(fixedBillTable);
+            resultBillTable.setIndicationDate(LocalTime.now());
+
+            return resultBillTable;
+
+        } else throw new Exception("null exception");
+    }
+
+
+    private boolean initializeAndSaveCountedBillTable() throws Exception {
+        countedBillTable = new CountedBillTable();
+
+        if (countedBillTable != null) {
+            countedBillTable.setColdWater(coldWater);
+            //add other values
+
+            tableService.save(countedBillTable);//save is needed here for previous Data Base row invocation
+
+            return true;
+//        } else return false;
+        } else throw new Exception("null exception in initializeAndSaveCountedBillTable");
+
+    }
+
+    private boolean initializeAndSaveTariffsTable() throws Exception {
+
+        tariffsTable = new TariffsTable();
+        if (tariffsTable != null) {
+            tariffsTable.setColdWaterTariff(coldWaterTariff);
+            //add other values
+            resultBillTable.setTariffsTable(tariffsTable);
+            return true;
+//        } else return false;
+        } else throw new Exception("null exception in initializeAndSaveTariffsTable");
+    }
+
+    private boolean initializeAndSaveFixedBillTable() throws Exception {
+
+        fixedBillTable = new FixedBillTable();
+
+        if (fixedBillTable != null) {
+            fixedBillTable.setGarbageRemovalPrice(garbageRemovalPrice);
+            //add other values
+            resultBillTable.setFixedBillTable(fixedBillTable);
+            return true;
+//        } else return false;
+        } else throw new Exception("null exception in initializeAndSaveFixedBillTable");
+    }
+
+    public void computeResultBill() {
 
         CountedBillTable previousMonthBill = tableService.getPreviousCountedBill();
 
@@ -184,55 +245,12 @@ public class MonsterBill {
                 (countedBillTable.getColdWater() - previousMonthBill.getColdWater()) *
                         resultBillTable.getTariffsTable().getColdWaterTariff();
 
+        resultBillTable.setColdWater(resultColdWater);
 
-        tableService.save(resultBillTable);
+
 
         System.out.println("COMPUTE");
     }
 
-    private boolean initializeAndSaveCountedBillTable() {
-        if (countedBillTable != null) {
-            countedBillTable.setColdWater(coldWater);
-            //add other values
 
-            tableService.save(countedBillTable);//save is needed here for previous Data Base row invocation
-
-            return true;
-        } else return false;
-
-    }
-
-    private boolean initializeAndSaveTariffsTable() {
-        if (tariffsTable != null) {
-            tariffsTable.setColdWaterTariff(coldWaterTariff);
-            //add other values
-            resultBillTable.setTariffsTable(tariffsTable);
-            return true;
-        } else return false;
-    }
-
-    private boolean initializeAndSaveFixedBillTable() {
-
-        if (fixedBillTable != null) {
-            fixedBillTable.setGarbageRemovalPrice(garbageRemovalPrice);
-            //add other values
-            resultBillTable.setFixedBillTable(fixedBillTable);
-            return true;
-        } else return false;
-    }
-
-    private ResultBillTable initializeAndReturnResultBillTable() throws Exception {
-
-        if (initializeAndSaveCountedBillTable() &&
-                initializeAndSaveFixedBillTable() &&
-                initializeAndSaveTariffsTable()) {
-
-            resultBillTable.setCountedBillTable(countedBillTable);
-            resultBillTable.setTariffsTable(tariffsTable);
-            resultBillTable.setFixedBillTable(fixedBillTable);
-
-            return resultBillTable;
-
-        } else throw new Exception("null exception");
-    }
 }

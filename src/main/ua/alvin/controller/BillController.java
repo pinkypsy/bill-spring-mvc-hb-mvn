@@ -56,8 +56,13 @@ public class BillController {
             @ModelAttribute("monsterBill") MonsterBill monsterBill) {
 
 
-        monsterBill.computeAndSaveResult(tableService);
+//        monsterBill.computeResultBill();
 
+        try {
+            tableService.save(monsterBill.initializeAndReturnResultBillTable());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         message = "Indications has been successfully saved!";

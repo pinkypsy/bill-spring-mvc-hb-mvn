@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import javax.persistence.*;
+import java.time.LocalTime;
 import java.util.Date;
 //@Configurable
 @Entity
@@ -43,7 +44,7 @@ public class ResultBillTable implements BillTable {
     private int garbageRemoval;
 
     @Column(name = "indication_date")
-    private Date indicationDate;
+    private LocalTime indicationDate;
 
     @OneToOne(mappedBy = "resultBillTable", cascade = CascadeType.ALL)
     private CountedBillTable countedBillTable;
@@ -131,11 +132,11 @@ public class ResultBillTable implements BillTable {
         this.garbageRemoval = garbageRemoval;
     }
 
-    public Date getIndicationDate() {
+    public LocalTime getIndicationDate() {
         return indicationDate;
     }
 
-    public void setIndicationDate(Date indicationDate) {
+    public void setIndicationDate(LocalTime indicationDate) {
         this.indicationDate = indicationDate;
     }
 
