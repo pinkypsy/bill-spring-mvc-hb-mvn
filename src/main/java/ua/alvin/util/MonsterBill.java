@@ -1,15 +1,12 @@
 package ua.alvin.util;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import ua.alvin.entity.CountedBillTable;
 import ua.alvin.entity.FixedBillTable;
 import ua.alvin.entity.ResultBillTable;
 import ua.alvin.entity.TariffsTable;
-import ua.alvin.service.CountedBillTableService;
 import ua.alvin.service.TableService;
-import java.time.LocalTime;
+
 import java.util.Date;
 
 //!!!instantly delete when realize how to save in multiple entities fields by one form:form save button!!!
@@ -188,7 +185,7 @@ public class MonsterBill {
                 initializeAndSaveFixedBillTable() &&
                 initializeAndSaveTariffsTable()) {
 
-            computeResultBill();
+            setResultBill();
 
             resultBillTable.setCountedBillTable(countedBillTable);
             resultBillTable.setTariffsTable(tariffsTable);
@@ -242,10 +239,9 @@ public class MonsterBill {
         } else throw new Exception("null exception in initializeAndSaveFixedBillTable");
     }
 
-    public void computeResultBill() {
+    private void computeAndSetCountedValues(){
 
         CountedBillTable previousMonthBill = tableService.getPreviousCountedBill();
-
 
         int resultColdWater =
                 (countedBillTable.getColdWater() - previousMonthBill.getColdWater()) *
@@ -253,9 +249,14 @@ public class MonsterBill {
 
         resultBillTable.setColdWater(resultColdWater);
 
+    }
 
+    public void setResultBill() {
 
-        System.out.println("COMPUTE");
+        computeAndSetCountedValues();
+
+        resultBillTable.setGarbageRemoval(garbageRemovalPrice);
+
     }
 
 
