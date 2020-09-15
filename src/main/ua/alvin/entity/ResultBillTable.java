@@ -181,27 +181,5 @@ public class ResultBillTable implements BillTable {
                 '}';
     }
 
-    public void computeResult(ResultBillTable resultBillTable, CountedBillTable countedBillTable, TableService tableService /*, int id*/) {
 
-        System.out.println(resultBillTable);
-
-        CountedBillTable previousMonthBill = tableService.getPreviousCountedBill(/*id*/);
-
-        System.out.println("previousMonthBill " + previousMonthBill);
-
-
-        System.out.println("countedBillTable " + countedBillTable);
-
-        int resultColdWater =
-                (countedBillTable.getColdWater() - previousMonthBill.getColdWater()) *
-                        resultBillTable.getTariffsTable().getColdWaterTariff();
-
-        resultBillTable.setColdWater(resultColdWater);
-
-        resultBillTable.setGarbageRemoval(resultBillTable.getFixedBillTable().getGarbageRemovalPrice());
-
-        tableService.save(resultBillTable);
-
-        System.out.println("COMPUTE");
-    }
 }

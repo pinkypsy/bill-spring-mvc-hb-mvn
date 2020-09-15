@@ -27,24 +27,26 @@
     <div id="content">
 
 
-        <form:form action="saveTariffs" method="POST">
+        <form:form action="saveTariffs" modelAttribute="monsterBill" method="POST">
             <table>
                 <tbody>
 
                 <tr>
                     <td><label>${message}</label></td>
                 </tr>
-<%--                <tr>--%>
-<%--                    <td><label>Cold water tariff:</label></td>--%>
-<%--                    <td><form:input path="${tariffsTable.coldWaterTariff}" /></td>--%>
-<%--                </tr>--%>
+
                 <tr>
-                    <td><label>Cold water indication:</label></td>
-                    <td><form:input path="${countedBillTable.coldWater}" /></td>
+                    <td><label>Cold Water Tariff:</label></td>
+                    <td><form:input path="coldWaterTariff" /></td>
+                </tr>
+
+                <tr>
+                    <td><label>Cold Water indication:</label></td>
+                    <td><form:input path="coldWater" /></td>
                 </tr>
                 <tr>
                     <td><label>Garbage Removal Price:</label></td>
-                    <td><form:input path="${fixedBillTable.garbageRemovalPrice}" /></td>
+                    <td><form:input path="garbageRemovalPrice" /></td>
                 </tr>
 
                 <tr>

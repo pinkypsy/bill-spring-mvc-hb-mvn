@@ -9,9 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
 @RequestMapping("/bill")
 public class BillController {
@@ -39,6 +36,7 @@ public class BillController {
     @RequestMapping("/addIndicationsForm")
     public String addIndications(Model model) {
 
+        model.addAttribute("monsterBill", new MonsterBill());
 
 
 
@@ -53,47 +51,12 @@ public class BillController {
     }
 
 
-//    @RequestMapping("/saveTariffs")
-//    public String saveTariffs(
-//            @ModelAttribute("tariffsTable") TariffsTable tariffsTable,
-//            @ModelAttribute("countedBillTable") CountedBillTable countedBillTable,
-//            @ModelAttribute("fixedBillTable") FixedBillTable fixedBillTable) {
-//
-//        ResultBillTable resultBillTable = new ResultBillTable();
-//
-//        tableService.save(countedBillTable);
-//
-//        System.out.println("getGarbageRemovalPrice " + fixedBillTable.getGarbageRemovalPrice());
-//
-//        resultBillTable.setFixedBillTable(fixedBillTable);
-//        resultBillTable.setTariffsTable(tariffsTable);
-//
-//        resultBillTable.computeResult(resultBillTable, countedBillTable, tableService/*,id*/);
-//
-//
-//
-//        message = "Indications has been successfully saved!";
-//
-//
-//        return "redirect:/bill/addIndicationsForm";
-//    }
-
     @RequestMapping("/saveTariffs")
     public String saveTariffs(
-            @ModelAttribute("tariffsTable") TariffsTable tariffsTable,
-            @ModelAttribute("countedBillTable") CountedBillTable countedBillTable,
-            @ModelAttribute("fixedBillTable") FixedBillTable fixedBillTable) {
+            @ModelAttribute("monsterBill") MonsterBill monsterBill) {
 
-        ResultBillTable resultBillTable = new ResultBillTable();
 
-        tableService.save(countedBillTable);
-
-        System.out.println("getGarbageRemovalPrice " + fixedBillTable.getGarbageRemovalPrice());
-
-        resultBillTable.setFixedBillTable(fixedBillTable);
-        resultBillTable.setTariffsTable(tariffsTable);
-
-        resultBillTable.computeResult(resultBillTable, countedBillTable, tableService/*,id*/);
+        monsterBill.computeAndSaveResult(tableService);
 
 
 
