@@ -8,10 +8,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class ResultBillTableService implements TableService {
+public class ResultBillTableService extends AbstractTableService {
+    //    @Qualifier(value = "tablesDAOImpl")//not necessary clarification, but for the readability purpose
+    private final TablesDAO tablesDAO;
+
     @Autowired
-//    @Qualifier(value = "tablesDAOImpl")//not necessary clarification, but for the readability purpose
-    private TablesDAO tablesDAO;
+    public ResultBillTableService(TablesDAO tablesDAO) {
+        super(tablesDAO);
+        this.tablesDAO = tablesDAO;
+    }
 
     @Transactional
     @Override
@@ -19,11 +24,4 @@ public class ResultBillTableService implements TableService {
         tablesDAO.save(billTable);
     }
 
-
-    @Override
-    @Transactional
-    public CountedBillTable getPreviousCountedBill(/*int id*/) {
-
-        return tablesDAO.getPreviousCountedBill(/*id*/);
-    }
 }

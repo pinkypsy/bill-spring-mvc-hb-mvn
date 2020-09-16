@@ -44,6 +44,21 @@
                     <td><label>Cold Water indication:</label></td>
                     <td><form:input path="coldWater" /></td>
                 </tr>
+
+                <tr>
+                    <td><label>Electricity Before 100 kVt Tariff:</label></td>
+                    <td><form:input path="electricityBefore100Tariff" /></td>
+                </tr>
+
+                <tr>
+                    <td><label>Electricity After 100 kVt Tariff:</label></td>
+                    <td><form:input path="electricityAfter100Tariff" /></td>
+                </tr>
+
+                <tr>
+                    <td><label>Electricity indication:</label></td>
+                    <td><form:input path="electricity" /></td>
+                </tr>
                 <tr>
                     <td><label>Garbage Removal Price:</label></td>
                     <td><form:input path="garbageRemovalPrice" /></td>

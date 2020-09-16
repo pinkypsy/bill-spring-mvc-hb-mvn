@@ -56,6 +56,140 @@ public class MonsterBill {
 
     private Date billFillingDate;
 
+    public ResultBillTable initializeAndReturnResultBillTable(TableService tableService) throws Exception {
+        resultBillTable = new ResultBillTable();
+
+        this.tableService = tableService;
+
+        if (initializeAndSaveCountedBillTable() &&
+                initializeAndSaveFixedBillTable() &&
+                initializeAndSaveTariffsTable()) {
+
+            setResultBill();
+
+            resultBillTable.setCountedBillTable(countedBillTable);
+            resultBillTable.setTariffsTable(tariffsTable);
+            resultBillTable.setFixedBillTable(fixedBillTable);
+//            resultBillTable.setIndicationDate(LocalTime.now());
+
+            return resultBillTable;
+
+        } else throw new Exception("null exception");
+    }
+
+
+    private boolean initializeAndSaveCountedBillTable() throws Exception {
+        countedBillTable = new CountedBillTable();
+
+        countedBillTable.setColdWater(coldWater);
+        countedBillTable.setElectricity(electricity);
+        //add other values
+        System.out.println(tableService);
+
+       /* tableService.save(countedBillTable);*///save is needed here for previous Data Base row invocation
+
+        return true;
+
+    }
+
+    private boolean initializeAndSaveTariffsTable() throws Exception {
+
+        tariffsTable = new TariffsTable();
+        tariffsTable.setColdWaterTariff(coldWaterTariff);
+        tariffsTable.setElectricityBefore100Tariff(electricityBefore100Tariff);
+        tariffsTable.setElectricityAfter100Tariff(electricityAfter100Tariff);
+        //add other values
+        resultBillTable.setTariffsTable(tariffsTable);
+        return true;
+    }
+
+    private boolean initializeAndSaveFixedBillTable() throws Exception {
+
+        fixedBillTable = new FixedBillTable();
+
+        fixedBillTable.setGarbageRemovalPrice(garbageRemovalPrice);
+        //add other values
+        resultBillTable.setFixedBillTable(fixedBillTable);
+        return true;
+    }
+
+
+    private void setResultBill() {
+
+        setCountedValues();
+
+        resultBillTable.setGarbageRemoval(garbageRemovalPrice);
+
+    }
+
+    private void setCountedValues() {
+
+        CountedBillTable previousMonthBill = tableService.getPreviousCountedBill();
+
+        resultBillTable.setColdWater(computeColdWaterPrice(previousMonthBill));
+
+        resultBillTable.setElectricity(computeElectricityPrice(previousMonthBill));
+
+
+    }
+
+    private int computeColdWaterPrice(CountedBillTable previousMonthBill) {
+        System.out.println(countedBillTable);
+        System.out.println(previousMonthBill);
+
+        return (countedBillTable.getColdWater() - previousMonthBill.getColdWater()) *
+                resultBillTable.getTariffsTable().getColdWaterTariff();
+
+    }
+
+    private int computeHotWaterPrice(CountedBillTable previousMonthBill) {
+
+        return (countedBillTable.getHotWater() - previousMonthBill.getHotWater()) *
+                resultBillTable.getTariffsTable().getHotWaterTariff();
+
+    }
+
+    private int computeGasSupplyPrice(CountedBillTable previousMonthBill) {
+
+        return (countedBillTable.getGasSupply() - previousMonthBill.getGasSupply()) *
+                resultBillTable.getTariffsTable().getGasSupplyTariff();
+
+    }
+
+    private int computeSewagePrice(CountedBillTable previousMonthBill) {
+
+        return (countedBillTable.getColdWater() + countedBillTable.getHotWater()) *
+                resultBillTable.getTariffsTable().getSewageTariff();
+
+    }
+
+    private int computeElectricityPrice(CountedBillTable previousMonthBill) {
+
+        int resultPrice = 0;
+
+        int electricityValue = countedBillTable.getElectricity() - previousMonthBill.getElectricity();
+
+        System.out.println("electricityValue " + electricityValue);
+
+        if (electricityValue <= 100) {
+            System.out.println("electricityValue <= 100");
+            System.out.println("getElectricityBefore100Tariff " + electricityBefore100Tariff);
+            resultPrice = electricityValue * tariffsTable.getElectricityBefore100Tariff();
+        } else /*if (electricityValue > 100)*/ {
+            System.out.println("electricityValue > 100");
+            System.out.println("getElectricityAfter100Tariff " + electricityAfter100Tariff);
+            int priceBefore100 = (electricityValue - Math.abs(100 - electricityValue))
+                    * tariffsTable.getElectricityBefore100Tariff(); // 130 - (100-130)
+
+            int priceAfter100 = Math.abs(100 - electricityValue)
+                    * tariffsTable.getElectricityAfter100Tariff();
+
+            resultPrice = priceBefore100 + priceAfter100;
+        }
+        return resultPrice;
+    }
+
+
     public int getColdWaterTariff() {
         return coldWaterTariff;
     }
@@ -175,89 +309,5 @@ public class MonsterBill {
     public void setBillFillingDate(Date billFillingDate) {
         this.billFillingDate = billFillingDate;
     }
-
-    public ResultBillTable initializeAndReturnResultBillTable(TableService tableService) throws Exception {
-        resultBillTable = new ResultBillTable();
-
-        this.tableService = tableService;
-
-        if (initializeAndSaveCountedBillTable() &&
-                initializeAndSaveFixedBillTable() &&
-                initializeAndSaveTariffsTable()) {
-
-            setResultBill();
-
-            resultBillTable.setCountedBillTable(countedBillTable);
-            resultBillTable.setTariffsTable(tariffsTable);
-            resultBillTable.setFixedBillTable(fixedBillTable);
-//            resultBillTable.setIndicationDate(LocalTime.now());
-
-            return resultBillTable;
-
-        } else throw new Exception("null exception");
-    }
-
-
-    private boolean initializeAndSaveCountedBillTable() throws Exception {
-        countedBillTable = new CountedBillTable();
-
-        if (countedBillTable != null) {
-            countedBillTable.setColdWater(coldWater);
-            //add other values
-            System.out.println(tableService);
-
-            tableService.save(countedBillTable);//save is needed here for previous Data Base row invocation
-
-            return true;
-//        } else return false;
-        } else throw new Exception("null exception in initializeAndSaveCountedBillTable");
-
-    }
-
-    private boolean initializeAndSaveTariffsTable() throws Exception {
-
-        tariffsTable = new TariffsTable();
-        if (tariffsTable != null) {
-            tariffsTable.setColdWaterTariff(coldWaterTariff);
-            //add other values
-            resultBillTable.setTariffsTable(tariffsTable);
-            return true;
-//        } else return false;
-        } else throw new Exception("null exception in initializeAndSaveTariffsTable");
-    }
-
-    private boolean initializeAndSaveFixedBillTable() throws Exception {
-
-        fixedBillTable = new FixedBillTable();
-
-        if (fixedBillTable != null) {
-            fixedBillTable.setGarbageRemovalPrice(garbageRemovalPrice);
-            //add other values
-            resultBillTable.setFixedBillTable(fixedBillTable);
-            return true;
-//        } else return false;
-        } else throw new Exception("null exception in initializeAndSaveFixedBillTable");
-    }
-
-    private void computeAndSetCountedValues(){
-
-        CountedBillTable previousMonthBill = tableService.getPreviousCountedBill();
-
-        int resultColdWater =
-                (countedBillTable.getColdWater() - previousMonthBill.getColdWater()) *
-                        resultBillTable.getTariffsTable().getColdWaterTariff();
-
-        resultBillTable.setColdWater(resultColdWater);
-
-    }
-
-    public void setResultBill() {
-
-        computeAndSetCountedValues();
-
-        resultBillTable.setGarbageRemoval(garbageRemovalPrice);
-
-    }
-
 
 }

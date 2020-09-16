@@ -8,29 +8,25 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.alvin.entity.CountedBillTable;
 
 @Service
-public class TariffsTableService implements TableService{
+public class TariffsTableService extends AbstractTableService {
+
+    //    @Qualifier(value = "tablesDAOImpl")//not necessary clarification, but for the readability purpose
+    private final TablesDAO tablesDAO;
 
     @Autowired
-//    @Qualifier(value = "tablesDAOImpl")//not necessary clarification, but for the readability purpose
-    private TablesDAO tablesDAO;
+    public TariffsTableService(TablesDAO tablesDAO) {
+        super(tablesDAO);
+        this.tablesDAO = tablesDAO;
+    }
 
 
     @Transactional
     @Override
     public void save(BillTable billTable) {
-        System.out.println("inside TTService " + billTable);
-        System.out.println("inside TTService tablesDAO " + tablesDAO);
+
         tablesDAO.save(billTable);
 
     }
 
-    @Override
-    public CountedBillTable getPreviousCountedBill() {
-        return new CountedBillTable();//temp null object
-    }
 
-//    @Override
-//    public CountedBillTable getPreviousCountableBill(int id) {
-//        return null;
-//    }
 }

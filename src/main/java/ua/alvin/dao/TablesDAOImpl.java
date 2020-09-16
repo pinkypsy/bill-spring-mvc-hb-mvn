@@ -12,20 +12,15 @@ import java.math.BigInteger;
 @Repository
 public class TablesDAOImpl implements TablesDAO {
 
-    private static long lastId;
 
-    @Autowired
     private SessionFactory sessionFactory;
 
-
+    @Autowired
     public TablesDAOImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
         System.out.println(2);
     }
 
-    public static long getLastId() {
-        return lastId;
-    }
 
     @Override
     public void save(BillTable billTable) {
@@ -38,14 +33,9 @@ public class TablesDAOImpl implements TablesDAO {
         session.saveOrUpdate(billTable);
 
 
-//        session.close();
-
-//        System.out.println("TablesDAOImpl save()");
-
-
     }
 
-    @Override
+  /*  @Override
     public CountedBillTable getPreviousCountedBill() {
 
         Session session = sessionFactory.getCurrentSession();
@@ -57,5 +47,21 @@ public class TablesDAOImpl implements TablesDAO {
 
         System.out.println("lastId " + lastId1);
         return session.get(CountedBillTable.class, (int)(lastId1 - 1));
+    }*/
+
+    @Override
+    public CountedBillTable getPreviousCountedBill() {
+
+        Session session = sessionFactory.getCurrentSession();
+
+
+        int lastId =
+                ((BigInteger) session
+                        .createSQLQuery(
+                                "SELECT MAX(id) from counted_bill").setMaxResults(1).uniqueResult()).intValue();
+
+
+        System.out.println("lastId " + lastId);
+        return session.get(CountedBillTable.class, (lastId - 1));
     }
 }

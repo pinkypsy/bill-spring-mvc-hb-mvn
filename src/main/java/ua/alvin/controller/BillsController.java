@@ -11,17 +11,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/bill")
-public class BillController {
+public class BillsController {
 
-    @Qualifier(value = "resultBillTableService")
-    @Autowired
-    TableService resultBillTableService;
+    final TableService resultBillTableService;
 
-    @Qualifier(value = "countedBillTableService")
-    @Autowired
-    TableService countedBillTableService;
+    final TableService countedBillTableService;
 
     private String message = " ";
+
+    @Autowired
+    public BillsController(@Qualifier(value = "countedBillTableService") TableService countedBillTableService,
+                           @Qualifier(value = "resultBillTableService") TableService resultBillTableService) {
+        this.countedBillTableService = countedBillTableService;
+        this.resultBillTableService = resultBillTableService;
+    }
 
 
 //    @RequestMapping("/addIndicationsForm")

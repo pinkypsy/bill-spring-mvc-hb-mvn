@@ -1,4 +1,4 @@
-package ua.alvin;
+package trials;
 
 import java.sql.SQLException;
 
@@ -25,6 +25,13 @@ public class Main {
 //        Integer i = null;
 //
 //        i.hashCode();
+
+        Int i = new Ci();
+        i.h();
     }
+
+
+
+
 
 }
