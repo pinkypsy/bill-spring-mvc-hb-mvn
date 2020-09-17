@@ -35,21 +35,21 @@ public class TablesDAOImpl implements TablesDAO {
 
     }
 
-  /*  @Override
+    @Override
     public CountedBillTable getPreviousCountedBill() {
 
         Session session = sessionFactory.getCurrentSession();
 
 
-        Long lastId1 = ((BigInteger) session.createSQLQuery("SELECT LAST_INSERT_ID() from counted_bill").setMaxResults(1).uniqueResult()).longValue();
+        int lastId1 = ((BigInteger) session.createSQLQuery("SELECT LAST_INSERT_ID() from counted_bill").setMaxResults(1).uniqueResult()).intValue();
 //        lastId = ((BigInteger) session.createSQLQuery("SELECT LAST_INSERT_ID() from counted_bill").uniqueResult()).longValue();
 
 
         System.out.println("lastId " + lastId1);
-        return session.get(CountedBillTable.class, (int)(lastId1 - 1));
-    }*/
+        return session.get(CountedBillTable.class, (lastId1 - 1));
+    }
 
-    @Override
+  /*  @Override
     public CountedBillTable getPreviousCountedBill() {
 
         Session session = sessionFactory.getCurrentSession();
@@ -63,5 +63,5 @@ public class TablesDAOImpl implements TablesDAO {
 
         System.out.println("lastId " + lastId);
         return session.get(CountedBillTable.class, (lastId - 1));
-    }
+    }*/
 }

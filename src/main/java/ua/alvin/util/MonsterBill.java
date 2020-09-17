@@ -1,5 +1,6 @@
 package ua.alvin.util;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import ua.alvin.entity.CountedBillTable;
 import ua.alvin.entity.FixedBillTable;
@@ -15,6 +16,9 @@ import java.util.Date;
 public class MonsterBill {
 
     TableService tableService;
+
+//    @Value("#{ta}")
+//    int electricityTariffBorder;
 
     private CountedBillTable countedBillTable;
     private FixedBillTable fixedBillTable;
@@ -67,9 +71,9 @@ public class MonsterBill {
 
             setResultBill();
 
-            resultBillTable.setCountedBillTable(countedBillTable);
+           /* resultBillTable.setCountedBillTable(countedBillTable);
             resultBillTable.setTariffsTable(tariffsTable);
-            resultBillTable.setFixedBillTable(fixedBillTable);
+            resultBillTable.setFixedBillTable(fixedBillTable);*/
 //            resultBillTable.setIndicationDate(LocalTime.now());
 
             return resultBillTable;
@@ -86,6 +90,8 @@ public class MonsterBill {
         //add other values
         System.out.println(tableService);
 
+        tableService.save(countedBillTable);
+
        /* tableService.save(countedBillTable);*///save is needed here for previous Data Base row invocation
 
         return true;
@@ -99,7 +105,9 @@ public class MonsterBill {
         tariffsTable.setElectricityBefore100Tariff(electricityBefore100Tariff);
         tariffsTable.setElectricityAfter100Tariff(electricityAfter100Tariff);
         //add other values
-        resultBillTable.setTariffsTable(tariffsTable);
+//        resultBillTable.setTariffsTable(tariffsTable);
+
+        tableService.save(tariffsTable);
         return true;
     }
 
@@ -109,7 +117,9 @@ public class MonsterBill {
 
         fixedBillTable.setGarbageRemovalPrice(garbageRemovalPrice);
         //add other values
-        resultBillTable.setFixedBillTable(fixedBillTable);
+//        resultBillTable.setFixedBillTable(fixedBillTable);
+
+        tableService.save(fixedBillTable);
         return true;
     }
 
@@ -134,38 +144,40 @@ public class MonsterBill {
     }
 
     private int computeColdWaterPrice(CountedBillTable previousMonthBill) {
-        System.out.println(countedBillTable);
-        System.out.println(previousMonthBill);
+        System.out.println("countedBillTable " + countedBillTable);
+        System.out.println("previousMonthBill " + previousMonthBill);
 
         return (countedBillTable.getColdWater() - previousMonthBill.getColdWater()) *
-                resultBillTable.getTariffsTable().getColdWaterTariff();
+                tariffsTable.getColdWaterTariff();
 
     }
 
     private int computeHotWaterPrice(CountedBillTable previousMonthBill) {
 
         return (countedBillTable.getHotWater() - previousMonthBill.getHotWater()) *
-                resultBillTable.getTariffsTable().getHotWaterTariff();
+                tariffsTable.getHotWaterTariff();
 
     }
 
     private int computeGasSupplyPrice(CountedBillTable previousMonthBill) {
 
         return (countedBillTable.getGasSupply() - previousMonthBill.getGasSupply()) *
-                resultBillTable.getTariffsTable().getGasSupplyTariff();
+                tariffsTable.getGasSupplyTariff();
 
     }
 
     private int computeSewagePrice(CountedBillTable previousMonthBill) {
 
         return (countedBillTable.getColdWater() + countedBillTable.getHotWater()) *
-                resultBillTable.getTariffsTable().getSewageTariff();
+                tariffsTable.getSewageTariff();
 
     }
 
     private int computeElectricityPrice(CountedBillTable previousMonthBill) {
 
         int resultPrice = 0;
+
+
 
         int electricityValue = countedBillTable.getElectricity() - previousMonthBill.getElectricity();
 

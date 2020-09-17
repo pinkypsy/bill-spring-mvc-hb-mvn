@@ -66,6 +66,7 @@ public class BillsController {
 //        monsterBill.computeResultBill();
 
         try {
+            System.out.println("resultBillTableService " + resultBillTableService);
             resultBillTableService.save(monsterBill.initializeAndReturnResultBillTable(countedBillTableService));
         } catch (Exception e) {
             e.printStackTrace();
