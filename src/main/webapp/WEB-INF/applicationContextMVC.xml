@@ -98,5 +98,5 @@
 <!--        <property name="viewNames" value="*"/>-->
 <!--    </bean>-->
 
-    <util:properties id="tariffs" location="classpath:resources/tariffs.properties" />
+<!--    <util:properties id="tariffs" location="classpath:resources/tariffs.properties" />-->
 </beans>

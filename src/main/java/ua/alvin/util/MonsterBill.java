@@ -17,7 +17,7 @@ public class MonsterBill {
 
     TableService tableService;
 
-//    @Value("#{ta}")
+//    @Value("${electricityTariffBorder}")
 //    int electricityTariffBorder;
 
     private CountedBillTable countedBillTable;
@@ -135,6 +135,11 @@ public class MonsterBill {
     private void setCountedValues() {
 
         CountedBillTable previousMonthBill = tableService.getPreviousCountedBill();
+
+        if (previousMonthBill == null) {
+            // if it is FIRST bill in the DataBase
+            previousMonthBill = new CountedBillTable();
+        }
 
         resultBillTable.setColdWater(computeColdWaterPrice(previousMonthBill));
 

@@ -1,8 +1,16 @@
 package trials;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import java.sql.SQLException;
+import java.util.Map;
 
 public class Main {
+
+//    @Value("#{tariffs}")
+//    Map <String, Integer> electricityTariffBorder;
+
+
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
 //        Class.forName("com.mysql.cj.jdbc.Driver");
 //            String user = "root";
@@ -26,8 +34,7 @@ public class Main {
 //
 //        i.hashCode();
 
-        Int i = new Ci();
-        i.h();
+        new Ci().a();
     }
 
 

@@ -36,7 +36,7 @@ public class TablesDAOImpl implements TablesDAO {
     }
 
     @Override
-    public CountedBillTable getPreviousCountedBill() {
+    public CountedBillTable getPreviousCountedBill()  {
 
         Session session = sessionFactory.getCurrentSession();
 
