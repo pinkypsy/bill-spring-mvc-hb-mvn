@@ -1,10 +1,7 @@
 package ua.alvin.util;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import ua.alvin.entity.CountedBillTable;
 import ua.alvin.entity.FixedBillTable;
 import ua.alvin.entity.ResultBillTable;
@@ -39,18 +36,22 @@ public class MonsterBill {
 
 
     //tariff values
-    @Value("999")
+    @Value("${coldWaterTariff}")
     private int coldWaterTariff;
 
+    @Value("${hotWaterTariff}")
     private int hotWaterTariff;
 
+    @Value("${sewageTariff}")
     private int sewageTariff;
 
-    @Value("999")
+    @Value("${electricityBefore100Tariff}")
     private int electricityBefore100Tariff;
 
+    @Value("${electricityAfter100Tariff}")
     private int electricityAfter100Tariff;
 
+    @Value("${gasSupplyTariff}")
     private int gasSupplyTariff;
 
     //counted bill values
@@ -58,8 +59,6 @@ public class MonsterBill {
     private int hotWater;
 
     private int coldWater;
-
-    private int sewage;
 
     private int electricity;
 
@@ -69,8 +68,10 @@ public class MonsterBill {
 
     private int houseHeatingPrice;
 
+    @Value("${rentServicePrice}")
     private int rentServicePrice;
 
+    @Value("${garbageRemovalPrice}")
     private int garbageRemovalPrice;
 
     private Date billFillingDate;
@@ -144,8 +145,19 @@ public class MonsterBill {
 
         setCountedValues();
 
+
         resultBillTable.setGarbageRemoval(garbageRemovalPrice);
 
+        resultBillTable.setTotalToPay(computeTotalToPay());
+        resultBillTable.setIndicationDate(new Date());
+
+    }
+
+    private int computeTotalToPay() {
+        return resultBillTable.getColdWater() + resultBillTable.getHotWater() +
+                resultBillTable.getElectricity() + resultBillTable.getGarbageRemoval() +
+                resultBillTable.getGasSupply() + resultBillTable.getHouseHeating() +
+                resultBillTable.getRentService() + resultBillTable.getSewage();
     }
 
     private void setCountedValues() {
@@ -285,14 +297,6 @@ public class MonsterBill {
 
     public void setColdWater(int coldWater) {
         this.coldWater = coldWater;
-    }
-
-    public int getSewage() {
-        return sewage;
-    }
-
-    public void setSewage(int sewage) {
-        this.sewage = sewage;
     }
 
     public int getElectricity() {

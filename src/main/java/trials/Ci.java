@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 //@Component
 public class Ci  extends Bi{
 //    @Value("#{systemProperties['mongodb.port'] ?: 27017}")
-@Value("")
-    private String test;
+@Value("${coldWaterTariff}")
+    private int test;
 
 @Override
    public void a(){
@@ -19,11 +19,11 @@ public class Ci  extends Bi{
 //    System.out.println(electricityTariffBorder);
     }
 
-    public void setTest(String test) {
-        this.test = test;
-    }
-
-    public String getTest(){
-        return test;
-    }
+//    public void setTest(String test) {
+//        this.test = test;
+//    }
+//
+//    public String getTest(){
+//        return test;
+//    }
 }

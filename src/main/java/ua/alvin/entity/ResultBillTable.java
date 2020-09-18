@@ -1,7 +1,8 @@
 package ua.alvin.entity;
 
 import javax.persistence.*;
-import java.time.LocalTime;
+import java.util.Date;
+
 //@Configurable
 @Entity
 @Table(name = "result_bill")
@@ -36,8 +37,11 @@ public class ResultBillTable implements BillTable {
     @Column(name = "garbage_removal_cost")
     private int garbageRemoval;
 
+    @Column(name = "total_to_pay")
+    private int totalToPay;
+
     @Column(name = "indication_date")
-    private LocalTime indicationDate;
+    private Date indicationDate;
 
     @OneToOne(mappedBy = "resultBillTable", cascade = CascadeType.ALL)
     private CountedBillTable countedBillTable;
@@ -125,11 +129,11 @@ public class ResultBillTable implements BillTable {
         this.garbageRemoval = garbageRemoval;
     }
 
-    public LocalTime getIndicationDate() {
+    public Date getIndicationDate() {
         return indicationDate;
     }
 
-    public void setIndicationDate(LocalTime indicationDate) {
+    public void setIndicationDate(Date indicationDate) {
         this.indicationDate = indicationDate;
     }
 
@@ -176,4 +180,11 @@ public class ResultBillTable implements BillTable {
     }
 
 
+    public int getTotalToPay() {
+        return totalToPay;
+    }
+
+    public void setTotalToPay(int totalToPay) {
+        this.totalToPay = totalToPay;
+    }
 }

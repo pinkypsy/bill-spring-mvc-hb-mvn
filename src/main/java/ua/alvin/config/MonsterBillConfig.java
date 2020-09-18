@@ -1,10 +1,10 @@
 package ua.alvin.config;
 
-/*import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ua.alvin.util.MonsterBill;
 
-@Configuration
+/*@Configuration
 public class MonsterBillConfig {
 
     @Bean
@@ -12,5 +12,4 @@ public class MonsterBillConfig {
         return new MonsterBill();
     }
 
-}
-*/
+}*/

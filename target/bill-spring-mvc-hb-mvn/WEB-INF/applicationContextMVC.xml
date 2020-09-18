@@ -103,7 +103,7 @@
 <!--        <property name="test" value="999"/>-->
 <!--    </bean>-->
 
-<!--    <context:property-placeholder location="classpath:tariffs.properties"/>-->
+    <context:property-placeholder location="classpath:tariffs.properties"/>
 
-<!--    <util:properties id="tariffs" location="classpath:resources/tariffs.properties" />-->
+<!--    <util:properties id="tariffs" location="classpath:tariffs.properties" />-->
 </beans>

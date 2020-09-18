@@ -37,7 +37,7 @@
 
                 <tr>
                     <td><label>Cold Water Tariff:</label></td>
-                    <td><form:input path="coldWaterTariff"/></td>
+                    <td><form:input path="coldWaterTariff" value = "${monsterBill.coldWaterTariff}"/></td>
                 </tr>
 
                 <tr>
@@ -61,7 +61,7 @@
                 </tr>
                 <tr>
                     <td><label>Garbage Removal Price:</label></td>
-                    <td><form:input path="garbageRemovalPrice" value = "33"/></td>
+                    <td><form:input path="garbageRemovalPrice" /></td>
                 </tr>
 
                 <tr>

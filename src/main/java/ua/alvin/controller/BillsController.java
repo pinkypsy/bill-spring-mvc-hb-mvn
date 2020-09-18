@@ -14,20 +14,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BillsController {
 
     final TableService resultBillTableService;
-
     final TableService countedBillTableService;
-
+    final MonsterBill monsterBill;
     private String message = " ";
 
-    static {
-        System.out.println(new MonsterBill().getColdWaterTariff());
-    }
+
+//    static {
+//        System.out.println(new MonsterBill().getColdWaterTariff());
+//    }
 
     @Autowired
     public BillsController(@Qualifier(value = "countedBillTableService") TableService countedBillTableService,
-                           @Qualifier(value = "resultBillTableService") TableService resultBillTableService) {
+                           @Qualifier(value = "resultBillTableService") TableService resultBillTableService,
+                           @Qualifier(value = "monsterBill") MonsterBill monsterBill) {
         this.countedBillTableService = countedBillTableService;
         this.resultBillTableService = resultBillTableService;
+        this.monsterBill = monsterBill;
     }
 
 
@@ -47,8 +49,9 @@ public class BillsController {
     @RequestMapping("/addIndicationsForm")
     public String addIndications(Model model) {
 
-
-        model.addAttribute("monsterBill", new MonsterBill());
+        System.out.println(monsterBill.getColdWaterTariff());
+//        model.addAttribute("monsterBill", new MonsterBill());
+        model.addAttribute("monsterBill", monsterBill);
 
 
 
@@ -67,8 +70,6 @@ public class BillsController {
     public String saveTariffs(
             @ModelAttribute("monsterBill") MonsterBill monsterBill) {
 
-
-//        monsterBill.computeResultBill();
 
         try {
             System.out.println("resultBillTableService " + resultBillTableService);

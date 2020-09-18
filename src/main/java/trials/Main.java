@@ -2,6 +2,7 @@ package trials;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
 import java.util.Map;
