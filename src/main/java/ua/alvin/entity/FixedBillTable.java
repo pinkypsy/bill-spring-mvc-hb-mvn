@@ -20,7 +20,7 @@ public class FixedBillTable implements BillTable {
     private int rentServicePrice;
 
     @Column(name = "garbage_removal")
-    private int garbageRemovalPrice;
+    private double garbageRemovalPrice;
 
     @Column(name = "indication_date")
     private Date indicationDate;
@@ -53,11 +53,11 @@ public class FixedBillTable implements BillTable {
         this.rentServicePrice = rentServicePrice;
     }
 
-    public int getGarbageRemovalPrice() {
+    public double getGarbageRemovalPrice() {
         return garbageRemovalPrice;
     }
 
-    public void setGarbageRemovalPrice(int garbageRemovalPrice) {
+    public void setGarbageRemovalPrice(double garbageRemovalPrice) {
         this.garbageRemovalPrice = garbageRemovalPrice;
     }
 

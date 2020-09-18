@@ -35,10 +35,10 @@ public class ResultBillTable implements BillTable {
     private int rentService;
 
     @Column(name = "garbage_removal_cost")
-    private int garbageRemoval;
+    private double garbageRemoval;
 
     @Column(name = "total_to_pay")
-    private int totalToPay;
+    private double totalToPay;
 
     @Column(name = "indication_date")
     private Date indicationDate;
@@ -121,11 +121,11 @@ public class ResultBillTable implements BillTable {
         this.rentService = rentService;
     }
 
-    public int getGarbageRemoval() {
+    public double getGarbageRemoval() {
         return garbageRemoval;
     }
 
-    public void setGarbageRemoval(int garbageRemoval) {
+    public void setGarbageRemoval(double garbageRemoval) {
         this.garbageRemoval = garbageRemoval;
     }
 
@@ -180,11 +180,11 @@ public class ResultBillTable implements BillTable {
     }
 
 
-    public int getTotalToPay() {
+    public double getTotalToPay() {
         return totalToPay;
     }
 
-    public void setTotalToPay(int totalToPay) {
+    public void setTotalToPay(double totalToPay) {
         this.totalToPay = totalToPay;
     }
 }

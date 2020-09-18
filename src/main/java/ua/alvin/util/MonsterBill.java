@@ -21,38 +21,38 @@ public class MonsterBill {
     private ResultBillTable resultBillTable;
     private TableService tableService;
 
-//    {
-//        coldWaterTariff = 888;
-//        electricityBefore100Tariff = 888;
-//        electricityAfter100Tariff = 888;
-//    }
 
+/*
+If used electricity in current month is bigger than electricityTariffDelimiter,
+then electricity tariff for remains is greater.
 
-
-//    @Value("${electricityTariffBorder}")
-//    int electricityTariffBorder;
-
-
-
+I.e. if difference on electricity between previous and current month is 99 kVt,
+then electricityTariff = 90.
+If difference is 150 kVt, then:
+for 100 kVt: electricityTariff = 90
+and for the remaining 50 kVt: electricityTariff = 168.
+ */
+    @Value("${electricityTariffDelimiter}")
+    private short electricityTariffDelimiter;
 
     //tariff values
     @Value("${coldWaterTariff}")
-    private int coldWaterTariff;
+    private double coldWaterTariff;
 
     @Value("${hotWaterTariff}")
-    private int hotWaterTariff;
+    private double hotWaterTariff;
 
     @Value("${sewageTariff}")
-    private int sewageTariff;
+    private double sewageTariff;
 
-    @Value("${electricityBefore100Tariff}")
-    private int electricityBefore100Tariff;
+    @Value("${electricityBeforeDelimiterTariff}")
+    private double electricityBeforeDelimiterTariff;
 
-    @Value("${electricityAfter100Tariff}")
-    private int electricityAfter100Tariff;
+    @Value("${electricityAfterDelimiterTariff}")
+    private double electricityAfterDelimiterTariff;
 
     @Value("${gasSupplyTariff}")
-    private int gasSupplyTariff;
+    private double gasSupplyTariff;
 
     //counted bill values
 
@@ -72,7 +72,7 @@ public class MonsterBill {
     private int rentServicePrice;
 
     @Value("${garbageRemovalPrice}")
-    private int garbageRemovalPrice;
+    private double garbageRemovalPrice;
 
     private Date billFillingDate;
 
@@ -118,9 +118,9 @@ public class MonsterBill {
 
         tariffsTable = new TariffsTable();
 
-        tariffsTable.setColdWaterTariff(coldWaterTariff);
-        tariffsTable.setElectricityBefore100Tariff(electricityBefore100Tariff);
-        tariffsTable.setElectricityAfter100Tariff(electricityAfter100Tariff);
+        tariffsTable.setColdWaterTariff((int)Math.floor(coldWaterTariff * 100));
+        tariffsTable.setElectricityBeforeDelimiterTariff((int)Math.floor(electricityBeforeDelimiterTariff * 100));
+        tariffsTable.setElectricityAfterDelimiterTariff((int)Math.floor(electricityAfterDelimiterTariff * 100));
         //add other values
 //        resultBillTable.setTariffsTable(tariffsTable);
 
@@ -132,7 +132,7 @@ public class MonsterBill {
 
         fixedBillTable = new FixedBillTable();
 
-        fixedBillTable.setGarbageRemovalPrice(garbageRemovalPrice);
+        fixedBillTable.setGarbageRemovalPrice((int)Math.floor(garbageRemovalPrice * 100));
         //add other values
 //        resultBillTable.setFixedBillTable(fixedBillTable);
 
@@ -146,14 +146,14 @@ public class MonsterBill {
         setCountedValues();
 
 
-        resultBillTable.setGarbageRemoval(garbageRemovalPrice);
+        resultBillTable.setGarbageRemoval(fixedBillTable.getGarbageRemovalPrice());
 
         resultBillTable.setTotalToPay(computeTotalToPay());
         resultBillTable.setIndicationDate(new Date());
 
     }
 
-    private int computeTotalToPay() {
+    private double computeTotalToPay() {
         return resultBillTable.getColdWater() + resultBillTable.getHotWater() +
                 resultBillTable.getElectricity() + resultBillTable.getGarbageRemoval() +
                 resultBillTable.getGasSupply() + resultBillTable.getHouseHeating() +
@@ -216,70 +216,76 @@ public class MonsterBill {
 
         System.out.println("electricityValue " + electricityValue);
 
-        if (electricityValue <= 100) {
+        if (electricityValue <= electricityTariffDelimiter) {
             System.out.println("electricityValue <= 100");
-            System.out.println("getElectricityBefore100Tariff " + electricityBefore100Tariff);
-            resultPrice = electricityValue * tariffsTable.getElectricityBefore100Tariff();
-        } else /*if (electricityValue > 100)*/ {
+            System.out.println("getElectricityBefore100Tariff " + tariffsTable.getElectricityBeforeDelimiterTariff());
+            resultPrice = electricityValue * tariffsTable.getElectricityBeforeDelimiterTariff();
+        } else /*if (electricityValue > electricityTariffDelimiter)*/ {
             System.out.println("electricityValue > 100");
-            System.out.println("getElectricityAfter100Tariff " + electricityAfter100Tariff);
-            int priceBefore100 = (electricityValue - Math.abs(100 - electricityValue))
-                    * tariffsTable.getElectricityBefore100Tariff(); // 130 - (100-130)
+            System.out.println("getElectricityAfter100Tariff " + getElectricityAfterDelimiterTariff());
+            int priceBeforeDelimiter = (electricityValue - Math.abs(electricityTariffDelimiter - electricityValue))
+                    * tariffsTable.getElectricityBeforeDelimiterTariff(); // 130 - (100-130)
+            System.out.println("priceBeforeDelimiter " + priceBeforeDelimiter);
 
-            int priceAfter100 = Math.abs(100 - electricityValue)
-                    * tariffsTable.getElectricityAfter100Tariff();
+            int priceAfterDelimiter = Math.abs(electricityTariffDelimiter - electricityValue)
+                    * tariffsTable.getElectricityAfterDelimiterTariff();
 
-            resultPrice = priceBefore100 + priceAfter100;
+            System.out.println("priceAfterDelimiter " + priceAfterDelimiter);
+
+
+
+            resultPrice = priceBeforeDelimiter + priceAfterDelimiter;
+            System.out.println("resultPrice " + resultPrice);
         }
         return resultPrice;
     }
 
 
-    public int getColdWaterTariff() {
+    public double getColdWaterTariff() {
         return coldWaterTariff;
     }
 
-    public void setColdWaterTariff(int coldWaterTariff) {
+    public void setColdWaterTariff(double coldWaterTariff) {
         this.coldWaterTariff = coldWaterTariff;
     }
 
-    public int getHotWaterTariff() {
+    public double getHotWaterTariff() {
         return hotWaterTariff;
     }
 
-    public void setHotWaterTariff(int hotWaterTariff) {
+    public void setHotWaterTariff(double hotWaterTariff) {
         this.hotWaterTariff = hotWaterTariff;
     }
 
-    public int getSewageTariff() {
+    public double getSewageTariff() {
         return sewageTariff;
     }
 
-    public void setSewageTariff(int sewageTariff) {
+    public void setSewageTariff(double sewageTariff) {
         this.sewageTariff = sewageTariff;
     }
 
-    public int getElectricityBefore100Tariff() {
-        return electricityBefore100Tariff;
+    public double getElectricityBeforeDelimiterTariff() {
+        return electricityBeforeDelimiterTariff;
     }
 
-    public void setElectricityBefore100Tariff(int electricityBefore100Tariff) {
-        this.electricityBefore100Tariff = electricityBefore100Tariff;
+    public void setElectricityBeforeDelimiterTariff(double electricityBeforeDelimiterTariff) {
+        this.electricityBeforeDelimiterTariff = electricityBeforeDelimiterTariff;
     }
 
-    public int getElectricityAfter100Tariff() {
-        return electricityAfter100Tariff;
+    public double getElectricityAfterDelimiterTariff() {
+        return electricityAfterDelimiterTariff;
     }
 
-    public void setElectricityAfter100Tariff(int electricityAfter100Tariff) {
-        this.electricityAfter100Tariff = electricityAfter100Tariff;
+    public void setElectricityAfterDelimiterTariff(double electricityAfterDelimiterTariff) {
+        this.electricityAfterDelimiterTariff = electricityAfterDelimiterTariff;
     }
 
-    public int getGasSupplyTariff() {
+    public double getGasSupplyTariff() {
         return gasSupplyTariff;
     }
 
-    public void setGasSupplyTariff(int gasSupplyTariff) {
+    public void setGasSupplyTariff(double gasSupplyTariff) {
         this.gasSupplyTariff = gasSupplyTariff;
     }
 
@@ -331,11 +337,11 @@ public class MonsterBill {
         this.rentServicePrice = rentServicePrice;
     }
 
-    public int getGarbageRemovalPrice() {
+    public double getGarbageRemovalPrice() {
         return garbageRemovalPrice;
     }
 
-    public void setGarbageRemovalPrice(int garbageRemovalPrice) {
+    public void setGarbageRemovalPrice(double garbageRemovalPrice) {
         this.garbageRemovalPrice = garbageRemovalPrice;
     }
 
@@ -347,4 +353,11 @@ public class MonsterBill {
         this.billFillingDate = billFillingDate;
     }
 
+    public short getElectricityTariffDelimiter() {
+        return electricityTariffDelimiter;
+    }
+
+    public void setElectricityTariffDelimiter(short electricityTariffDelimiter) {
+        this.electricityTariffDelimiter = electricityTariffDelimiter;
+    }
 }

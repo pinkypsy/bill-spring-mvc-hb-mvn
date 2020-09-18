@@ -29,11 +29,11 @@ public class TariffsTable implements BillTable {
     @Column(name = "sewage")
     private int sewageTariff;
 
-    @Column(name = "electricity_before100")
-    private int electricityBefore100Tariff;
+    @Column(name = "electricity_beforeDelimiter")
+    private int electricityBeforeDelimiterTariff;
 
-    @Column(name = "electricity_after100")
-    private int electricityAfter100Tariff;
+    @Column(name = "electricity_afterDelimiter")
+    private int electricityAfterDelimiterTariff;
 
     @Column(name = "gas_supply")
     private int gasSupplyTariff;
@@ -77,20 +77,20 @@ public class TariffsTable implements BillTable {
         this.sewageTariff = sewageTariff;
     }
 
-    public int getElectricityBefore100Tariff() {
-        return electricityBefore100Tariff;
+    public int getElectricityBeforeDelimiterTariff() {
+        return electricityBeforeDelimiterTariff;
     }
 
-    public void setElectricityBefore100Tariff(int electricityBefore100Tariff) {
-        this.electricityBefore100Tariff = electricityBefore100Tariff;
+    public void setElectricityBeforeDelimiterTariff(int electricityBeforeDelimiterTariff) {
+        this.electricityBeforeDelimiterTariff = electricityBeforeDelimiterTariff;
     }
 
-    public int getElectricityAfter100Tariff() {
-        return electricityAfter100Tariff;
+    public int getElectricityAfterDelimiterTariff() {
+        return electricityAfterDelimiterTariff;
     }
 
-    public void setElectricityAfter100Tariff(int electricityAfter100Tariff) {
-        this.electricityAfter100Tariff = electricityAfter100Tariff;
+    public void setElectricityAfterDelimiterTariff(int electricityAfterDelimiterTariff) {
+        this.electricityAfterDelimiterTariff = electricityAfterDelimiterTariff;
     }
 
     public int getGasSupplyTariff() {
@@ -116,8 +116,8 @@ public class TariffsTable implements BillTable {
                 ", coldWaterTariff=" + coldWaterTariff +
                 ", hotWaterTariff=" + hotWaterTariff +
                 ", sewageTariff=" + sewageTariff +
-                ", electricityBefore100Tariff=" + electricityBefore100Tariff +
-                ", electricityAfter100Tariff=" + electricityAfter100Tariff +
+                ", electricityBefore100Tariff=" + electricityBeforeDelimiterTariff +
+                ", electricityAfter100Tariff=" + electricityAfterDelimiterTariff +
                 ", gasSupplyTariff=" + gasSupplyTariff +
                 ", dateTariffIsValid=" + dateTariffIsValid +
                 '}';
