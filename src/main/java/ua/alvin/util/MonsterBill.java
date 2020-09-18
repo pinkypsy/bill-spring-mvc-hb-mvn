@@ -1,6 +1,9 @@
 package ua.alvin.util;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import ua.alvin.entity.CountedBillTable;
 import ua.alvin.entity.FixedBillTable;
@@ -12,26 +15,38 @@ import java.util.Date;
 
 //!!!instantly delete when realize how to save in multiple entities fields by one form:form save button!!!
 //then add those entities as modelAttributes
-@Controller
+@Component
 public class MonsterBill {
 
-    TableService tableService;
+    private TariffsTable tariffsTable;
+    private CountedBillTable countedBillTable;
+    private FixedBillTable fixedBillTable;
+    private ResultBillTable resultBillTable;
+    private TableService tableService;
+
+//    {
+//        coldWaterTariff = 888;
+//        electricityBefore100Tariff = 888;
+//        electricityAfter100Tariff = 888;
+//    }
+
+
 
 //    @Value("${electricityTariffBorder}")
 //    int electricityTariffBorder;
 
-    private CountedBillTable countedBillTable;
-    private FixedBillTable fixedBillTable;
-    private TariffsTable tariffsTable;
-    private ResultBillTable resultBillTable;
+
+
 
     //tariff values
+    @Value("999")
     private int coldWaterTariff;
 
     private int hotWaterTariff;
 
     private int sewageTariff;
 
+    @Value("999")
     private int electricityBefore100Tariff;
 
     private int electricityAfter100Tariff;
@@ -101,6 +116,7 @@ public class MonsterBill {
     private boolean initializeAndSaveTariffsTable() throws Exception {
 
         tariffsTable = new TariffsTable();
+
         tariffsTable.setColdWaterTariff(coldWaterTariff);
         tariffsTable.setElectricityBefore100Tariff(electricityBefore100Tariff);
         tariffsTable.setElectricityAfter100Tariff(electricityAfter100Tariff);

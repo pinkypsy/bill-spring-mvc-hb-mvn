@@ -1,17 +1,30 @@
 package trials;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.sql.SQLException;
 import java.util.Map;
 
 public class Main {
 
-//    @Value("#{tariffs}")
-//    Map <String, Integer> electricityTariffBorder;
-
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
+
+       AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(SportConfig.class);
+
+        Int ci = context.getBean("ci", Int.class);
+
+        ci.a();
+
+//        new Ci().a();
+
+    }
+
+
+}
+
 //        Class.forName("com.mysql.cj.jdbc.Driver");
 //            String user = "root";
 //            String password = "root";
@@ -33,12 +46,3 @@ public class Main {
 //        Integer i = null;
 //
 //        i.hashCode();
-
-        new Ci().a();
-    }
-
-
-
-
-
-}

@@ -37,7 +37,7 @@
 
                 <tr>
                     <td><label>Cold Water Tariff:</label></td>
-                    <td><form:input path="coldWaterTariff" /></td>
+                    <td><form:input path="coldWaterTariff"/></td>
                 </tr>
 
                 <tr>
@@ -47,12 +47,12 @@
 
                 <tr>
                     <td><label>Electricity Before 100 kVt Tariff:</label></td>
-                    <td><form:input path="electricityBefore100Tariff" /></td>
+                    <td><form:input path="electricityBefore100Tariff"  /></td>
                 </tr>
 
                 <tr>
                     <td><label>Electricity After 100 kVt Tariff:</label></td>
-                    <td><form:input path="electricityAfter100Tariff" /></td>
+                    <td><form:input path="electricityAfter100Tariff"/></td>
                 </tr>
 
                 <tr>
@@ -61,7 +61,7 @@
                 </tr>
                 <tr>
                     <td><label>Garbage Removal Price:</label></td>
-                    <td><form:input path="garbageRemovalPrice" /></td>
+                    <td><form:input path="garbageRemovalPrice" value = "33"/></td>
                 </tr>
 
                 <tr>

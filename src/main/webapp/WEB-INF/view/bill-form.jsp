@@ -37,7 +37,7 @@
 
                 <tr>
                     <td><label>Cold Water Tariff:</label></td>
-                    <td><form:input path="coldWaterTariff" value = "1314" /></td>
+                    <td><form:input path="coldWaterTariff"/></td>
                 </tr>
 
                 <tr>
@@ -47,12 +47,12 @@
 
                 <tr>
                     <td><label>Electricity Before 100 kVt Tariff:</label></td>
-                    <td><form:input path="electricityBefore100Tariff" value = "90" /></td>
+                    <td><form:input path="electricityBefore100Tariff"  /></td>
                 </tr>
 
                 <tr>
                     <td><label>Electricity After 100 kVt Tariff:</label></td>
-                    <td><form:input path="electricityAfter100Tariff" value = "168"/></td>
+                    <td><form:input path="electricityAfter100Tariff"/></td>
                 </tr>
 
                 <tr>

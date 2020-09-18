@@ -19,6 +19,10 @@ public class BillsController {
 
     private String message = " ";
 
+    static {
+        System.out.println(new MonsterBill().getColdWaterTariff());
+    }
+
     @Autowired
     public BillsController(@Qualifier(value = "countedBillTableService") TableService countedBillTableService,
                            @Qualifier(value = "resultBillTableService") TableService resultBillTableService) {
@@ -42,6 +46,7 @@ public class BillsController {
 
     @RequestMapping("/addIndicationsForm")
     public String addIndications(Model model) {
+
 
         model.addAttribute("monsterBill", new MonsterBill());
 
