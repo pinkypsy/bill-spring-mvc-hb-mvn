@@ -32,12 +32,12 @@ public abstract class AbstractTableService implements TableService{
     public CountedBillTable getPreviousCountedBill() {
         return tablesDAO.getPreviousCountedBill();
     }
-
-    @Transactional
-    @Override
-    public TariffsTable getPreviousTariffsTable() {
-        return tablesDAO.getPreviousTariffsTable();
-    }
+//
+//    @Transactional
+//    @Override
+//    public TariffsTable getPreviousTariffsTable() {
+//        return tablesDAO.getPreviousTariffsTable();
+//    }
 
 
 }

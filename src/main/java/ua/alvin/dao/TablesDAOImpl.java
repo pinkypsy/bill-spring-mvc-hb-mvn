@@ -2,14 +2,16 @@ package ua.alvin.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ua.alvin.entity.BillTable;
 import ua.alvin.entity.CountedBillTable;
+import ua.alvin.entity.ResultBillTable;
 import ua.alvin.entity.TariffsTable;
 
 import java.math.BigInteger;
+import java.util.List;
 
 @Repository
 public class TablesDAOImpl implements TablesDAO {
@@ -62,6 +64,18 @@ public class TablesDAOImpl implements TablesDAO {
 
         System.out.println("lastId " + lastId1);
         return session.get(TariffsTable.class, (lastId1 - 1));
+    }
+
+    @Override
+    public List<ResultBillTable> showResultBillTable() {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        Query<ResultBillTable> resultBillTableQuery =
+                session.createQuery("from ResultBillTable", ResultBillTable.class);
+
+
+        return resultBillTableQuery.getResultList();
     }
 
 

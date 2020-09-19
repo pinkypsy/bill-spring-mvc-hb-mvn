@@ -105,5 +105,6 @@
 
     <context:property-placeholder location="classpath:tariffs.properties"/>
 
-<!--    <util:properties id="tariffs" location="classpath:tariffs.properties" />-->
+    <!-- Add support for reading web resources: css, images, js, etc ... -->
+    <mvc:resources location="/resources/" mapping="/resources/**"/>
 </beans>

@@ -2,10 +2,12 @@ package ua.alvin.service;
 
 import ua.alvin.dao.TablesDAO;
 import ua.alvin.entity.BillTable;
-import ua.alvin.entity.CountedBillTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ua.alvin.entity.ResultBillTable;
+
+import java.util.List;
 
 @Service
 public class ResultBillTableService extends AbstractTableService {
@@ -22,6 +24,12 @@ public class ResultBillTableService extends AbstractTableService {
     @Override
     public void save(BillTable billTable) {
         tablesDAO.save(billTable);
+    }
+
+    @Transactional
+    @Override
+    public List<ResultBillTable> showResultBillTable() {
+        return tablesDAO.showResultBillTable();
     }
 
 }

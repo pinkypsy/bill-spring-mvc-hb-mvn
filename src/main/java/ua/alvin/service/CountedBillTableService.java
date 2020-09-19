@@ -6,7 +6,7 @@ import ua.alvin.entity.CountedBillTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+/*
 @Service
 public class CountedBillTableService extends AbstractTableService{
     //    @Qualifier(value = "tablesDAOImpl")//not necessary clarification, but for the readability purpose
@@ -24,10 +24,5 @@ public class CountedBillTableService extends AbstractTableService{
         tablesDAO.save(billTable);
     }
 
-  /*  @Override
-    @Transactional
-    public CountedBillTable getPreviousCountedBill() {
 
-        return tablesDAO.getPreviousCountedBill();
-    }*/
-}
+}*/

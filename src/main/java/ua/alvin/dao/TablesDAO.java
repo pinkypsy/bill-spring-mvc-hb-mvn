@@ -1,9 +1,11 @@
 package ua.alvin.dao;
 
-import org.hibernate.Transaction;
 import ua.alvin.entity.BillTable;
 import ua.alvin.entity.CountedBillTable;
+import ua.alvin.entity.ResultBillTable;
 import ua.alvin.entity.TariffsTable;
+
+import java.util.List;
 
 public interface TablesDAO {
 
@@ -14,4 +16,5 @@ public interface TablesDAO {
     TariffsTable getPreviousTariffsTable();
 
 
+    List<ResultBillTable> showResultBillTable();
 }

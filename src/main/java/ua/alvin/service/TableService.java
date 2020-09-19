@@ -1,9 +1,10 @@
 package ua.alvin.service;
 
-import org.hibernate.Transaction;
 import ua.alvin.entity.BillTable;
 import ua.alvin.entity.CountedBillTable;
-import ua.alvin.entity.TariffsTable;
+import ua.alvin.entity.ResultBillTable;
+
+import java.util.List;
 
 public interface TableService {
 
@@ -11,6 +12,7 @@ public interface TableService {
 
     CountedBillTable getPreviousCountedBill();
 
-    TariffsTable getPreviousTariffsTable();
+//    TariffsTable getPreviousTariffsTable();
 
+    List<ResultBillTable> showResultBillTable();
 }

@@ -8,6 +8,7 @@ import ua.alvin.entity.ResultBillTable;
 import ua.alvin.entity.TariffsTable;
 import ua.alvin.service.TableService;
 
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 //!!!instantly delete when realize how to save in multiple entities fields by one form:form save button!!!
@@ -36,6 +37,7 @@ and for the remaining 50 kVt: electricityTariff = 168.
     private short electricityTariffDelimiter;
 
     //tariff values
+    @Pattern(regexp = "\\d+\\.\\d*",message = "Use decimal numbers and point as the separator")
     @Value("${coldWaterTariff}")
     private double coldWaterTariff;
 
@@ -81,7 +83,8 @@ and for the remaining 50 kVt: electricityTariff = 168.
 
         this.tableService = tableService;
 
-        if (initializeAndSaveCountedBillTable() &&
+        if (    /*isCountedTableValid() &&*/
+                initializeAndSaveCountedBillTable() &&
                 initializeAndSaveFixedBillTable() &&
                 initializeAndSaveTariffsTable()) {
 
@@ -96,6 +99,10 @@ and for the remaining 50 kVt: electricityTariff = 168.
 
         } else throw new Exception("null exception");
     }
+
+//    private boolean isCountedTableValid() {
+//
+//    }
 
 
     private boolean initializeAndSaveCountedBillTable() throws Exception {

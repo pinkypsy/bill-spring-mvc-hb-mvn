@@ -1,6 +1,7 @@
 package ua.alvin.entity;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 //@Configurable
@@ -14,25 +15,25 @@ public class ResultBillTable implements BillTable {
     private int id;
 
     @Column(name = "hot_water_cost")
-    private int hotWater;
+    private double hotWater;
 
     @Column(name = "cold_water_cost")
-    private int coldWater;
+    private double coldWater;
 
     @Column(name = "sewage_cost")
-    private int sewage;
+    private double sewage;
 
     @Column(name = "electricity_cost")
-    private int electricity;
+    private double electricity;
 
     @Column(name = "gas_supply_cost")
-    private int gasSupply;
+    private double gasSupply;
 
     @Column(name = "house_heating_cost")
-    private int houseHeating;
+    private double houseHeating;
 
     @Column(name = "rent_service_cost")
-    private int rentService;
+    private double rentService;
 
     @Column(name = "garbage_removal_cost")
     private double garbageRemoval;
@@ -65,59 +66,59 @@ public class ResultBillTable implements BillTable {
         this.id = id;
     }
 
-    public int getHotWater() {
+    public double getHotWater() {
         return hotWater;
     }
 
-    public void setHotWater(int hotWater) {
+    public void setHotWater(double hotWater) {
         this.hotWater = hotWater;
     }
 
-    public int getColdWater() {
+    public double getColdWater() {
         return coldWater;
     }
 
-    public void setColdWater(int coldWater) {
+    public void setColdWater(double coldWater) {
         this.coldWater = coldWater;
     }
 
-    public int getSewage() {
+    public double getSewage() {
         return sewage;
     }
 
-    public void setSewage(int sewage) {
+    public void setSewage(double sewage) {
         this.sewage = sewage;
     }
 
-    public int getElectricity() {
+    public double getElectricity() {
         return electricity;
     }
 
-    public void setElectricity(int electricity) {
+    public void setElectricity(double electricity) {
         this.electricity = electricity;
     }
 
-    public int getGasSupply() {
+    public double getGasSupply() {
         return gasSupply;
     }
 
-    public void setGasSupply(int gasSupply) {
+    public void setGasSupply(double gasSupply) {
         this.gasSupply = gasSupply;
     }
 
-    public int getHouseHeating() {
+    public double getHouseHeating() {
         return houseHeating;
     }
 
-    public void setHouseHeating(int houseHeating) {
+    public void setHouseHeating(double houseHeating) {
         this.houseHeating = houseHeating;
     }
 
-    public int getRentService() {
+    public double getRentService() {
         return rentService;
     }
 
-    public void setRentService(int rentService) {
+    public void setRentService(double rentService) {
         this.rentService = rentService;
     }
 
@@ -129,8 +130,9 @@ public class ResultBillTable implements BillTable {
         this.garbageRemoval = garbageRemoval;
     }
 
-    public Date getIndicationDate() {
-        return indicationDate;
+    public String getIndicationDate() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        return simpleDateFormat.format(indicationDate);
     }
 
     public void setIndicationDate(Date indicationDate) {

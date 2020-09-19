@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.alvin.entity.CountedBillTable;
-
+/*
 @Service
 public class TariffsTableService extends AbstractTableService {
 
@@ -29,4 +29,4 @@ public class TariffsTableService extends AbstractTableService {
     }
 
 
-}
+}*/
