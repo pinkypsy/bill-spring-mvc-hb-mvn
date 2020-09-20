@@ -2,9 +2,7 @@ package ua.alvin.controller;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.alvin.entity.CountedBillTable;
-import ua.alvin.entity.FixedBillTable;
 import ua.alvin.entity.ResultBillTable;
-import ua.alvin.entity.TariffsTable;
 import ua.alvin.util.BillsHub;
 import ua.alvin.service.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,25 +18,27 @@ import java.util.List;
 @RequestMapping("/bill")
 public class BillsController {
 
-    final TableService tableService;
-    //    final TableService countedBillTableService;
+    final TableService resultBillTableService;
+    final TableService countedBillTableService;
+
     final BillsHub billsHub;
     private String message = " ";
 
 
     @Autowired
-    public BillsController(/*@Qualifier(value = "countedBillTableService") TableService countedBillTableService,*/
-            @Qualifier(value = "billsTableService") TableService tableService,
-            @Qualifier(value = "billsHub") BillsHub billsHub) {
+    public BillsController(@Qualifier(value = "countedBillTableService") TableService countedBillTableService,
+                           @Qualifier(value = "resultBillTableService") TableService resultBillTableService,
+                           @Qualifier(value = "billsHub") BillsHub billsHub) {
         // this.countedBillTableService = countedBillTableService;
-        this.tableService = tableService;
+        this.resultBillTableService = resultBillTableService;
+        this.countedBillTableService = countedBillTableService;
         this.billsHub = billsHub;
     }
 
     @RequestMapping("/showResultTable")
     public String showResultTable(Model model) {
 
-        List<ResultBillTable> resultBillTableList = tableService.getAllResultBillTableList();
+        List<?> resultBillTableList = resultBillTableService.getAllRowsFromTable();
 
         model.addAttribute("resultBillTableList", resultBillTableList);
 
@@ -51,7 +51,7 @@ public class BillsController {
 
         System.out.println(billsHub.getColdWaterTariff());
 //        model.addAttribute("monsterBill", new MonsterBill());
-        model.addAttribute("monsterBill", billsHub);
+        model.addAttribute("billsHub", billsHub);
 
 
 
@@ -70,10 +70,9 @@ public class BillsController {
     public String saveBill(
             @ModelAttribute("monsterBill") BillsHub billsHub) {
 
-
         try {
-            System.out.println("resultBillTableService " + tableService);
-            tableService.save(billsHub.initializeAndReturnResultBillTable(tableService));
+            System.out.println("resultBillTableService " + resultBillTableService);
+            resultBillTableService.save(billsHub.initializeAndReturnResultBillTable(resultBillTableService));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -84,20 +83,21 @@ public class BillsController {
     }
 
     @RequestMapping("/details")
-    public String details(@RequestParam("billId") int billId, Model model){
+    public String details(@RequestParam("billId") int billId, Model model) {
 
-        CountedBillTable countedBillTable = tableService.showCountedBillTable(billId);
-        FixedBillTable fixedBillTable = tableService.showFixedBillTable(billId);
-        TariffsTable tariffsBillTable = tableService.showTariffsTable(billId);
-        ResultBillTable resultBillTable = tableService.showResultBillTable(billId);
+        CountedBillTable countedBillTable = (CountedBillTable) countedBillTableService.showBillTable(billId);
+//        FixedBillTable fixedBillTable = tableService.showFixedBillTable(billId);
+//        TariffsTable tariffsBillTable = tableService.showTariffsTable(billId);
+        ResultBillTable resultBillTable = (ResultBillTable) resultBillTableService.showBillTable(billId);
 
         System.out.println(countedBillTable);
-        System.out.println(fixedBillTable);
-        System.out.println(tariffsBillTable);
+        System.out.println(resultBillTable);
+//        System.out.println(fixedBillTable);
+//        System.out.println(tariffsBillTable);
 
         model.addAttribute("countedBillTable", countedBillTable);
-        model.addAttribute("fixedBillTable", fixedBillTable);
-        model.addAttribute("tariffsTable", tariffsBillTable);
+//        model.addAttribute("fixedBillTable", fixedBillTable);
+//        model.addAttribute("tariffsTable", tariffsBillTable);
         model.addAttribute("resultBillTable", resultBillTable);
 
         return "show-bill-form";

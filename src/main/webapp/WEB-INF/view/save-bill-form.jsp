@@ -34,7 +34,7 @@
 <div id="container">
     <div id="content">
 
-        <form:form action="saveBill" modelAttribute="monsterBill" method="POST" cssClass="saveBillForm">
+        <form:form action="saveBill" modelAttribute="billsHub" method="POST" cssClass="saveBillForm">
             <table>
                 <tbody>
 
@@ -60,14 +60,14 @@
                 </tr>
 
                 <tr>
-                    <td><label>Electricity Before ${monsterBill.electricityTariffDelimiter} kVt Tariff:</label></td>
+                    <td><label>Electricity Before ${billsHub.electricityTariffDelimiter} kVt Tariff:</label></td>
                     <td><form:input path="electricityBeforeDelimiterTariff"
                                     pattern = "\d+\.\d*"
                                     title="Use decimal numbers and point as the separator"/></td>
                 </tr>
 
                 <tr>
-                    <td><label>Electricity After ${monsterBill.electricityTariffDelimiter} kVt Tariff:</label></td>
+                    <td><label>Electricity After ${billsHub.electricityTariffDelimiter} kVt Tariff:</label></td>
                     <td><form:input path="electricityAfterDelimiterTariff"
                                     pattern = "\d+\.\d*"
                                     title="Use decimal numbers and point as the separator"/></td>

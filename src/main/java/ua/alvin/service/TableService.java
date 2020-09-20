@@ -12,13 +12,15 @@ public interface TableService {
 
 //    TariffsTable getPreviousTariffsTable();
 
-    List<ResultBillTable>  getAllResultBillTableList();
+    List <?> getAllRowsFromTable();
 
-    ResultBillTable showResultBillTable(int billId);
+    BillTable showBillTable(int billId);
 
-    CountedBillTable showCountedBillTable(int billId);
-
-    FixedBillTable showFixedBillTable(int billId);
-
-    TariffsTable showTariffsTable(int billId);
+//    ResultBillTable showResultBillTable(int billId);
+//
+//    CountedBillTable showCountedBillTable(int billId);
+//
+//    FixedBillTable showFixedBillTable(int billId);
+//
+//    TariffsTable showTariffsTable(int billId);
 }

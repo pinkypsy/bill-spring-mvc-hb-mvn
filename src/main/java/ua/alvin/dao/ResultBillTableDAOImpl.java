@@ -11,13 +11,13 @@ import java.math.BigInteger;
 import java.util.List;
 
 @Repository
-public class TablesDAOImpl implements TablesDAO {
+public class ResultBillTableDAOImpl implements TablesDAO {
 
 
     private SessionFactory sessionFactory;
 
     @Autowired
-    public TablesDAOImpl(SessionFactory sessionFactory) {
+    public ResultBillTableDAOImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
         System.out.println(2);
     }
@@ -50,21 +50,10 @@ public class TablesDAOImpl implements TablesDAO {
         return session.get(CountedBillTable.class, (lastId1 - 1));
     }
 
-    @Override
-    public TariffsTable getPreviousTariffsTable() {
-        Session session = sessionFactory.getCurrentSession();
 
-
-        int lastId1 = ((BigInteger) session.createSQLQuery("SELECT LAST_INSERT_ID() from tariffs").setMaxResults(1).uniqueResult()).intValue();
-//        lastId = ((BigInteger) session.createSQLQuery("SELECT LAST_INSERT_ID() from counted_bill").uniqueResult()).longValue();
-
-
-        System.out.println("lastId " + lastId1);
-        return session.get(TariffsTable.class, (lastId1 - 1));
-    }
 
     @Override
-    public List<ResultBillTable> getAllResultBillTableList() {
+    public List<ResultBillTable> getAllRowsFromTable() {
         Session session = sessionFactory.getCurrentSession();
 
         Query<ResultBillTable> resultBillTableQuery =
@@ -75,34 +64,43 @@ public class TablesDAOImpl implements TablesDAO {
     }
 
     @Override
-    public ResultBillTable showResultBillTable(int billId) {
+    public ResultBillTable showBillTable(int billId) {
 
         Session session = sessionFactory.getCurrentSession();
 
         return session.get(ResultBillTable.class, billId);
     }
 
-    @Override
-    public CountedBillTable showCountedBillTable(int billId) {
 
-        Session session = sessionFactory.getCurrentSession();
-
-        return session.get(CountedBillTable.class, billId);
-    }
-
-
-
-    @Override
-    public FixedBillTable showFixedBillTable(int billId) {
-        Session session = sessionFactory.getCurrentSession();
-
-        return session.get(FixedBillTable.class, billId);
-    }
-
-    @Override
-    public TariffsTable showTariffsTable(int billId) {
-        Session session = sessionFactory.getCurrentSession();
-
-        return session.get(TariffsTable.class, billId);
-    }
+//    @Override
+//    public ResultBillTable showResultBillTable(int billId) {
+//
+//        Session session = sessionFactory.getCurrentSession();
+//
+//        return session.get(ResultBillTable.class, billId);
+//    }
+//
+//    @Override
+//    public CountedBillTable showCountedBillTable(int billId) {
+//
+//        Session session = sessionFactory.getCurrentSession();
+//
+//        return session.get(CountedBillTable.class, billId);
+//    }
+//
+//
+//
+//    @Override
+//    public FixedBillTable showFixedBillTable(int billId) {
+//        Session session = sessionFactory.getCurrentSession();
+//
+//        return session.get(FixedBillTable.class, billId);
+//    }
+//
+//    @Override
+//    public TariffsTable showTariffsTable(int billId) {
+//        Session session = sessionFactory.getCurrentSession();
+//
+//        return session.get(TariffsTable.class, billId);
+//    }
 }

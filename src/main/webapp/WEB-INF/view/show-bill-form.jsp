@@ -37,9 +37,9 @@
             <td>Electricity</td>
             <td>${countedBillTable.electricity}</td>
             <%--        <td>${tariffsTable.electricityBeforeDelimiterTariff}</td>--%>
-            <td>${tariffsTable.electricityBeforeDelimiterTariff}</td>
+<%--            <td>${tariffsTable.electricityBeforeDelimiterTariff}</td>--%>
 
-            <td>${resultBillTable.electricity}</td>
+<%--            <td>${resultBillTable.electricity}</td>--%>
         </tr>
 <%--        </tbody>--%>
 

@@ -1,19 +1,22 @@
 package ua.alvin.service;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import ua.alvin.dao.TablesDAO;
 import ua.alvin.entity.BillTable;
 import ua.alvin.entity.CountedBillTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-/*
+
+import java.util.List;
+
 @Service
 public class CountedBillTableService extends AbstractTableService{
-    //    @Qualifier(value = "tablesDAOImpl")//not necessary clarification, but for the readability purpose
+
     private final TablesDAO tablesDAO;
 
     @Autowired
-    public CountedBillTableService(TablesDAO tablesDAO) {
+    public CountedBillTableService(@Qualifier(value = "countedBillTableDAOImpl")TablesDAO tablesDAO) {
         super(tablesDAO);
         this.tablesDAO = tablesDAO;
     }
@@ -24,5 +27,16 @@ public class CountedBillTableService extends AbstractTableService{
         tablesDAO.save(billTable);
     }
 
+    @Transactional
+    @Override
+    public BillTable showBillTable(int billId) {
+        return tablesDAO.showBillTable(billId);
+    }
 
-}*/
+    @Transactional
+    @Override
+    public List<?> getAllRowsFromTable() {
+        return tablesDAO.getAllRowsFromTable();
+    }
+
+}

@@ -10,16 +10,18 @@ public interface TablesDAO {
 
     CountedBillTable getPreviousCountedBill();
 
-    TariffsTable getPreviousTariffsTable();
+//    TariffsTable getPreviousTariffsTable();
 
 
-    ResultBillTable showResultBillTable(int billId);
+//    ResultBillTable showResultBillTable(int billId);
+//
+//    CountedBillTable showCountedBillTable(int billId);
+//
+//    FixedBillTable showFixedBillTable(int billId);
+//
+//    TariffsTable showTariffsTable(int billId);
 
-    CountedBillTable showCountedBillTable(int billId);
+    List <?> getAllRowsFromTable();
 
-    FixedBillTable showFixedBillTable(int billId);
-
-    TariffsTable showTariffsTable(int billId);
-
-    List<ResultBillTable> getAllResultBillTableList();
+    BillTable showBillTable(int billId);
 }
