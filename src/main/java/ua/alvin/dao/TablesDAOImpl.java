@@ -5,10 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ua.alvin.entity.BillTable;
-import ua.alvin.entity.CountedBillTable;
-import ua.alvin.entity.ResultBillTable;
-import ua.alvin.entity.TariffsTable;
+import ua.alvin.entity.*;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -40,7 +37,7 @@ public class TablesDAOImpl implements TablesDAO {
     }
 
     @Override
-    public CountedBillTable getPreviousCountedBill()  {
+    public CountedBillTable getPreviousCountedBill() {
 
         Session session = sessionFactory.getCurrentSession();
 
@@ -67,8 +64,7 @@ public class TablesDAOImpl implements TablesDAO {
     }
 
     @Override
-    public List<ResultBillTable> showResultBillTable() {
-
+    public List<ResultBillTable> getAllResultBillTableList() {
         Session session = sessionFactory.getCurrentSession();
 
         Query<ResultBillTable> resultBillTableQuery =
@@ -78,20 +74,35 @@ public class TablesDAOImpl implements TablesDAO {
         return resultBillTableQuery.getResultList();
     }
 
-
-  /*  @Override
-    public CountedBillTable getPreviousCountedBill() {
+    @Override
+    public ResultBillTable showResultBillTable(int billId) {
 
         Session session = sessionFactory.getCurrentSession();
 
+        return session.get(ResultBillTable.class, billId);
+    }
 
-        int lastId =
-                ((BigInteger) session
-                        .createSQLQuery(
-                                "SELECT MAX(id) from counted_bill").setMaxResults(1).uniqueResult()).intValue();
+    @Override
+    public CountedBillTable showCountedBillTable(int billId) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        return session.get(CountedBillTable.class, billId);
+    }
 
 
-        System.out.println("lastId " + lastId);
-        return session.get(CountedBillTable.class, (lastId - 1));
-    }*/
+
+    @Override
+    public FixedBillTable showFixedBillTable(int billId) {
+        Session session = sessionFactory.getCurrentSession();
+
+        return session.get(FixedBillTable.class, billId);
+    }
+
+    @Override
+    public TariffsTable showTariffsTable(int billId) {
+        Session session = sessionFactory.getCurrentSession();
+
+        return session.get(TariffsTable.class, billId);
+    }
 }

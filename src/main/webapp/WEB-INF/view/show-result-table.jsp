@@ -31,7 +31,7 @@
     <%--    <div id = "content2">--%>
     <%--        <!--  add a search box -->--%>
     <%--        <form:form action="search" method="GET">--%>
-    <%--            Search customer: <input type="text" name="theSearchName" />--%>
+    <%--            Search bill: <input type="text" name="theSearchName" />--%>
 
     <%--            <input type="submit" value="Search" class="add-button" />--%>
     <%--        </form:form>--%>
@@ -94,32 +94,6 @@
     </c:forEach>
 
 
-    <%--    <c:forEach var="customer" items="${customerList}">--%>
-
-    <%--        construct an update link with customer id--%>
-    <%--        <c:url var="updateLink" value="/customer/showFormUpdateCustomer">--%>
-    <%--            <c:param name="customerId" value="${customer.id}"/>--%>
-    <%--        </c:url>--%>
-
-    <%--        <c:url var="deleteLink" value="/customer/delete">--%>
-    <%--            <c:param name="customerId" value="${customer.id}"/>--%>
-    <%--        </c:url>--%>
-
-    <%--        <tr>--%>
-    <%--            <td>${customer.id}</td>--%>
-    <%--            <td>${customer.firstName}</td>--%>
-    <%--            <td>${customer.lastName}</td>--%>
-    <%--            <td>${customer.email}</td>--%>
-    <%--            <td>${customer.photo}</td>--%>
-    <%--            <td>--%>
-    <%--                    &lt;%&ndash;            display the update link&ndash;%&gt;--%>
-    <%--                <a href="${updateLink}">Update</a>--%>
-    <%--                |--%>
-    <%--                <a href="${deleteLink}"--%>
-    <%--                   onclick="if (!(confirm('Are you sure you want to delete this customer?'))) return false">Delete</a>--%>
-    <%--            </td>--%>
-    <%--        </tr>--%>
-    <%--    </c:forEach>--%>
 </table>
 
 </body>

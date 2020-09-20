@@ -14,7 +14,7 @@ import java.util.Date;
 //!!!instantly delete when realize how to save in multiple entities fields by one form:form save button!!!
 //then add those entities as modelAttributes
 @Component
-public class MonsterBill {
+public class BillsHub {
 
     private TariffsTable tariffsTable;
     private CountedBillTable countedBillTable;
