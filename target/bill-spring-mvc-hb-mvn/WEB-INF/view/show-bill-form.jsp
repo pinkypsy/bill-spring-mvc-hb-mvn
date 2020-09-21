@@ -24,33 +24,86 @@
 <div id="container">
 
     <table>
-        <%--        <thead>--%>
+                <thead>
         <tr>
-            <th>Utility Service</th>
-            <th>Usage</th>
-            <th  colspan="2">Tariff Rate</th>
-            <th>Charge</th>
+            <th rowspan="2">Utility Service</th>
+            <th colspan="2">Usage</th>
+            <th colspan="2" rowspan="2">Tariff Rate</th>
+            <th rowspan="2">Charge</th>
         </tr>
-        <%--        </thead>--%>
-        <%--        <tbody>--%>
+            <tr>
+            <td>Total</td>
+            <td>Per Month</td>
+
+        </tr>
+                </thead>
+                <tbody>
         <tr>
             <td>Electricity</td>
             <td>${countedBillTable.electricity}</td>
+            <td>-</td>
 
             <td>${tariffsTable.electricityBeforeDelimiterTariff / 100}</td>
-            <td>${tariffsTable.electricityAfterDelimiterTariff / 100}</td>
-
-            <td>${resultBillTable.electricity / 100}</td>
+            <td>${tariffsTable.electricityAfterDelimiterTariff / 100} UAH</td>
+            <td>${resultBillTable.electricity / 100} UAH</td>
         </tr>
         <tr>
             <td>Cold Water</td>
             <td>${countedBillTable.coldWater}</td>
-            <td  colspan="2">${tariffsTable.coldWaterTariff / 100}</td>
-            <td>${resultBillTable.coldWater / 100}</td>
+            <td>-</td>
+            <td colspan="2">${tariffsTable.coldWaterTariff / 100} UAH</td>
+            <td>${resultBillTable.coldWater / 100} UAH</td>
         </tr>
-        <%--        </tbody>--%>
+        <tr>
+            <td>Hot Water</td>
+            <td>${countedBillTable.hotWater}</td>
+            <td>-</td>
+            <td colspan="2">${tariffsTable.hotWaterTariff / 100} UAH</td>
+            <td>${resultBillTable.hotWater / 100} UAH</td>
+        </tr>
+        <tr>
+            <td>Sewage</td>
+            <td>${countedBillTable.sewage}</td>
+            <td>-</td>
+            <td colspan="2">${tariffsTable.sewageTariff / 100} UAH</td>
+            <td>${resultBillTable.sewage / 100} UAH</td>
+        </tr>
+        <tr>
+            <td>Gas Supply</td>
+            <td>${countedBillTable.gasSupply}</td>
+            <td>-</td>
+            <td colspan="2">${tariffsTable.gasSupplyTariff / 100} UAH</td>
+            <td>${resultBillTable.gasSupply / 100} UAH</td>
+        </tr>
+        <tr>
+            <td>House Heating</td>
+            <td></td>
+            <td>-</td>
+            <td colspan="2">${fixedBillTable.houseHeatingPrice / 100} UAH</td>
+            <td>${resultBillTable.houseHeating / 100} UAH</td>
+        </tr>
+        <tr>
+            <td>Rent Service</td>
+            <td></td>
+            <td>-</td>
+            <td colspan="2">${fixedBillTable.rentServicePrice / 100} UAH</td>
+            <td>${resultBillTable.rentService / 100} UAH</td>
+        </tr>
+        <tr>
+            <td>Garbage Removal</td>
+            <td></td>
+            <td>-</td>
+            <td colspan="2">${fixedBillTable.garbageRemovalPrice  / 100} UAH</td>
+            <td>${resultBillTable.garbageRemoval / 100} UAH</td>
+        </tr>
+        <tr>
+            <td>Total to charge:</td>
+            <td colspan="5" style="text-align: right">${resultBillTable.totalToPay / 100} UAH</td>
+        </tr>
 
-        Total: ${resultBillTable.totalToPay}
+
+                </tbody>
+
 
     </table>
     <a href="${pageContext.request.contextPath}/bill/showResultTable">Back</a>
