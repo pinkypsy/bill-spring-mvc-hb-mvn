@@ -47,7 +47,6 @@ import java.util.List;
 
 
 
-            lastInsertedID = ((BigInteger) session.createSQLQuery("SELECT MAX(id) from counted_bill").setMaxResults(1).uniqueResult()).intValue();
 //            lastInsertedID = ((BigInteger) session.createSQLQuery("SELECT LAST_INSERT_ID() from counted_bill").setMaxResults(1).uniqueResult()).intValue();
 //        lastId = ((BigInteger) session.createSQLQuery("SELECT LAST_INSERT_ID() from counted_bill").uniqueResult()).longValue();
 
@@ -77,7 +76,14 @@ import java.util.List;
             return session.get(CountedBillTable.class, billId);
         }
 
+        @Override
         public int getLastInsertedID() {
+
+            Session session = sessionFactory.getCurrentSession();
+
+            lastInsertedID = (int) (session.createSQLQuery("SELECT MAX(id) from counted_bill").setMaxResults(1).uniqueResult());
+
+            System.out.println("lastInsertedID in DAO " + lastInsertedID);
             return lastInsertedID;
         }
 
