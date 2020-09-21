@@ -12,11 +12,12 @@ table {
 	width:100%;
 }
  
-th {
-	border-bottom:1px solid gray;
+td, th {
+	/*border-bottom:1px solid gray;*/
 	background:none repeat scroll 0 0 #ffe5e5;
 	padding:10px;
 	color: #000;
+	border: 1px solid black;
 }
 
 tr {
