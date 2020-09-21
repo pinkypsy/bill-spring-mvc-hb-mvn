@@ -14,7 +14,11 @@ import java.util.List;
     public class CountedBillTableDAOImpl implements TablesDAO {
 
 
+        private int lastInsertedID;
+
         private SessionFactory sessionFactory;
+
+
 
         @Autowired
         public CountedBillTableDAOImpl(SessionFactory sessionFactory) {
@@ -42,12 +46,14 @@ import java.util.List;
             Session session = sessionFactory.getCurrentSession();
 
 
-            int lastId1 = ((BigInteger) session.createSQLQuery("SELECT LAST_INSERT_ID() from counted_bill").setMaxResults(1).uniqueResult()).intValue();
+
+            lastInsertedID = ((BigInteger) session.createSQLQuery("SELECT MAX(id) from counted_bill").setMaxResults(1).uniqueResult()).intValue();
+//            lastInsertedID = ((BigInteger) session.createSQLQuery("SELECT LAST_INSERT_ID() from counted_bill").setMaxResults(1).uniqueResult()).intValue();
 //        lastId = ((BigInteger) session.createSQLQuery("SELECT LAST_INSERT_ID() from counted_bill").uniqueResult()).longValue();
 
 
-            System.out.println("lastId " + lastId1);
-            return session.get(CountedBillTable.class, (lastId1 - 1));
+            System.out.println("lastId " + lastInsertedID);
+            return session.get(CountedBillTable.class, (lastInsertedID - 1));
         }
 
 
@@ -71,6 +77,9 @@ import java.util.List;
             return session.get(CountedBillTable.class, billId);
         }
 
+        public int getLastInsertedID() {
+            return lastInsertedID;
+        }
 
 //    @Override
 //    public ResultBillTable showResultBillTable(int billId) {

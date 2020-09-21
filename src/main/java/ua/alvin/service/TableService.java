@@ -16,6 +16,8 @@ public interface TableService {
 
     BillTable showBillTable(int billId);
 
+    int getLastInsertedID();
+
 //    ResultBillTable showResultBillTable(int billId);
 //
 //    CountedBillTable showCountedBillTable(int billId);

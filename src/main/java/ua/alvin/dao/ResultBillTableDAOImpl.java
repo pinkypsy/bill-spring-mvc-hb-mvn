@@ -13,8 +13,9 @@ import java.util.List;
 @Repository
 public class ResultBillTableDAOImpl implements TablesDAO {
 
-
+    private int lastInsertedID;
     private SessionFactory sessionFactory;
+
 
     @Autowired
     public ResultBillTableDAOImpl(SessionFactory sessionFactory) {
@@ -69,6 +70,10 @@ public class ResultBillTableDAOImpl implements TablesDAO {
         Session session = sessionFactory.getCurrentSession();
 
         return session.get(ResultBillTable.class, billId);
+    }
+
+    public int getLastInsertedID() {
+        return lastInsertedID;
     }
 
 

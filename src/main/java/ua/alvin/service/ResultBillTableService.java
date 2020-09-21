@@ -15,7 +15,7 @@ public class ResultBillTableService extends AbstractTableService {
     private final TablesDAO tablesDAO;
 
     @Autowired
-    public ResultBillTableService(@Qualifier(value = "resultBillTableDAOImpl")TablesDAO tablesDAO) {
+    public ResultBillTableService(@Qualifier(value = "resultBillTableDAOImpl") TablesDAO tablesDAO) {
         super(tablesDAO);
         this.tablesDAO = tablesDAO;
     }
@@ -37,6 +37,12 @@ public class ResultBillTableService extends AbstractTableService {
     @Override
     public List<?> getAllRowsFromTable() {
         return tablesDAO.getAllRowsFromTable();
+    }
+
+    @Transactional
+    @Override
+    public int getLastInsertedID() {
+        return tablesDAO.getLastInsertedID();
     }
 
 //    @Transactional

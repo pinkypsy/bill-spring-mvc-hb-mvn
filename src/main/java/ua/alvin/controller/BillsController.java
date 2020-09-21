@@ -39,6 +39,10 @@ public class BillsController {
     public String showResultTable(Model model) {
 
         List<?> resultBillTableList = resultBillTableService.getAllRowsFromTable();
+        List<?> countedBillTableList = countedBillTableService.getAllRowsFromTable();
+//        List<?> resultBillTableList = countedBillTableService.getAllRowsFromTable();
+        System.out.println("countedBillTableList in showResultTable " + countedBillTableList);
+        System.out.println("resultBillTableList in showResultTable " + resultBillTableList);
 
         model.addAttribute("resultBillTableList", resultBillTableList);
 
@@ -85,10 +89,12 @@ public class BillsController {
     @RequestMapping("/details")
     public String details(@RequestParam("billId") int billId, Model model) {
 
-        CountedBillTable countedBillTable = (CountedBillTable) countedBillTableService.showBillTable(billId);
+        System.out.println("getLastInsertedID " + countedBillTableService.getLastInsertedID());
+        CountedBillTable countedBillTable = (CountedBillTable) countedBillTableService.showBillTable(countedBillTableService.getLastInsertedID());
 //        FixedBillTable fixedBillTable = tableService.showFixedBillTable(billId);
 //        TariffsTable tariffsBillTable = tableService.showTariffsTable(billId);
         ResultBillTable resultBillTable = (ResultBillTable) resultBillTableService.showBillTable(billId);
+
 
         System.out.println(countedBillTable);
         System.out.println(resultBillTable);

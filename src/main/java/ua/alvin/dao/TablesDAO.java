@@ -24,4 +24,6 @@ public interface TablesDAO {
     List <?> getAllRowsFromTable();
 
     BillTable showBillTable(int billId);
+
+    int getLastInsertedID();
 }

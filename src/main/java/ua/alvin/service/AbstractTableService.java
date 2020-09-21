@@ -29,6 +29,8 @@ public abstract class AbstractTableService implements TableService{
         return tablesDAO.getPreviousCountedBill();
     }
 
+
+
 //    @Transactional
 //    @Override
 //    public List<?> getAllRowsFromTable() {

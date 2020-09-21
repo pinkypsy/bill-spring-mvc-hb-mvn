@@ -11,12 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class CountedBillTableService extends AbstractTableService{
+public class CountedBillTableService extends AbstractTableService {
 
     private final TablesDAO tablesDAO;
 
     @Autowired
-    public CountedBillTableService(@Qualifier(value = "countedBillTableDAOImpl")TablesDAO tablesDAO) {
+    public CountedBillTableService(@Qualifier(value = "countedBillTableDAOImpl") TablesDAO tablesDAO) {
         super(tablesDAO);
         this.tablesDAO = tablesDAO;
     }
@@ -37,6 +37,12 @@ public class CountedBillTableService extends AbstractTableService{
     @Override
     public List<?> getAllRowsFromTable() {
         return tablesDAO.getAllRowsFromTable();
+    }
+
+    @Transactional
+    @Override
+    public int getLastInsertedID() {
+        return tablesDAO.getLastInsertedID();
     }
 
 }
