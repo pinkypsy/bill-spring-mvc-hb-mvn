@@ -1,6 +1,8 @@
 package ua.alvin.service;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import ua.alvin.dao.TablesDAO;
 import ua.alvin.entity.BillTable;
 import ua.alvin.entity.CountedBillTable;
@@ -11,13 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class CountedBillTableService extends AbstractTableService {
+//@Scope(value="prototype", proxyMode= ScopedProxyMode.TARGET_CLASS)
+public class CountedBillTableService implements TableService {
 
     private final TablesDAO tablesDAO;
 
     @Autowired
     public CountedBillTableService(@Qualifier(value = "countedBillTableDAOImpl") TablesDAO tablesDAO) {
-        super(tablesDAO);
         this.tablesDAO = tablesDAO;
     }
 
@@ -29,8 +31,8 @@ public class CountedBillTableService extends AbstractTableService {
 
     @Transactional
     @Override
-    public BillTable showBillTable(int billId) {
-        return tablesDAO.showBillTable(billId);
+    public BillTable getBillByID(int billId) {
+        return tablesDAO.getBillByID(billId);
     }
 
     @Transactional

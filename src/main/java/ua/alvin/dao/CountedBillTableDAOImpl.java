@@ -41,18 +41,11 @@ import java.util.List;
         }
 
         @Override
-        public CountedBillTable getPreviousCountedBill() {
+        public BillTable getBillByID(int billId) {
 
             Session session = sessionFactory.getCurrentSession();
 
-
-
-//            lastInsertedID = ((BigInteger) session.createSQLQuery("SELECT LAST_INSERT_ID() from counted_bill").setMaxResults(1).uniqueResult()).intValue();
-//        lastId = ((BigInteger) session.createSQLQuery("SELECT LAST_INSERT_ID() from counted_bill").uniqueResult()).longValue();
-
-
-            System.out.println("lastId " + lastInsertedID);
-            return session.get(CountedBillTable.class, (lastInsertedID - 1));
+            return session.get(CountedBillTable.class, (billId));
         }
 
 
@@ -68,13 +61,13 @@ import java.util.List;
             return countedBillTableQuery.getResultList();
         }
 
-        @Override
+    /*    @Override
         public CountedBillTable showBillTable(int billId) {
 
             Session session = sessionFactory.getCurrentSession();
 
             return session.get(CountedBillTable.class, billId);
-        }
+        }*/
 
         @Override
         public int getLastInsertedID() {

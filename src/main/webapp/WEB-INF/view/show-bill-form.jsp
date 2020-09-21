@@ -24,26 +24,36 @@
 <div id="container">
 
     <table>
-<%--        <thead>--%>
+        <%--        <thead>--%>
         <tr>
             <th>Utility Service</th>
             <th>Usage</th>
-            <th>Tariff Rate</th>
+            <th  colspan="2">Tariff Rate</th>
             <th>Charge</th>
         </tr>
-<%--        </thead>--%>
-<%--        <tbody>--%>
+        <%--        </thead>--%>
+        <%--        <tbody>--%>
         <tr>
             <td>Electricity</td>
             <td>${countedBillTable.electricity}</td>
-            <%--        <td>${tariffsTable.electricityBeforeDelimiterTariff}</td>--%>
-<%--            <td>${tariffsTable.electricityBeforeDelimiterTariff}</td>--%>
 
-<%--            <td>${resultBillTable.electricity}</td>--%>
+            <td>${tariffsTable.electricityBeforeDelimiterTariff / 100}</td>
+            <td>${tariffsTable.electricityAfterDelimiterTariff / 100}</td>
+
+            <td>${resultBillTable.electricity / 100}</td>
         </tr>
-<%--        </tbody>--%>
+        <tr>
+            <td>Cold Water</td>
+            <td>${countedBillTable.coldWater}</td>
+            <td  colspan="2">${tariffsTable.coldWaterTariff / 100}</td>
+            <td>${resultBillTable.coldWater / 100}</td>
+        </tr>
+        <%--        </tbody>--%>
+
+        Total: ${resultBillTable.totalToPay / 100} UAH
 
     </table>
+    <a href="${pageContext.request.contextPath}/bill/showResultTable">Back</a>
 </div>
 
 

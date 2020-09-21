@@ -8,13 +8,13 @@ public interface TableService {
 
     void save(BillTable billTable);
 
-    CountedBillTable getPreviousCountedBill();
+    BillTable getBillByID(int billId);
 
 //    TariffsTable getPreviousTariffsTable();
 
     List <?> getAllRowsFromTable();
 
-    BillTable showBillTable(int billId);
+//    BillTable showBillTable(int billId);
 
     int getLastInsertedID();
 

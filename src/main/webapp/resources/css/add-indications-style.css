@@ -29,7 +29,7 @@ input {
 }
 
 table {   
-	border-style:none;
+	border-style: dashed;
 	width:50%;
 }
 

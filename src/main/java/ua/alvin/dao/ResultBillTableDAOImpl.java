@@ -38,17 +38,11 @@ public class ResultBillTableDAOImpl implements TablesDAO {
     }
 
     @Override
-    public CountedBillTable getPreviousCountedBill() {
+    public BillTable getBillByID(int billId) {
 
         Session session = sessionFactory.getCurrentSession();
 
-
-        int lastId1 = ((BigInteger) session.createSQLQuery("SELECT LAST_INSERT_ID() from counted_bill").setMaxResults(1).uniqueResult()).intValue();
-//        lastId = ((BigInteger) session.createSQLQuery("SELECT LAST_INSERT_ID() from counted_bill").uniqueResult()).longValue();
-
-
-        System.out.println("lastId " + lastId1);
-        return session.get(CountedBillTable.class, (lastId1 - 1));
+        return session.get(ResultBillTable.class, (billId));
     }
 
 
@@ -64,15 +58,22 @@ public class ResultBillTableDAOImpl implements TablesDAO {
         return resultBillTableQuery.getResultList();
     }
 
-    @Override
+   /* @Override
     public ResultBillTable showBillTable(int billId) {
 
         Session session = sessionFactory.getCurrentSession();
 
         return session.get(ResultBillTable.class, billId);
-    }
+    }*/
 
+    @Override
     public int getLastInsertedID() {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        lastInsertedID = (int) (session.createSQLQuery("SELECT MAX(id) from result_bill").setMaxResults(1).uniqueResult());
+
+        System.out.println("lastInsertedID in DAO " + lastInsertedID);
         return lastInsertedID;
     }
 
