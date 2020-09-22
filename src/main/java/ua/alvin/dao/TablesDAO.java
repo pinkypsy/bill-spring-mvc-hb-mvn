@@ -21,7 +21,7 @@ public interface TablesDAO {
 //
 //    TariffsTable showTariffsTable(int billId);
 
-    List <?> getAllRowsFromTable();
+    List <? extends BillTable> getAllRowsFromTable();
 
 //    BillTable showBillTable(int billId);
 

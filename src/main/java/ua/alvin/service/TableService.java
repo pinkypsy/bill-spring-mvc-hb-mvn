@@ -12,7 +12,7 @@ public interface TableService {
 
 //    TariffsTable getPreviousTariffsTable();
 
-    List <?> getAllRowsFromTable();
+    List <? extends BillTable> getAllRowsFromTable();
 
 //    BillTable showBillTable(int billId);
 

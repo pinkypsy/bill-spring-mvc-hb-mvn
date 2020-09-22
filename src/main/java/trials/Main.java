@@ -5,6 +5,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -18,6 +21,10 @@ public class Main {
         Int ci = context.getBean("ci", Int.class);
 
         ci.a();
+        List<Integer> ab = Arrays.asList(1,2,3,4,5,6);
+        System.out.println(ab);
+        Ci.rev(ab);
+        System.out.println(ab);
 
 //        new Ci().a();
 

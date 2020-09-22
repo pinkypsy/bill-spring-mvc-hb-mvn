@@ -14,7 +14,7 @@ table {
  
 td, th {
 	/*border-bottom:1px solid gray;*/
-	background:none repeat scroll 0 0 #ffe5e5;
+	background:none repeat scroll 0 0 #79d2a6;
 	padding:10px;
 	color: #000;
 	border: 1px solid black;
@@ -26,10 +26,10 @@ tr {
 }
  
 tr:nth-child(even) {background: #e6ffe6}
-tr:nth-child(odd) {background: #ffe5e5}
+tr:nth-child(odd) {background: #79d2a6}
  
 #wrapper {width: 100%; margin-top: 0px; }
-#header {width: 100%; background: #ffe5e5; margin-top: 0px; padding:15px 0px 15px 15px;}
+#header {width: 100%; background: #79d2a6; margin-top: 0px; padding:15px 0px 15px 15px;}
 #header h2 {width: 100%; margin:auto; color: #000;}
 #container {width: 100%; margin:auto}
 #container h3 {color: #000;}

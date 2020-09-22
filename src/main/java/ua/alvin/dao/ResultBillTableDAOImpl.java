@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import ua.alvin.entity.*;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository

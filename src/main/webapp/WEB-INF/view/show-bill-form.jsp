@@ -42,7 +42,7 @@
             <td>${countedBillTable.electricity}</td>
             <td>-</td>
 
-            <td>${tariffsTable.electricityBeforeDelimiterTariff / 100}</td>
+            <td>${tariffsTable.electricityBeforeDelimiterTariff / 100} UAH</td>
             <td>${tariffsTable.electricityAfterDelimiterTariff / 100} UAH</td>
             <td>${resultBillTable.electricity / 100} UAH</td>
         </tr>

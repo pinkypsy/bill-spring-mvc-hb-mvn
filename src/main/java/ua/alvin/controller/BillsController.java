@@ -1,10 +1,7 @@
 package ua.alvin.controller;
 
 import org.springframework.web.bind.annotation.RequestParam;
-import ua.alvin.entity.CountedBillTable;
-import ua.alvin.entity.FixedBillTable;
-import ua.alvin.entity.ResultBillTable;
-import ua.alvin.entity.TariffsTable;
+import ua.alvin.entity.*;
 import ua.alvin.util.BillsHub;
 import ua.alvin.service.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,10 +44,7 @@ public class BillsController {
     @RequestMapping("/showResultTable")
     public String showResultTable(Model model) {
 
-        List<?> resultBillTableList = resultBillTableService.getAllRowsFromTable();
-        List<?> countedBillTableList = countedBillTableService.getAllRowsFromTable();
-//        List<?> resultBillTableList = countedBillTableService.getAllRowsFromTable();
-        System.out.println("countedBillTableList in showResultTable " + countedBillTableList);
+        List<? extends BillTable> resultBillTableList = resultBillTableService.getAllRowsFromTable();
         System.out.println("resultBillTableList in showResultTable " + resultBillTableList);
 
         model.addAttribute("resultBillTableList", resultBillTableList);
@@ -85,12 +79,12 @@ public class BillsController {
 
         try {
             System.out.println("resultBillTableService in saveBill Controller" + resultBillTableService);
-
+            System.out.println("fixedBillTableService in saveBill Controller " + fixedBillTableService);
             resultBillTableService.save(
                     billsHub.initializeAndReturnResultBillTable(
-                    Arrays.asList(
-                            countedBillTableService,fixedBillTableService,
-                            tariffsTableService, resultBillTableService)
+                            Arrays.asList(
+                                    countedBillTableService, fixedBillTableService,
+                                    tariffsTableService, resultBillTableService)
                     )
             );
 
@@ -107,14 +101,13 @@ public class BillsController {
     @RequestMapping("/details")
     public String details(@RequestParam("billId") int billId, Model model) {
 
-        CountedBillTable countedBillTable =
-                (CountedBillTable) countedBillTableService.getBillByID(billId);
+        BillTable countedBillTable = countedBillTableService.getBillByID(billId);
 
-        FixedBillTable fixedBillTable = (FixedBillTable) fixedBillTableService.getBillByID(billId);
+        BillTable fixedBillTable = fixedBillTableService.getBillByID(billId);
 
-        TariffsTable tariffsTable = (TariffsTable) tariffsTableService.getBillByID(billId);
+        BillTable tariffsTable = tariffsTableService.getBillByID(billId);
 
-        ResultBillTable resultBillTable = (ResultBillTable) resultBillTableService.getBillByID(billId);
+        BillTable resultBillTable = resultBillTableService.getBillByID(billId);
 
         System.out.println("countedBillTable " + countedBillTable);
         System.out.println("fixedBillTable " + fixedBillTable);

@@ -1,6 +1,8 @@
 package ua.alvin.service;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import ua.alvin.dao.TablesDAO;
 import ua.alvin.entity.BillTable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-//@Scope(value="prototype", proxyMode=ScopedProxyMode.TARGET_CLASS)
+//@Scope(value="prototype", proxyMode= ScopedProxyMode.TARGET_CLASS)
 public class TariffsTableService implements TableService {
 
     private final TablesDAO tablesDAO;
@@ -34,7 +36,7 @@ public class TariffsTableService implements TableService {
 
     @Transactional
     @Override
-    public List<?> getAllRowsFromTable() {
+    public List<? extends BillTable> getAllRowsFromTable() {
         return tablesDAO.getAllRowsFromTable();
     }
 

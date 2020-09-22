@@ -24,26 +24,25 @@
 <div id="container">
 
     <table>
-                <thead>
+        <thead>
         <tr>
             <th rowspan="2">Utility Service</th>
             <th colspan="2">Usage</th>
             <th colspan="2" rowspan="2">Tariff Rate</th>
             <th rowspan="2">Charge</th>
         </tr>
-            <tr>
+        <tr>
             <td>Total</td>
             <td>Per Month</td>
-
         </tr>
-                </thead>
-                <tbody>
+        </thead>
+        <tbody>
         <tr>
             <td>Electricity</td>
             <td>${countedBillTable.electricity}</td>
             <td>-</td>
 
-            <td>${tariffsTable.electricityBeforeDelimiterTariff / 100}</td>
+            <td>${tariffsTable.electricityBeforeDelimiterTariff / 100} UAH</td>
             <td>${tariffsTable.electricityAfterDelimiterTariff / 100} UAH</td>
             <td>${resultBillTable.electricity / 100} UAH</td>
         </tr>
@@ -97,12 +96,10 @@
             <td>${resultBillTable.garbageRemoval / 100} UAH</td>
         </tr>
         <tr>
-            <td>Total to charge:</td>
+            <td><strong>Total to charge:</strong></td>
             <td colspan="5" style="text-align: right">${resultBillTable.totalToPay / 100} UAH</td>
         </tr>
-
-
-                </tbody>
+        </tbody>
 
 
     </table>

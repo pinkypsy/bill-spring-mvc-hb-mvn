@@ -100,6 +100,8 @@ public class BillsHub {
     public ResultBillTable initializeAndReturnResultBillTable(List<TableService> tableServices) throws Exception {
         resultBillTable = new ResultBillTable();
 
+
+
         countedBillTableService = tableServices.get(0);
         fixedBillTableService = tableServices.get(1);
         tariffsTableService = tableServices.get(2);

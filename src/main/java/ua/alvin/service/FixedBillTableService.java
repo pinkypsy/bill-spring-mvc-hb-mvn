@@ -36,7 +36,7 @@ public class FixedBillTableService implements TableService {
 
     @Transactional
     @Override
-    public List<?> getAllRowsFromTable() {
+    public List<? extends BillTable> getAllRowsFromTable() {
         return tablesDAO.getAllRowsFromTable();
     }
 
