@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ua.alvin.entity.*;
 
+import javax.annotation.PreDestroy;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,11 +53,19 @@ public class ResultBillTableDAOImpl implements TablesDAO {
     public List<ResultBillTable> getAllRowsFromTable() {
         Session session = sessionFactory.getCurrentSession();
 
+
+
         Query<ResultBillTable> resultBillTableQuery =
                 session.createQuery("from ResultBillTable", ResultBillTable.class);
 
 
         return resultBillTableQuery.getResultList();
+    }
+
+    @PreDestroy
+    public void close(){
+        System.out.println("sessionFactory RB " + sessionFactory);
+        sessionFactory.close();
     }
 
    /* @Override

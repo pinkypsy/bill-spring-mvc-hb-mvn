@@ -9,6 +9,7 @@ import ua.alvin.entity.BillTable;
 import ua.alvin.entity.CountedBillTable;
 import ua.alvin.entity.FixedBillTable;
 
+import javax.annotation.PreDestroy;
 import java.util.List;
 
 @Repository
@@ -61,6 +62,11 @@ public class FixedBillTableDAOImpl implements TablesDAO {
         return fixedBillTableQuery.getResultList();
     }
 
+    @PreDestroy
+    public void close(){
+        System.out.println("sessionFactory FB " + sessionFactory);
+        sessionFactory.close();
+    }
 
     @Override
     public int getLastInsertedID() {

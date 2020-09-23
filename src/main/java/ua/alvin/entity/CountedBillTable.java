@@ -1,6 +1,7 @@
 package ua.alvin.entity;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -32,6 +33,9 @@ public class CountedBillTable implements BillTable {
 
     @Column(name = "indication_date")
     private Date indicationDate;
+
+    @Transient
+    private String formattedDate;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "result_id")
@@ -121,5 +125,14 @@ public class CountedBillTable implements BillTable {
 
     public void setHouseHeating(int houseHeating) {
         this.houseHeating = houseHeating;
+    }
+
+    public String getFormattedDate() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        return simpleDateFormat.format(indicationDate);
+    }
+
+    public void setFormattedDate(String formattedDate) {
+        this.formattedDate = formattedDate;
     }
 }

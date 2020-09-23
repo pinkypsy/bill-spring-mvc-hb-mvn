@@ -40,7 +40,7 @@
         <tr>
             <td>Electricity</td>
             <td>${countedBillTable.electricity}</td>
-            <td>-</td>
+            <td>${countedBillTable.electricity - previousMonthCB.electricity}</td>
 
             <td>${tariffsTable.electricityBeforeDelimiterTariff} UAH</td>
             <td>${tariffsTable.electricityAfterDelimiterTariff} UAH</td>

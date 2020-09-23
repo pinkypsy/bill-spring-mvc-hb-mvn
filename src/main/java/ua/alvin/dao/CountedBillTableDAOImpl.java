@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ua.alvin.entity.*;
 
+import javax.annotation.PreDestroy;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -89,6 +90,11 @@ import java.util.List;
             return lastInsertedID;
         }
 
+        @PreDestroy
+        public void close(){
+            System.out.println("sessionFactory CB " + sessionFactory);
+            sessionFactory.close();
+        }
 //    @Override
 //    public ResultBillTable showResultBillTable(int billId) {
 //

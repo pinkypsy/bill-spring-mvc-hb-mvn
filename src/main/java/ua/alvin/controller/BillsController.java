@@ -1,5 +1,6 @@
 package ua.alvin.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.alvin.entity.*;
 import ua.alvin.util.BillsHub;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ua.alvin.util.ResultBillCalculator;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.List;
 
 @Controller
@@ -23,14 +26,10 @@ public class BillsController {
     private final TableService tariffsTableService;
     private final TableService fixedBillTableService;
 
+    private TariffsTable tariffsTable;
+    private TariffsTable countedBillTable;
+
     private final ResultBillCalculator resultBillCalculator;
-
-    private BillsHub billsHub;
-    private String message = " ";
-
-
-//    private final TableService getResultBillTableService;
-
 
     @Autowired
     public BillsController(@Qualifier(value = "countedBillTableService") TableService countedBillTableService,
@@ -44,11 +43,29 @@ public class BillsController {
         this.tariffsTableService = tariffsTableService;
         this.fixedBillTableService = fixedBillTableService;
         this.resultBillCalculator = resultBillCalculator;
-//        this.getResultBillTableService = getResultBillTableService;
-        this.billsHub = billsHub;
 
         System.out.println("CONSTRUCTOR: resultBillTableService " + resultBillTableService);
 //        System.out.println("CONSTRUCTOR: getResultBillTableService " + getResultBillTableService);
+
+    }
+
+    @PostConstruct
+    public void initTables() {
+
+        TariffsTable previousMonthTariff = (TariffsTable) tariffsTableService.getBillByID(tariffsTableService.getLastInsertedID());
+
+        tariffsTable = new TariffsTable();
+        tariffsTable.setColdWaterTariff(previousMonthTariff.getColdWaterTariff());
+        tariffsTable.setElectricityTariffDelimiter(previousMonthTariff.getElectricityTariffDelimiter());
+        tariffsTable.setElectricityBeforeDelimiterTariff(previousMonthTariff.getElectricityBeforeDelimiterTariff());
+        tariffsTable.setElectricityAfterDelimiterTariff(previousMonthTariff.getElectricityAfterDelimiterTariff());
+        System.out.println("BEAN CONSTRUCTED");
+
+    }
+
+    @PreDestroy
+    public void closeSession() {
+        System.out.println("BEAN DESTROYED");
     }
 
     @RequestMapping("/showResultTable")
@@ -63,35 +80,19 @@ public class BillsController {
     }
 
 
-
-
     @RequestMapping("/addIndicationsForm")
     public String addIndications(Model model) {
 
         ResultBillTable resultBillTable = new ResultBillTable();
 
-        resultBillTable.setTariffsTable(new TariffsTable());
+//        resultBillTable.setTariffsTable(new TariffsTable());
+        resultBillTable.setTariffsTable(tariffsTable);
         resultBillTable.setFixedBillTable(new FixedBillTable());
         resultBillTable.setCountedBillTable(new CountedBillTable());
 
-//        resultBillTable.getCountedBillTable().setElectricity(999);
 
         model.addAttribute("resultBillTable", resultBillTable);
 
-
-//billsHub = new BillsHub();
-//        System.out.println(billsHub.getColdWaterTariff());
-//        model.addAttribute("monsterBill", new MonsterBill());
-//        model.addAttribute("billsHub", billsHub);
-
-
-
-      /*  model.addAttribute("tariffsTable", new TariffsTable());
-        model.addAttribute("countedBillTable", new CountedBillTable());
-        model.addAttribute("fixedBillTable", new FixedBillTable());*/
-//        model.addAttribute("message", message);
-
-        message = " ";
 
         return "fill-bill-form";
     }
@@ -99,7 +100,7 @@ public class BillsController {
     //@Autowired
     @RequestMapping("/saveBill")
     public String saveBill(
-            @ModelAttribute("resultBillTable") /*@Qualifier("billsHub") */ ResultBillTable resultBillTable/*, Model model*/) {
+            @ModelAttribute("resultBillTable") ResultBillTable resultBillTable) {
 
         System.out.println("resultBillTable ELECTRICITY " + resultBillTable.getCountedBillTable().getElectricity());
         System.out.println("resultBillTable COUNTED TABLE " + resultBillTable.getCountedBillTable());
@@ -107,25 +108,6 @@ public class BillsController {
         resultBillTable = resultBillCalculator.calculateAndUpdateResultBillTable(resultBillTable);
 
         resultBillTableService.save(resultBillTable);
-
-
-        try {
-            System.out.println("resultBillTableService in saveBill Controller" + resultBillTableService);
-            System.out.println("fixedBillTableService in saveBill Controller " + fixedBillTableService);
-           /* resultBillTableService.save(
-                    billsHub.initializeAndReturnResultBillTable(
-                            Arrays.asList(
-                                    countedBillTableService, fixedBillTableService,
-                                    tariffsTableService, resultBillTableService)
-                    )
-            );*/
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        message = "Indications has been successfully saved!";
 
         return "redirect:/bill/showResultTable";
     }
@@ -141,12 +123,15 @@ public class BillsController {
 
         ResultBillTable resultBillTable = (ResultBillTable) resultBillTableService.getBillByID(billId);
 
+        CountedBillTable previousMonthCB = (CountedBillTable) countedBillTableService.getBillByID(billId - 1);
+
         System.out.println("countedBillTable " + countedBillTable);
         System.out.println("fixedBillTable " + fixedBillTable);
         System.out.println("tariffsTable " + tariffsTable);
         System.out.println("resultBillTable " + resultBillTable);
 
         model.addAttribute("countedBillTable", countedBillTable);
+        model.addAttribute("previousMonthCB", previousMonthCB);
         model.addAttribute("fixedBillTable", fixedBillTable);
         model.addAttribute("tariffsTable", tariffsTable);
         model.addAttribute("resultBillTable", resultBillTable);

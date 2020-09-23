@@ -80,6 +80,8 @@ public class ResultBillCalculator {
 
         resultBillTable.setElectricity(computeElectricityPrice(previousMonthBill));
 
+        resultBillTable.getCountedBillTable().setIndicationDate(new Date());
+
 
     }
 
@@ -127,14 +129,20 @@ public class ResultBillCalculator {
             System.out.println("getElectricityBefore100Tariff " + tariffsTable.getElectricityBeforeDelimiterTariff());
             resultPrice = electricityValue * tariffsTable.getElectricityBeforeDelimiterTariff();
         } else /*if (electricityValue > electricityTariffDelimiter)*/ {
-            System.out.println("electricityValue > 100");
-            System.out.println("getElectricityAfter100Tariff " + tariffsTable.getElectricityAfterDelimiterTariff());
-            double priceBeforeDelimiter = (electricityValue -
+
+          /*  double priceBeforeDelimiter = (electricityValue -
                     Math.abs(tariffsTable.getElectricityTariffDelimiter() - electricityValue))
-                    * tariffsTable.getElectricityBeforeDelimiterTariff(); // 130 - (100-130)
+                    * tariffsTable.getElectricityBeforeDelimiterTariff(); // 130 - (100-130)*/
+
+            double priceBeforeDelimiter = tariffsTable.getElectricityTariffDelimiter()
+                    * tariffsTable.getElectricityBeforeDelimiterTariff();
+
             System.out.println("priceBeforeDelimiter " + priceBeforeDelimiter);
 
-            double priceAfterDelimiter = Math.abs(tariffsTable.getElectricityTariffDelimiter() - electricityValue)
+//            double priceAfterDelimiter = Math.abs(tariffsTable.getElectricityTariffDelimiter() - electricityValue)
+//                    * tariffsTable.getElectricityAfterDelimiterTariff();
+
+            double priceAfterDelimiter = (electricityValue - tariffsTable.getElectricityTariffDelimiter())
                     * tariffsTable.getElectricityAfterDelimiterTariff();
 
             System.out.println("priceAfterDelimiter " + priceAfterDelimiter);

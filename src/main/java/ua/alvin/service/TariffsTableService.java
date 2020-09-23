@@ -18,6 +18,7 @@ public class TariffsTableService implements TableService {
 
     private final TablesDAO tablesDAO;
 
+
     @Autowired
     public TariffsTableService(@Qualifier(value = "tariffsTableDAOImpl") TablesDAO tablesDAO) {
         this.tablesDAO = tablesDAO;

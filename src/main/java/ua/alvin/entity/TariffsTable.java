@@ -1,5 +1,6 @@
 package ua.alvin.entity;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
@@ -22,7 +23,8 @@ public class TariffsTable implements BillTable {
     @Column(name = "id")
     private int id;
 
-//    @Value("${coldWaterTariff * 100}")
+//    @Value("434")
+//    @ColumnDefault("'${coldWaterTariff}'")
     @Column(name = "cold_water")
     private double coldWaterTariff;
 

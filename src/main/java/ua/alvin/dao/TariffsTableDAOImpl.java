@@ -9,6 +9,7 @@ import ua.alvin.entity.BillTable;
 import ua.alvin.entity.CountedBillTable;
 import ua.alvin.entity.TariffsTable;
 
+import javax.annotation.PreDestroy;
 import java.util.List;
 
 @Repository
@@ -35,6 +36,11 @@ public class TariffsTableDAOImpl implements TablesDAO {
 
         session.saveOrUpdate(billTable);
 
+    }
+    @PreDestroy
+    public void close(){
+        System.out.println("sessionFactory TB " + sessionFactory);
+        sessionFactory.close();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package ua.alvin.entity;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
@@ -46,6 +47,9 @@ public class ResultBillTable implements BillTable {
 
     @Column(name = "indication_date")
     private Date indicationDate;
+
+    @Transient
+    private String formattedDate;
 
     @OneToOne(mappedBy = "resultBillTable", cascade = CascadeType.ALL)
     private CountedBillTable countedBillTable;
@@ -133,9 +137,8 @@ public class ResultBillTable implements BillTable {
         this.garbageRemoval = garbageRemoval;
     }
 
-    public String getIndicationDate() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        return simpleDateFormat.format(indicationDate);
+    public Date getIndicationDate() {
+        return indicationDate;
     }
 
     public void setIndicationDate(Date indicationDate) {
@@ -158,6 +161,7 @@ public class ResultBillTable implements BillTable {
         this.fixedBillTable = fixedBillTable;
     }
 
+    @ModelAttribute("tariff")
     public TariffsTable getTariffsTable() {
         return tariffsTable;
     }
@@ -191,5 +195,14 @@ public class ResultBillTable implements BillTable {
 
     public void setTotalToPay(double totalToPay) {
         this.totalToPay = totalToPay;
+    }
+
+    public String getFormattedDate() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        return simpleDateFormat.format(indicationDate);
+    }
+
+    public void setFormattedDate(String formattedDate) {
+        this.formattedDate = formattedDate;
     }
 }
