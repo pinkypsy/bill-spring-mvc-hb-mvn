@@ -56,7 +56,6 @@ public class ResultBillTable implements BillTable {
     @OneToOne(mappedBy = "resultBillTable", cascade = CascadeType.ALL)
     private FixedBillTable fixedBillTable;
 
-//    @Column()
     @OneToOne(mappedBy = "resultBillTable", cascade = CascadeType.ALL)
     private TariffsTable tariffsTable;
 
