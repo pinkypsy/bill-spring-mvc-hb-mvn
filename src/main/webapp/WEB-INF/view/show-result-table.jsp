@@ -59,28 +59,28 @@
     <c:forEach var="resultBillTable" items="${resultBillTableList}">
 
         <c:url var="detailsLink" value="/bill/details">
-            <c:param name="billId" value="${resultBillTableList.id}"/>
+            <c:param name="billId" value="${resultBillTable.id}"/>
         </c:url>
 
         <c:url var="updateLink" value="/bill/update">
-            <c:param name="billId" value="${resultBillTableList.id}"/>
+            <c:param name="billId" value="${resultBillTable.id}"/>
         </c:url>
 
         <c:url var="deleteLink" value="/bill/delete">
-            <c:param name="billId" value="${resultBillTableList.id}"/>
+            <c:param name="billId" value="${resultBillTable.id}"/>
         </c:url>
         <tr>
-            <td>${resultBillTableList.id}</td>
-            <td>${resultBillTableList.hotWater}</td>
-            <td>${resultBillTableList.coldWater}</td>
-            <td>${resultBillTableList.sewage}</td>
-            <td>${resultBillTableList.electricity}</td>
-            <td>${resultBillTableList.gasSupply}</td>
-            <td>${resultBillTableList.houseHeating}</td>
-            <td>${resultBillTableList.rentService}</td>
-            <td>${resultBillTableList.garbageRemoval}</td>
-            <td>${resultBillTableList.indicationDate}</td>
-            <td>${resultBillTableList.totalToPay}</td>
+            <td>${resultBillTable.id}</td>
+            <td>${resultBillTable.hotWater}</td>
+            <td>${resultBillTable.coldWater}</td>
+            <td>${resultBillTable.sewage}</td>
+            <td>${resultBillTable.electricity}</td>
+            <td>${resultBillTable.gasSupply}</td>
+            <td>${resultBillTable.houseHeating}</td>
+            <td>${resultBillTable.rentService}</td>
+            <td>${resultBillTable.garbageRemoval}</td>
+            <td>${resultBillTable.indicationDate}</td>
+            <td>${resultBillTable.totalToPay}</td>
             <td>
 
                 <a href="${detailsLink}">Details</a>

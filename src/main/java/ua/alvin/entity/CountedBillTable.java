@@ -30,8 +30,6 @@ public class CountedBillTable implements BillTable {
     @Column(name = "house_heating")
     private int houseHeating;
 
-
-
     @Column(name = "indication_date")
     private Date indicationDate;
 

@@ -70,7 +70,7 @@ public class ResultBillTable implements BillTable {
     }
 
     public double getHotWater() {
-        return hotWater;
+        return Double.parseDouble(String.format("%.2f", hotWater));
     }
 
     public void setHotWater(double hotWater) {
@@ -78,7 +78,7 @@ public class ResultBillTable implements BillTable {
     }
 
     public double getColdWater() {
-        return coldWater;
+        return Double.parseDouble(String.format("%.2f", coldWater));
     }
 
     public void setColdWater(double coldWater) {
@@ -86,7 +86,7 @@ public class ResultBillTable implements BillTable {
     }
 
     public double getSewage() {
-        return sewage;
+        return Double.parseDouble(String.format("%.2f", sewage));
     }
 
     public void setSewage(double sewage) {
@@ -94,7 +94,7 @@ public class ResultBillTable implements BillTable {
     }
 
     public double getElectricity() {
-        return electricity;
+        return Double.parseDouble(String.format("%.2f", electricity));
     }
 
     public void setElectricity(double electricity) {
@@ -102,7 +102,7 @@ public class ResultBillTable implements BillTable {
     }
 
     public double getGasSupply() {
-        return gasSupply;
+        return Double.parseDouble(String.format("%.2f", gasSupply));
     }
 
     public void setGasSupply(double gasSupply) {
@@ -110,7 +110,7 @@ public class ResultBillTable implements BillTable {
     }
 
     public double getHouseHeating() {
-        return houseHeating;
+        return Double.parseDouble(String.format("%.2f", houseHeating));
     }
 
     public void setHouseHeating(double houseHeating) {
@@ -118,7 +118,7 @@ public class ResultBillTable implements BillTable {
     }
 
     public double getRentService() {
-        return rentService;
+        return Double.parseDouble(String.format("%.2f", rentService));
     }
 
     public void setRentService(double rentService) {
@@ -126,7 +126,7 @@ public class ResultBillTable implements BillTable {
     }
 
     public double getGarbageRemoval() {
-        return garbageRemoval;
+        return Double.parseDouble(String.format("%.2f", garbageRemoval));
     }
 
     public void setGarbageRemoval(double garbageRemoval) {
@@ -186,7 +186,7 @@ public class ResultBillTable implements BillTable {
 
 
     public double getTotalToPay() {
-        return totalToPay;
+        return Double.parseDouble(String.format("%.2f", totalToPay));
     }
 
     public void setTotalToPay(double totalToPay) {

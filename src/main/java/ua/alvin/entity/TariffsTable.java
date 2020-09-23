@@ -22,7 +22,7 @@ public class TariffsTable implements BillTable {
     @Column(name = "id")
     private int id;
 
-    @Value("${coldWaterTariff * 100}")
+//    @Value("${coldWaterTariff * 100}")
     @Column(name = "cold_water")
     private double coldWaterTariff;
 

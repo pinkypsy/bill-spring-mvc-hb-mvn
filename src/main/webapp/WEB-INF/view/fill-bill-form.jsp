@@ -56,7 +56,7 @@
 
                 <tr>
                     <td><label>Cold Water indication:</label></td>
-                    <td><form:input path="coldWater" /></td>
+                    <td><form:input path="countedBillTable.coldWater" /></td>
                 </tr>
 
                 <tr>
