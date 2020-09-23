@@ -125,6 +125,9 @@ public class BillsController {
 
         ResultBillTable previousResultBillTable = (ResultBillTable) resultBillTableService.getBillByID(billId - 1);
 
+        System.out.println("LOOK HERE resultBillTable" + resultBillTable.getCountedBillTable());
+        System.out.println("LOOK HERE prevResultBillTable" + previousResultBillTable.getCountedBillTable());
+
         String usagePeriodMessage;
 
         if (previousResultBillTable != null){

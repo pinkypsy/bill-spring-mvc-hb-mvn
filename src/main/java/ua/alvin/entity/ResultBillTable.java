@@ -56,13 +56,10 @@ public class ResultBillTable implements BillTable {
     @OneToOne(mappedBy = "resultBillTable", cascade = CascadeType.ALL)
     private FixedBillTable fixedBillTable;
 
+//    @Column()
     @OneToOne(mappedBy = "resultBillTable", cascade = CascadeType.ALL)
     private TariffsTable tariffsTable;
 
-   /* @Qualifier(value = "resultBillTableService")
-    @Transient
-    @Autowired
-    private TableService tableService;*/
 
     public int getId() {
         return id;

@@ -63,38 +63,33 @@
         </tr>
         <tr>
             <td>Sewage</td>
-            <td>${resultBillTable.countedBillTable.sewage}</td>
-            <td>-</td>
+            <td colspan="2">${resultBillTable.countedBillTable.sewage}</td>
             <td colspan="2">${resultBillTable.tariffsTable.sewageTariff} UAH</td>
             <td>${resultBillTable.sewage} UAH</td>
         </tr>
         <tr>
             <td>Gas Supply</td>
             <td>${resultBillTable.countedBillTable.gasSupply}</td>
-            <td>-</td>
+            <td>${resultBillTable.countedBillTable.gasSupply - previousResultBillTable.countedBillTable.gasSupply}</td>
             <td colspan="2">${resultBillTable.tariffsTable.gasSupplyTariff} UAH</td>
             <td>${resultBillTable.gasSupply} UAH</td>
         </tr>
         <tr>
             <td>House Heating</td>
-            <td></td>
-            <td>-</td>
+            <td>${resultBillTable.countedBillTable.houseHeating}</td>
+            <td>${resultBillTable.countedBillTable.houseHeating - previousResultBillTable.countedBillTable.houseHeating}</td>
             <td colspan="2">${resultBillTable.countedBillTable.houseHeating} UAH</td>
             <td>${resultBillTable.houseHeating} UAH</td>
         </tr>
         <tr>
             <td>Rent Service</td>
-            <td></td>
-            <td>-</td>
-            <td colspan="2">${resultBillTable.fixedBillTable.rentServicePrice} UAH</td>
-            <td>${resultBillTable.rentService} UAH</td>
+<%--            <td colspan="4" style="text-align: right">${resultBillTable.fixedBillTable.rentServicePrice} UAH</td>--%>
+            <td colspan="3" style="text-align: right">${resultBillTable.rentService} UAH</td>
         </tr>
         <tr>
             <td>Garbage Removal</td>
-            <td></td>
-            <td>-</td>
-            <td colspan="2">${resultBillTable.fixedBillTable.garbageRemovalPrice } UAH</td>
-            <td>${resultBillTable.garbageRemoval} UAH</td>
+<%--            <td colspan="2">${resultBillTable.fixedBillTable.garbageRemovalPrice } UAH</td>--%>
+            <td colspan="5" style="text-align: right">${resultBillTable.garbageRemoval} UAH</td>
         </tr>
         <tr>
             <td><strong>Total to charge:</strong></td>
