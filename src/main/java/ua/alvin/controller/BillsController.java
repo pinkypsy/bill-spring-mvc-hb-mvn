@@ -115,26 +115,33 @@ public class BillsController {
     @RequestMapping("/details")
     public String details(@RequestParam("billId") int billId, Model model) {
 
-        CountedBillTable countedBillTable = (CountedBillTable) countedBillTableService.getBillByID(billId);
-
-        FixedBillTable fixedBillTable = (FixedBillTable) fixedBillTableService.getBillByID(billId);
-
-        TariffsTable tariffsTable = (TariffsTable) tariffsTableService.getBillByID(billId);
+//        CountedBillTable countedBillTable = (CountedBillTable) countedBillTableService.getBillByID(billId);
+//
+//        FixedBillTable fixedBillTable = (FixedBillTable) fixedBillTableService.getBillByID(billId);
+//
+//        TariffsTable tariffsTable = (TariffsTable) tariffsTableService.getBillByID(billId);
 
         ResultBillTable resultBillTable = (ResultBillTable) resultBillTableService.getBillByID(billId);
 
-        CountedBillTable previousMonthCB = (CountedBillTable) countedBillTableService.getBillByID(billId - 1);
+        ResultBillTable previousResultBillTable = (ResultBillTable) resultBillTableService.getBillByID(billId - 1);
 
-        System.out.println("countedBillTable " + countedBillTable);
-        System.out.println("fixedBillTable " + fixedBillTable);
-        System.out.println("tariffsTable " + tariffsTable);
-        System.out.println("resultBillTable " + resultBillTable);
+        String usagePeriodMessage;
 
-        model.addAttribute("countedBillTable", countedBillTable);
-        model.addAttribute("previousMonthCB", previousMonthCB);
-        model.addAttribute("fixedBillTable", fixedBillTable);
-        model.addAttribute("tariffsTable", tariffsTable);
+        if (previousResultBillTable != null){
+            usagePeriodMessage = "From " + previousResultBillTable.getFormattedFillingDate() + " to " + resultBillTable.getFormattedFillingDate();
+        }else usagePeriodMessage = "Total";
+
+//        System.out.println("countedBillTable " + countedBillTable);
+//        System.out.println("fixedBillTable " + fixedBillTable);
+//        System.out.println("tariffsTable " + tariffsTable);
+//        System.out.println("resultBillTable " + resultBillTable);
+
+//        model.addAttribute("countedBillTable", countedBillTable);
+//        model.addAttribute("fixedBillTable", fixedBillTable);
+//        model.addAttribute("tariffsTable", tariffsTable);
         model.addAttribute("resultBillTable", resultBillTable);
+        model.addAttribute("previousResultBillTable", previousResultBillTable);
+        model.addAttribute("usagePeriodMessage", usagePeriodMessage);
 
         return "show-bill";
     }

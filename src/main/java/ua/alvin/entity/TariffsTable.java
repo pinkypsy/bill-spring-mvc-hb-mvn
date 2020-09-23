@@ -1,9 +1,9 @@
 package ua.alvin.entity;
 
-import org.hibernate.annotations.ColumnDefault;
-import org.springframework.beans.factory.annotation.Value;
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -46,8 +46,8 @@ public class TariffsTable implements BillTable {
     @Column(name = "house_heating")
     private double houseHeatingTariff;
 
-    @Column(name = "valid_by_date")
-    private Date dateTariffIsValid;
+    @Column(name = "filling_date")
+    private Date fillingDate;
 
     /*
 If used electricity in current month is bigger than electricityTariffDelimiter,
@@ -66,6 +66,9 @@ and for the remaining 50 kVt: electricityTariff = 168.
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "result_id")
     private ResultBillTable resultBillTable;
+
+    @Transient
+    private String formattedFillingDate;
 
     public int getId() {
         return id;
@@ -123,12 +126,18 @@ and for the remaining 50 kVt: electricityTariff = 168.
         this.gasSupplyTariff = gasSupplyTariff;
     }
 
-    public Date getDateTariffIsValid() {
-        return dateTariffIsValid;
+    public Date getFillingDate() {
+        return fillingDate;
     }
 
-    public void setDateTariffIsValid(Date dateTariffIsValid) {
-        this.dateTariffIsValid = dateTariffIsValid;
+    public void setFillingDate(Date fillingDate) {
+        this.fillingDate = fillingDate;
+    }
+
+    public String getFormattedFillingDate() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        formattedFillingDate = simpleDateFormat.format(fillingDate);
+        return formattedFillingDate;
     }
 
     @Override
@@ -141,7 +150,7 @@ and for the remaining 50 kVt: electricityTariff = 168.
                 ", electricityBefore100Tariff=" + electricityBeforeDelimiterTariff +
                 ", electricityAfter100Tariff=" + electricityAfterDelimiterTariff +
                 ", gasSupplyTariff=" + gasSupplyTariff +
-                ", dateTariffIsValid=" + dateTariffIsValid +
+                ", dateTariffIsValid=" + fillingDate +
                 '}';
     }
 

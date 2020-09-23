@@ -203,7 +203,7 @@ public class BillsHub {
         resultBillTable.setGarbageRemoval(fixedBillTable.getGarbageRemovalPrice());
 
         resultBillTable.setTotalToPay(computeTotalToPay());
-        resultBillTable.setIndicationDate(new Date());
+        resultBillTable.setFillingDate(new Date());
 
     }
 

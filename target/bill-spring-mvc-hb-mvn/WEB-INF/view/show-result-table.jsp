@@ -79,7 +79,7 @@
             <td>${resultBillTable.houseHeating}</td>
             <td>${resultBillTable.rentService}</td>
             <td>${resultBillTable.garbageRemoval}</td>
-            <td>${resultBillTable.indicationDate}</td>
+            <td>${resultBillTable.formattedDate}</td>
             <td>${resultBillTable.totalToPay}</td>
             <td>
 

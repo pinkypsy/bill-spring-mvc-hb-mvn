@@ -2,6 +2,7 @@ package ua.alvin.entity;
 
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -22,8 +23,11 @@ public class FixedBillTable implements BillTable {
     @Column(name = "garbage_removal")
     private double garbageRemovalPrice;
 
-    @Column(name = "indication_date")
-    private Date indicationDate;
+    @Column(name = "filling_date")
+    private Date fillingDate;
+
+    @Transient
+    private String formattedFillingDate;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "result_id")
@@ -61,12 +65,18 @@ public class FixedBillTable implements BillTable {
         this.garbageRemovalPrice = garbageRemovalPrice;
     }
 
-    public Date getIndicationDate() {
-        return indicationDate;
+    public Date getFillingDate() {
+        return fillingDate;
     }
 
-    public void setIndicationDate(Date indicationDate) {
-        this.indicationDate = indicationDate;
+    public void setFillingDate(Date fillingDate) {
+        this.fillingDate = fillingDate;
+    }
+
+    public String getFormattedFillingDate() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        formattedFillingDate = simpleDateFormat.format(fillingDate);
+        return formattedFillingDate;
     }
 
     public ResultBillTable getResultBillTable() {
@@ -84,7 +94,7 @@ public class FixedBillTable implements BillTable {
                 ", houseHeating=" + houseHeatingPrice +
                 ", rentService=" + rentServicePrice +
                 ", garbageRemoval=" + garbageRemovalPrice +
-                ", indicationDate=" + indicationDate +
+                ", indicationDate=" + fillingDate +
                 ", resultBillTable=" + resultBillTable +
                 '}';
     }

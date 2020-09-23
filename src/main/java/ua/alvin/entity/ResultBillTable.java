@@ -1,6 +1,5 @@
 package ua.alvin.entity;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.persistence.*;
@@ -45,11 +44,11 @@ public class ResultBillTable implements BillTable {
     @Column(name = "total_to_pay")
     private double totalToPay;
 
-    @Column(name = "indication_date")
-    private Date indicationDate;
+    @Column(name = "filling_date")
+    private Date fillingDate;
 
     @Transient
-    private String formattedDate;
+    private String formattedFillingDate;
 
     @OneToOne(mappedBy = "resultBillTable", cascade = CascadeType.ALL)
     private CountedBillTable countedBillTable;
@@ -137,12 +136,18 @@ public class ResultBillTable implements BillTable {
         this.garbageRemoval = garbageRemoval;
     }
 
-    public Date getIndicationDate() {
-        return indicationDate;
+    public Date getFillingDate() {
+        return fillingDate;
     }
 
-    public void setIndicationDate(Date indicationDate) {
-        this.indicationDate = indicationDate;
+    public void setFillingDate(Date fillingDate) {
+        this.fillingDate = fillingDate;
+    }
+
+    public String getFormattedFillingDate() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        formattedFillingDate = simpleDateFormat.format(fillingDate);
+        return formattedFillingDate;
     }
 
     public CountedBillTable getCountedBillTable() {
@@ -182,7 +187,7 @@ public class ResultBillTable implements BillTable {
                 ", houseHeating=" + houseHeating +
                 ", rentService=" + rentService +
                 ", garbageRemoval=" + garbageRemoval +
-                ", indicationDate=" + indicationDate +
+                ", indicationDate=" + fillingDate +
                 ", countedBillTable=" + countedBillTable +
                 ", fixedBillTable=" + fixedBillTable +
                 '}';
@@ -197,12 +202,7 @@ public class ResultBillTable implements BillTable {
         this.totalToPay = totalToPay;
     }
 
-    public String getFormattedDate() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        return simpleDateFormat.format(indicationDate);
-    }
 
-    public void setFormattedDate(String formattedDate) {
-        this.formattedDate = formattedDate;
-    }
+
+
 }

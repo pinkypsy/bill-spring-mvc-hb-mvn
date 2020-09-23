@@ -26,24 +26,24 @@
     <table>
         <thead>
         <tr>
-            <th rowspan="2">Utility Service</th>
-            <th colspan="2">Usage</th>
-            <th colspan="2" rowspan="2">Tariff Rate</th>
-            <th rowspan="2">Charge</th>
+            <th style="width: 50%" rowspan="2">Utility Service</th>
+            <th style="width: 12.5%" colspan="2">Usage</th>
+            <th style="width: 12.5%" colspan="2" rowspan="2">Tariff Rate</th>
+            <th style="width: 50%" rowspan="2">Charge</th>
         </tr>
         <tr>
-            <td>Total</td>
-            <td>Per Month</td>
+            <td style="width: 50%">Total</td>
+            <td style="width: 50%">${usagePeriodMessage}</td>
         </tr>
         </thead>
         <tbody>
         <tr>
             <td>Electricity</td>
             <td>${countedBillTable.electricity}</td>
-            <td>-</td>
+            <td>${countedBillTable.electricity - previousMonthCB.electricity}</td>
 
-            <td>${tariffsTable.electricityBeforeDelimiterTariff} UAH</td>
-            <td>${tariffsTable.electricityAfterDelimiterTariff} UAH</td>
+            <td style="width: 50%">${tariffsTable.electricityBeforeDelimiterTariff} UAH</td>
+            <td style="width: 50%">${tariffsTable.electricityAfterDelimiterTariff} UAH</td>
             <td>${resultBillTable.electricity} UAH</td>
         </tr>
         <tr>

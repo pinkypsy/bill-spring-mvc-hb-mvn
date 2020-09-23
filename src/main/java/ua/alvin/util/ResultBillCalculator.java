@@ -50,7 +50,10 @@ public class ResultBillCalculator {
 
         resultBillTable.setTotalToPay(computeTotalToPay());
 
-        resultBillTable.setIndicationDate(new Date());
+        resultBillTable.setFillingDate(new Date());
+        resultBillTable.getCountedBillTable().setFillingDate(new Date());
+        resultBillTable.getTariffsTable().setFillingDate(new Date());
+        resultBillTable.getFixedBillTable().setFillingDate(new Date());
 
 
         return resultBillTable;
@@ -80,7 +83,7 @@ public class ResultBillCalculator {
 
         resultBillTable.setElectricity(computeElectricityPrice(previousMonthBill));
 
-        resultBillTable.getCountedBillTable().setIndicationDate(new Date());
+
 
 
     }

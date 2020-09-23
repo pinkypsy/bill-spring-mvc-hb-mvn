@@ -31,11 +31,11 @@ public class CountedBillTable implements BillTable {
     @Column(name = "house_heating")
     private int houseHeating;
 
-    @Column(name = "indication_date")
-    private Date indicationDate;
+    @Column(name = "filling_date")
+    private Date fillingDate;
 
     @Transient
-    private String formattedDate;
+    private String formattedFillingDate;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "result_id")
@@ -97,12 +97,18 @@ public class CountedBillTable implements BillTable {
         this.resultBillTable = resultBillTable;
     }
 
-    public Date getIndicationDate() {
-        return indicationDate;
+    public Date getFillingDate() {
+        return fillingDate;
     }
 
-    public void setIndicationDate(Date indicationDate) {
-        this.indicationDate = indicationDate;
+    public void setFillingDate(Date fillingDate) {
+        this.fillingDate = fillingDate;
+    }
+
+    public String getFormattedFillingDate() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        formattedFillingDate = simpleDateFormat.format(fillingDate);
+        return formattedFillingDate;
     }
 
     @Override
@@ -115,7 +121,7 @@ public class CountedBillTable implements BillTable {
                 ", electricity=" + electricity +
                 ", gasSupply=" + gasSupply +
                 ", resultBillTable=" + resultBillTable +
-                ", indicationDate=" + indicationDate +
+                ", indicationDate=" + fillingDate +
                 '}';
     }
 
@@ -127,12 +133,6 @@ public class CountedBillTable implements BillTable {
         this.houseHeating = houseHeating;
     }
 
-    public String getFormattedDate() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        return simpleDateFormat.format(indicationDate);
-    }
 
-    public void setFormattedDate(String formattedDate) {
-        this.formattedDate = formattedDate;
-    }
+
 }
