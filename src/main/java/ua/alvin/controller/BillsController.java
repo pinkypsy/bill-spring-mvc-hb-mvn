@@ -22,9 +22,12 @@ public class BillsController {
     private final TableService countedBillTableService;
     private final TableService tariffsTableService;
     private final TableService fixedBillTableService;
-
-    final BillsHub billsHub;
+    ResultBillTable resultBillTable = new ResultBillTable();
+    private BillsHub billsHub;
     private String message = " ";
+
+
+//    private final TableService getResultBillTableService;
 
 
     @Autowired
@@ -32,13 +35,18 @@ public class BillsController {
                            @Qualifier(value = "resultBillTableService") TableService resultBillTableService,
                            @Qualifier(value = "fixedBillTableService") TableService fixedBillTableService,
                            @Qualifier(value = "tariffsTableService") TableService tariffsTableService,
+//                           @Qualifier(value = "resultBillTableService") TableService getResultBillTableService,
                            @Qualifier(value = "billsHub") BillsHub billsHub) {
         // this.countedBillTableService = countedBillTableService;
         this.resultBillTableService = resultBillTableService;
         this.countedBillTableService = countedBillTableService;
         this.tariffsTableService = tariffsTableService;
         this.fixedBillTableService = fixedBillTableService;
+//        this.getResultBillTableService = getResultBillTableService;
         this.billsHub = billsHub;
+
+        System.out.println("CONSTRUCTOR: resultBillTableService " + resultBillTableService);
+//        System.out.println("CONSTRUCTOR: getResultBillTableService " + getResultBillTableService);
     }
 
     @RequestMapping("/showResultTable")
@@ -52,11 +60,27 @@ public class BillsController {
         return "show-result-table";
     }
 
+    @RequestMapping("/test")
+    public String test(Model model){
+
+
+
+        resultBillTable.setTariffsTable(new TariffsTable());
+        resultBillTable.setFixedBillTable(new FixedBillTable());
+        resultBillTable.setCountedBillTable(new CountedBillTable());
+
+//        resultBillTable.getCountedBillTable().setElectricity(999);
+
+        model.addAttribute("resultBillTable", resultBillTable);
+
+        return "test";
+    }
+
 
     @RequestMapping("/addIndicationsForm")
     public String addIndications(Model model) {
-
-        System.out.println(billsHub.getColdWaterTariff());
+//billsHub = new BillsHub();
+//        System.out.println(billsHub.getColdWaterTariff());
 //        model.addAttribute("monsterBill", new MonsterBill());
         model.addAttribute("billsHub", billsHub);
 
@@ -72,21 +96,26 @@ public class BillsController {
         return "save-bill-form";
     }
 
-
+//@Autowired
     @RequestMapping("/saveBill")
     public String saveBill(
-            @ModelAttribute("monsterBill") BillsHub billsHub) {
+            @ModelAttribute("resultBillTable") /*@Qualifier("billsHub") */ ResultBillTable resultBillTable/*, Model model*/) {
+
+        System.out.println("resultBillTable ELECTRICITY " + resultBillTable.getCountedBillTable().getElectricity());
+        System.out.println("resultBillTable COUNTED TABLE " + resultBillTable.getCountedBillTable());
+
+
 
         try {
             System.out.println("resultBillTableService in saveBill Controller" + resultBillTableService);
             System.out.println("fixedBillTableService in saveBill Controller " + fixedBillTableService);
-            resultBillTableService.save(
+           /* resultBillTableService.save(
                     billsHub.initializeAndReturnResultBillTable(
                             Arrays.asList(
                                     countedBillTableService, fixedBillTableService,
                                     tariffsTableService, resultBillTableService)
                     )
-            );
+            );*/
 
 
         } catch (Exception e) {

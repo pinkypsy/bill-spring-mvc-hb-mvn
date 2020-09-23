@@ -12,9 +12,9 @@ import java.util.List;
 //@Component
 public class Ci  extends Bi {
     //    @Value("#{systemProperties['mongodb.port'] ?: 27017}")
-    @Value("55")
-//    @Value("${coldWaterTariff}")
-    private int test;
+//    @Value("55")
+    @Value("${coldWaterTariff}")
+    private double test;
 
     @Override
     public void a() {
@@ -27,14 +27,15 @@ public class Ci  extends Bi {
         List<T> tmp = new ArrayList<T>(list);
         for (int i = 0; i < list.size(); i++) {
             list.set(i, tmp.get(list.size() - i - 1));
+            System.out.print(list.get(i));
+            System.out.println(list);
         }
+    }
+    public void setTest(double test) {
+        this.test = test;
+    }
 
-//    public void setTest(String test) {
-//        this.test = test;
-//    }
-//
-//    public String getTest(){
-//        return test;
-//    }
+    public double getTest(){
+        return test;
     }
 }

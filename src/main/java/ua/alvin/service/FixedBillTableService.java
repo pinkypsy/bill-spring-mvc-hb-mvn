@@ -12,6 +12,7 @@ import ua.alvin.entity.BillTable;
 import java.util.List;
 
 @Service
+//@Scope(value="prototype")
 //@Scope(value="prototype", proxyMode= ScopedProxyMode.TARGET_CLASS)
 public class FixedBillTableService implements TableService {
 

@@ -20,11 +20,11 @@ public class Main {
 
         Int ci = context.getBean("ci", Int.class);
 
-        ci.a();
-        List<Integer> ab = Arrays.asList(1,2,3,4,5,6);
-        System.out.println(ab);
-        Ci.rev(ab);
-        System.out.println(ab);
+//        ci.a();
+//        List<Integer> ab = Arrays.asList(1,2,3,4,5,6);
+//        System.out.println(ab);
+//        Ci.rev(ab);
+//        System.out.println(ab);
 
 //        new Ci().a();
 

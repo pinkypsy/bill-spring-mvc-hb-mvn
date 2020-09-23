@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+//@Scope(value="prototype")
 //@Scope(value="prototype", proxyMode= ScopedProxyMode.TARGET_CLASS)
 public class ResultBillTableService implements TableService {
 

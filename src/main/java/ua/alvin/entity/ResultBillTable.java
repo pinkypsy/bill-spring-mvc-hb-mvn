@@ -1,13 +1,16 @@
 package ua.alvin.entity;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-//@Configurable
 @Entity
 @Table(name = "result_bill")
 public class ResultBillTable implements BillTable {
+
+
 
     @Id//mark for primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)//let mysql handle the generation of autoincrement

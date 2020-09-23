@@ -26,10 +26,10 @@ tr {
 }
  
 tr:nth-child(even) {background: #e6ffe6}
-tr:nth-child(odd) {background: #79d2a6}
+tr:nth-child(odd) {background: #54B236}
  
 #wrapper {width: 100%; margin-top: 0px; }
-#header {width: 100%; background: #79d2a6; margin-top: 0px; padding:15px 0px 15px 15px;}
+#header {width: 100%; background: #54B236; margin-top: 0px; padding:15px 0px 15px 15px;}
 #header h2 {width: 100%; margin:auto; color: #000;}
 #container {width: 100%; margin:auto}
 #container h3 {color: #000;}

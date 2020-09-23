@@ -3,7 +3,11 @@ package ua.alvin.util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import ua.alvin.entity.CountedBillTable;
 import ua.alvin.entity.FixedBillTable;
 import ua.alvin.entity.ResultBillTable;
@@ -17,6 +21,7 @@ import java.util.List;
 //!!!instantly delete when realize how to save in multiple entities fields by one form:form save button!!!
 //then add those entities as modelAttributes
 @Component
+@Scope("prototype")
 public class BillsHub {
 
     private TariffsTable tariffsTable;
@@ -26,20 +31,22 @@ public class BillsHub {
 
     private  TableService resultBillTableService;
     private  TableService countedBillTableService;
-    private  TableService fixedBillTableService;
-    private  TableService tariffsTableService;
+  /*  private  TableService fixedBillTableService;
+    private  TableService tariffsTableService;*/
 
 
     @Autowired
     public BillsHub(@Qualifier(value = "countedBillTableService") TableService countedBillTableService,
-                    @Qualifier(value = "resultBillTableService") TableService resultBillTableService,
+                    @Qualifier(value = "resultBillTableService") TableService resultBillTableService/*,
                     @Qualifier(value = "fixedBillTableService") TableService fixedBillTableService,
-                    @Qualifier(value = "tariffsTableService") TableService tariffsTableService
+                    @Qualifier(value = "tariffsTableService") TableService tariffsTableService*/
     ) {
         this.resultBillTableService = resultBillTableService;
         this.countedBillTableService = countedBillTableService;
-        this.tariffsTableService = tariffsTableService;
-        this.fixedBillTableService = fixedBillTableService;
+      /*  this.tariffsTableService = tariffsTableService;
+        this.fixedBillTableService = fixedBillTableService;*/
+
+        System.out.println("BillsHub CONSTRUCTOR resultBillTableService " + resultBillTableService);
     }
 
     /*
@@ -103,13 +110,12 @@ public class BillsHub {
 
 
         countedBillTableService = tableServices.get(0);
-        fixedBillTableService = tableServices.get(1);
-        tariffsTableService = tableServices.get(2);
+//        fixedBillTableService = tableServices.get(1);
+//        tariffsTableService = tableServices.get(2);
         resultBillTableService = tableServices.get(3);
 
         System.out.println("countedBillTableService in initialize Count " + countedBillTableService);
-        System.out.println("fixedBillTableService in initialize Count " + fixedBillTableService);
-        System.out.println("tariffsTableService in initialize Count " + tariffsTableService);
+//        System.out.println("fixedBillTableService in initialize Count " + fixedBillTableSer
         System.out.println("resultBillTableService in initialize Count " + resultBillTableService);
 //        this.resultBillTableService = tableService;
 
@@ -129,11 +135,21 @@ public class BillsHub {
             System.out.println(tariffsTable);
             System.out.println(resultBillTable);
 
+            resultBillTable.setCountedBillTable(countedBillTable);
+            resultBillTable.setFixedBillTable(fixedBillTable);
+            resultBillTable.setTariffsTable(tariffsTable);
+
             return resultBillTable;
 
         } else throw new Exception("null exception");
     }
 
+//    @Override
+//    public String toString() {
+//        return "BillsHub{" +
+//                "electricity=" + electricity +
+//                '}';
+//    }
 //    private boolean isCountedTableValid() {
 //
 //    }
@@ -148,7 +164,7 @@ public class BillsHub {
 
         System.out.println("countedBillTable in initialize Count " + countedBillTable);
 
-        countedBillTableService.save(countedBillTable);
+//        countedBillTableService.save(countedBillTable);
 
         /* tableService.save(countedBillTable);*///save is needed here for previous Data Base row invocation
 
@@ -166,7 +182,7 @@ public class BillsHub {
         //add other values
 //        resultBillTable.setTariffsTable(tariffsTable);
 
-        tariffsTableService.save(tariffsTable);
+//        tariffsTableService.save(tariffsTable);
         return true;
     }
 
@@ -178,7 +194,7 @@ public class BillsHub {
         //add other values
 //        resultBillTable.setFixedBillTable(fixedBillTable);
 
-        fixedBillTableService.save(fixedBillTable);
+//        fixedBillTableService.save(fixedBillTable);
         return true;
     }
 
@@ -205,8 +221,8 @@ public class BillsHub {
     private void setCountedValues() {
 
         CountedBillTable previousMonthBill =
-                (CountedBillTable) countedBillTableService.getBillByID(countedBillTableService.getLastInsertedID() - 1);
-
+                (CountedBillTable) countedBillTableService.getBillByID(countedBillTableService.getLastInsertedID()/* - 1*/);
+//        System.out.println(previousMonthBill.getElectricity());
         if (previousMonthBill == null) {
             // if it is FIRST bill in the DataBase
             previousMonthBill = new CountedBillTable();

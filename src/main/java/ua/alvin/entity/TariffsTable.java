@@ -1,5 +1,7 @@
 package ua.alvin.entity;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -20,6 +22,7 @@ public class TariffsTable implements BillTable {
     @Column(name = "id")
     private int id;
 
+    @Value("${coldWaterTariff * 100}")
     @Column(name = "cold_water")
     private int coldWaterTariff;
 
@@ -40,6 +43,20 @@ public class TariffsTable implements BillTable {
 
     @Column(name = "valid_by_date")
     private Date dateTariffIsValid;
+
+    /*
+If used electricity in current month is bigger than electricityTariffDelimiter,
+then electricity tariff for remains is greater.
+
+I.e. if difference on electricity between previous and current month is 99 kVt,
+then electricityTariff = 90.
+If difference is 150 kVt, then:
+for 100 kVt: electricityTariff = 90
+and for the remaining 50 kVt: electricityTariff = 168.
+ */
+    @Column(name = "electricity_tariff_delimiter")
+    @Value("${electricityTariffDelimiter}")
+    private short electricityTariffDelimiter;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "result_id")
@@ -121,5 +138,13 @@ public class TariffsTable implements BillTable {
                 ", gasSupplyTariff=" + gasSupplyTariff +
                 ", dateTariffIsValid=" + dateTariffIsValid +
                 '}';
+    }
+
+    public short getElectricityTariffDelimiter() {
+        return electricityTariffDelimiter;
+    }
+
+    public void setElectricityTariffDelimiter(short electricityTariffDelimiter) {
+        this.electricityTariffDelimiter = electricityTariffDelimiter;
     }
 }

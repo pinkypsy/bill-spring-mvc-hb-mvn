@@ -38,7 +38,7 @@
     <%--    </div>--%>
 
 </div>
-
+<a href="${pageContext.request.contextPath}/bill/test">TEST</a>
 
 <table>
     <tr>
