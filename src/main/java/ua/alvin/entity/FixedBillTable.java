@@ -14,10 +14,10 @@ public class FixedBillTable implements BillTable {
     private int id;
 
     @Column(name = "house_heating")
-    private int houseHeatingPrice;
+    private double houseHeatingPrice;
 
     @Column(name = "rent_service")
-    private int rentServicePrice;
+    private double rentServicePrice;
 
     @Column(name = "garbage_removal")
     private double garbageRemovalPrice;
@@ -37,19 +37,19 @@ public class FixedBillTable implements BillTable {
         this.id = id;
     }
 
-    public int getHouseHeatingPrice() {
+    public double getHouseHeatingPrice() {
         return houseHeatingPrice;
     }
 
-    public void setHouseHeatingPrice(int houseHeatingPrice) {
+    public void setHouseHeatingPrice(double houseHeatingPrice) {
         this.houseHeatingPrice = houseHeatingPrice;
     }
 
-    public int getRentServicePrice() {
+    public double getRentServicePrice() {
         return rentServicePrice;
     }
 
-    public void setRentServicePrice(int rentServicePrice) {
+    public void setRentServicePrice(double rentServicePrice) {
         this.rentServicePrice = rentServicePrice;
     }
 

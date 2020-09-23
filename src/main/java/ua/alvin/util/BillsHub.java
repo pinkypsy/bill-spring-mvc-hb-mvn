@@ -3,18 +3,14 @@ package ua.alvin.util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import ua.alvin.entity.CountedBillTable;
 import ua.alvin.entity.FixedBillTable;
 import ua.alvin.entity.ResultBillTable;
 import ua.alvin.entity.TariffsTable;
 import ua.alvin.service.TableService;
 
-import javax.validation.constraints.Pattern;
 import java.util.Date;
 import java.util.List;
 
@@ -235,7 +231,7 @@ public class BillsHub {
 
     }
 
-    private int computeColdWaterPrice(CountedBillTable previousMonthBill) {
+    private double computeColdWaterPrice(CountedBillTable previousMonthBill) {
         System.out.println("countedBillTable " + countedBillTable);
         System.out.println("previousMonthBill " + previousMonthBill);
 
@@ -244,30 +240,30 @@ public class BillsHub {
 
     }
 
-    private int computeHotWaterPrice(CountedBillTable previousMonthBill) {
+    private double computeHotWaterPrice(CountedBillTable previousMonthBill) {
 
         return (countedBillTable.getHotWater() - previousMonthBill.getHotWater()) *
                 tariffsTable.getHotWaterTariff();
 
     }
 
-    private int computeGasSupplyPrice(CountedBillTable previousMonthBill) {
+    private double computeGasSupplyPrice(CountedBillTable previousMonthBill) {
 
         return (countedBillTable.getGasSupply() - previousMonthBill.getGasSupply()) *
                 tariffsTable.getGasSupplyTariff();
 
     }
 
-    private int computeSewagePrice(CountedBillTable previousMonthBill) {
+    private double computeSewagePrice(CountedBillTable previousMonthBill) {
 
         return (countedBillTable.getColdWater() + countedBillTable.getHotWater()) *
                 tariffsTable.getSewageTariff();
 
     }
 
-    private int computeElectricityPrice(CountedBillTable previousMonthBill) {
+    private double computeElectricityPrice(CountedBillTable previousMonthBill) {
 
-        int resultPrice = 0;
+        double resultPrice = 0;
 
 
         int electricityValue = countedBillTable.getElectricity() - previousMonthBill.getElectricity();
@@ -281,11 +277,11 @@ public class BillsHub {
         } else /*if (electricityValue > electricityTariffDelimiter)*/ {
             System.out.println("electricityValue > 100");
             System.out.println("getElectricityAfter100Tariff " + getElectricityAfterDelimiterTariff());
-            int priceBeforeDelimiter = (electricityValue - Math.abs(electricityTariffDelimiter - electricityValue))
+            double priceBeforeDelimiter = (electricityValue - Math.abs(electricityTariffDelimiter - electricityValue))
                     * tariffsTable.getElectricityBeforeDelimiterTariff(); // 130 - (100-130)
             System.out.println("priceBeforeDelimiter " + priceBeforeDelimiter);
 
-            int priceAfterDelimiter = Math.abs(electricityTariffDelimiter - electricityValue)
+            double priceAfterDelimiter = Math.abs(electricityTariffDelimiter - electricityValue)
                     * tariffsTable.getElectricityAfterDelimiterTariff();
 
             System.out.println("priceAfterDelimiter " + priceAfterDelimiter);

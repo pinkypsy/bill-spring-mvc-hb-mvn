@@ -34,10 +34,15 @@ public class ResultBillCalculator {
     }
 
 
-    public ResultBillTable calculateAndReturnResultBillTable(ResultBillTable resultBillTable) {
+    public ResultBillTable calculateAndUpdateResultBillTable(ResultBillTable resultBillTable) {
         this.resultBillTable = resultBillTable;
 
         initializeTables();
+
+        System.out.println("resultBillTable int RBCalc " + resultBillTable);
+        System.out.println("tariffsTable int RBCalc " + tariffsTable);
+        System.out.println("fixedBillTable int RBCalc " + fixedBillTable);
+        System.out.println("countedBillTable int RBCalc " + countedBillTable);
 
         setAllCountedValues();
 
@@ -63,7 +68,9 @@ public class ResultBillCalculator {
 
         CountedBillTable previousMonthBill =
                 (CountedBillTable) countedBillTableService.getBillByID(countedBillTableService.getLastInsertedID()/* - 1*/);
-//        System.out.println(previousMonthBill.getElectricity());
+
+        System.out.println(previousMonthBill);
+
         if (previousMonthBill == null) {
             // if it is FIRST bill in the DataBase
             previousMonthBill = new CountedBillTable();
@@ -76,7 +83,7 @@ public class ResultBillCalculator {
 
     }
 
-    private int computeColdWaterPrice(CountedBillTable previousMonthBill) {
+    private double computeColdWaterPrice(CountedBillTable previousMonthBill) {
         System.out.println("countedBillTable " + resultBillTable.getCountedBillTable());
         System.out.println("previousMonthBill " + previousMonthBill);
 
@@ -85,30 +92,30 @@ public class ResultBillCalculator {
 
     }
 
-    private int computeHotWaterPrice(CountedBillTable previousMonthBill) {
+    private double computeHotWaterPrice(CountedBillTable previousMonthBill) {
 
         return (countedBillTable.getHotWater() - previousMonthBill.getHotWater()) *
                 tariffsTable.getHotWaterTariff();
 
     }
 
-    private int computeGasSupplyPrice(CountedBillTable previousMonthBill) {
+    private double computeGasSupplyPrice(CountedBillTable previousMonthBill) {
 
         return (countedBillTable.getGasSupply() - previousMonthBill.getGasSupply()) *
                 tariffsTable.getGasSupplyTariff();
 
     }
 
-    private int computeSewagePrice(CountedBillTable previousMonthBill) {
+    private double computeSewagePrice(CountedBillTable previousMonthBill) {
 
         return (countedBillTable.getColdWater() + countedBillTable.getHotWater()) *
                 tariffsTable.getSewageTariff();
 
     }
 
-    private int computeElectricityPrice(CountedBillTable previousMonthBill) {
+    private double computeElectricityPrice(CountedBillTable previousMonthBill) {
 
-        int resultPrice = 0;
+        double resultPrice = 0;
 
 
         int electricityValue = resultBillTable.getCountedBillTable().getElectricity() - previousMonthBill.getElectricity();
@@ -122,12 +129,12 @@ public class ResultBillCalculator {
         } else /*if (electricityValue > electricityTariffDelimiter)*/ {
             System.out.println("electricityValue > 100");
             System.out.println("getElectricityAfter100Tariff " + tariffsTable.getElectricityAfterDelimiterTariff());
-            int priceBeforeDelimiter = (electricityValue -
+            double priceBeforeDelimiter = (electricityValue -
                     Math.abs(tariffsTable.getElectricityTariffDelimiter() - electricityValue))
                     * tariffsTable.getElectricityBeforeDelimiterTariff(); // 130 - (100-130)
             System.out.println("priceBeforeDelimiter " + priceBeforeDelimiter);
 
-            int priceAfterDelimiter = Math.abs(tariffsTable.getElectricityTariffDelimiter() - electricityValue)
+            double priceAfterDelimiter = Math.abs(tariffsTable.getElectricityTariffDelimiter() - electricityValue)
                     * tariffsTable.getElectricityAfterDelimiterTariff();
 
             System.out.println("priceAfterDelimiter " + priceAfterDelimiter);

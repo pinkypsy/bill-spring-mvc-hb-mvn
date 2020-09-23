@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,6 +20,17 @@ public class Main {
                 new AnnotationConfigApplicationContext(SportConfig.class);
 
         Int ci = context.getBean("ci", Int.class);
+
+
+        BigDecimal bigDecimal = new BigDecimal("583");
+
+        BigDecimal bigDecimal2 = new BigDecimal("96");
+
+        System.out.println(bigDecimal.divide(bigDecimal2, 4));
+
+        Double aDouble = 13.5;
+
+        System.out.println(Math.floor(aDouble * 100));
 
 //        ci.a();
 //        List<Integer> ab = Arrays.asList(1,2,3,4,5,6);

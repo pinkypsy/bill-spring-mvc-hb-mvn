@@ -45,6 +45,8 @@ import java.util.List;
 
             Session session = sessionFactory.getCurrentSession();
 
+            System.out.println("billId: " + billId);
+
             return session.get(CountedBillTable.class, (billId));
         }
 
@@ -74,7 +76,14 @@ import java.util.List;
 
             Session session = sessionFactory.getCurrentSession();
 
-            lastInsertedID = (int) (session.createSQLQuery("SELECT MAX(id) from counted_bill").setMaxResults(1).uniqueResult());
+            System.out.println("session in countedBill getLastInserted " + session);
+
+
+            try {
+                lastInsertedID = (int) (session.createSQLQuery("SELECT MAX(id) from counted_bill").setMaxResults(1).uniqueResult());
+            } catch (NullPointerException e) {
+                lastInsertedID = 0;
+            }
 
             System.out.println("lastInsertedID in DAO " + lastInsertedID);
             return lastInsertedID;

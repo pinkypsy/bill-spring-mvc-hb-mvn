@@ -38,7 +38,7 @@
     <%--    </div>--%>
 
 </div>
-<a href="${pageContext.request.contextPath}/bill/test">TEST</a>
+<%--<a href="${pageContext.request.contextPath}/bill/test">TEST</a>--%>
 
 <table>
     <tr>
@@ -59,28 +59,28 @@
     <c:forEach var="resultBillTable" items="${resultBillTableList}">
 
         <c:url var="detailsLink" value="/bill/details">
-            <c:param name="billId" value="${resultBillTable.id}"/>
+            <c:param name="billId" value="${resultBillTableList.id}"/>
         </c:url>
 
         <c:url var="updateLink" value="/bill/update">
-            <c:param name="billId" value="${resultBillTable.id}"/>
+            <c:param name="billId" value="${resultBillTableList.id}"/>
         </c:url>
 
         <c:url var="deleteLink" value="/bill/delete">
-            <c:param name="billId" value="${resultBillTable.id}"/>
+            <c:param name="billId" value="${resultBillTableList.id}"/>
         </c:url>
         <tr>
-            <td>${resultBillTable.id}</td>
-            <td>${resultBillTable.hotWater / 100}</td>
-            <td>${resultBillTable.coldWater / 100}</td>
-            <td>${resultBillTable.sewage / 100}</td>
-            <td>${resultBillTable.electricity / 100}</td>
-            <td>${resultBillTable.gasSupply / 100}</td>
-            <td>${resultBillTable.houseHeating / 100}</td>
-            <td>${resultBillTable.rentService / 100}</td>
-            <td>${resultBillTable.garbageRemoval / 100}</td>
-            <td>${resultBillTable.indicationDate}</td>
-            <td>${resultBillTable.totalToPay / 100}</td>
+            <td>${resultBillTableList.id}</td>
+            <td>${resultBillTableList.hotWater}</td>
+            <td>${resultBillTableList.coldWater}</td>
+            <td>${resultBillTableList.sewage}</td>
+            <td>${resultBillTableList.electricity}</td>
+            <td>${resultBillTableList.gasSupply}</td>
+            <td>${resultBillTableList.houseHeating}</td>
+            <td>${resultBillTableList.rentService}</td>
+            <td>${resultBillTableList.garbageRemoval}</td>
+            <td>${resultBillTableList.indicationDate}</td>
+            <td>${resultBillTableList.totalToPay}</td>
             <td>
 
                 <a href="${detailsLink}">Details</a>

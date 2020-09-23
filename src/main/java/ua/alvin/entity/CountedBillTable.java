@@ -27,6 +27,11 @@ public class CountedBillTable implements BillTable {
     @Column(name = "gas_supply")
     private int gasSupply;
 
+    @Column(name = "house_heating")
+    private int houseHeating;
+
+
+
     @Column(name = "indication_date")
     private Date indicationDate;
 
@@ -110,5 +115,13 @@ public class CountedBillTable implements BillTable {
                 ", resultBillTable=" + resultBillTable +
                 ", indicationDate=" + indicationDate +
                 '}';
+    }
+
+    public int getHouseHeating() {
+        return houseHeating;
+    }
+
+    public void setHouseHeating(int houseHeating) {
+        this.houseHeating = houseHeating;
     }
 }

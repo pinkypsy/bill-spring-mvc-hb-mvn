@@ -34,7 +34,7 @@
 <div id="container">
     <div id="content">
 
-        <form:form action="saveBill" modelAttribute="billsHub" method="POST" cssClass="saveBillForm">
+        <form:form action="saveBill" modelAttribute="resultBillTable" method="POST" cssClass="saveBillForm">
             <table>
                 <tbody>
 
@@ -44,13 +44,13 @@
 
                 <tr>
                     <td><label>Electricity Tariff Delimiter:</label></td>
-                    <td><form:input path="electricityTariffDelimiter" /></td>
+                    <td><form:input path="tariffsTable.electricityTariffDelimiter" /></td>
                 </tr>
                 
                 <tr>
                     <td><label>Cold Water Tariff:</label></td>
-                    <td><form:input path="coldWaterTariff"
-                                    pattern = "\d+\.\d*"
+                    <td><form:input path="tariffsTable.coldWaterTariff"
+                                    pattern = "\d+\.?\d*"
                                     title="Use decimal numbers and point as the separator"/></td>
                 </tr>
 
@@ -60,26 +60,26 @@
                 </tr>
 
                 <tr>
-                    <td><label>Electricity Before ${billsHub.electricityTariffDelimiter} kVt Tariff:</label></td>
-                    <td><form:input path="electricityBeforeDelimiterTariff"
-                                    pattern = "\d+\.\d*"
+                    <td><label>Electricity Before ${resultBillTable.tariffsTable.electricityTariffDelimiter} kVt Tariff:</label></td>
+                    <td><form:input path="tariffsTable.electricityBeforeDelimiterTariff"
+                                    pattern = "\d+\.?\d*"
                                     title="Use decimal numbers and point as the separator"/></td>
                 </tr>
 
                 <tr>
-                    <td><label>Electricity After ${billsHub.electricityTariffDelimiter} kVt Tariff:</label></td>
-                    <td><form:input path="electricityAfterDelimiterTariff"
-                                    pattern = "\d+\.\d*"
+                    <td><label>Electricity After ${resultBillTable.tariffsTable.electricityTariffDelimiter} kVt Tariff:</label></td>
+                    <td><form:input path="tariffsTable.electricityAfterDelimiterTariff"
+                                    pattern = "\d+\.?\d*"
                                     title="Use decimal numbers and point as the separator"/></td>
                 </tr>
 
                 <tr>
                     <td><label>Electricity indication, kVt:</label></td>
-                    <td><form:input path="electricity" /></td>
+                    <td><form:input path="countedBillTable.electricity" /></td>
                 </tr>
                 <tr>
                     <td><label>Garbage Removal Price:</label></td>
-                    <td><form:input path="garbageRemovalPrice" /></td>
+                    <td><form:input path="fixedBillTable.garbageRemovalPrice" /></td>
                 </tr>
 
                 <tr>

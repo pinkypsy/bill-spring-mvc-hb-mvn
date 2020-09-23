@@ -24,22 +24,25 @@ public class TariffsTable implements BillTable {
 
     @Value("${coldWaterTariff * 100}")
     @Column(name = "cold_water")
-    private int coldWaterTariff;
+    private double coldWaterTariff;
 
     @Column(name = "hot_water")
-    private int hotWaterTariff;
+    private double hotWaterTariff;
 
     @Column(name = "sewage")
-    private int sewageTariff;
+    private double sewageTariff;
 
     @Column(name = "electricity_beforeDelimiter")
-    private int electricityBeforeDelimiterTariff;
+    private double electricityBeforeDelimiterTariff;
 
     @Column(name = "electricity_afterDelimiter")
-    private int electricityAfterDelimiterTariff;
+    private double electricityAfterDelimiterTariff;
 
     @Column(name = "gas_supply")
-    private int gasSupplyTariff;
+    private double gasSupplyTariff;
+
+    @Column(name = "house_heating")
+    private double houseHeatingTariff;
 
     @Column(name = "valid_by_date")
     private Date dateTariffIsValid;
@@ -55,7 +58,7 @@ for 100 kVt: electricityTariff = 90
 and for the remaining 50 kVt: electricityTariff = 168.
  */
     @Column(name = "electricity_tariff_delimiter")
-    @Value("${electricityTariffDelimiter}")
+//    @Value("${electricityTariffDelimiter}")
     private short electricityTariffDelimiter;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -70,51 +73,51 @@ and for the remaining 50 kVt: electricityTariff = 168.
         this.id = id;
     }
 
-    public int getColdWaterTariff() {
+    public double getColdWaterTariff() {
         return coldWaterTariff;
     }
 
-    public void setColdWaterTariff(int coldWaterTariff) {
+    public void setColdWaterTariff(double coldWaterTariff) {
         this.coldWaterTariff = coldWaterTariff;
     }
 
-    public int getHotWaterTariff() {
+    public double getHotWaterTariff() {
         return hotWaterTariff;
     }
 
-    public void setHotWaterTariff(int hotWaterTariff) {
+    public void setHotWaterTariff(double hotWaterTariff) {
         this.hotWaterTariff = hotWaterTariff;
     }
 
-    public int getSewageTariff() {
+    public double getSewageTariff() {
         return sewageTariff;
     }
 
-    public void setSewageTariff(int sewageTariff) {
+    public void setSewageTariff(double sewageTariff) {
         this.sewageTariff = sewageTariff;
     }
 
-    public int getElectricityBeforeDelimiterTariff() {
+    public double getElectricityBeforeDelimiterTariff() {
         return electricityBeforeDelimiterTariff;
     }
 
-    public void setElectricityBeforeDelimiterTariff(int electricityBeforeDelimiterTariff) {
+    public void setElectricityBeforeDelimiterTariff(double electricityBeforeDelimiterTariff) {
         this.electricityBeforeDelimiterTariff = electricityBeforeDelimiterTariff;
     }
 
-    public int getElectricityAfterDelimiterTariff() {
+    public double getElectricityAfterDelimiterTariff() {
         return electricityAfterDelimiterTariff;
     }
 
-    public void setElectricityAfterDelimiterTariff(int electricityAfterDelimiterTariff) {
+    public void setElectricityAfterDelimiterTariff(double electricityAfterDelimiterTariff) {
         this.electricityAfterDelimiterTariff = electricityAfterDelimiterTariff;
     }
 
-    public int getGasSupplyTariff() {
+    public double getGasSupplyTariff() {
         return gasSupplyTariff;
     }
 
-    public void setGasSupplyTariff(int gasSupplyTariff) {
+    public void setGasSupplyTariff(double gasSupplyTariff) {
         this.gasSupplyTariff = gasSupplyTariff;
     }
 
@@ -146,5 +149,13 @@ and for the remaining 50 kVt: electricityTariff = 168.
 
     public void setElectricityTariffDelimiter(short electricityTariffDelimiter) {
         this.electricityTariffDelimiter = electricityTariffDelimiter;
+    }
+
+    public double getHouseHeatingTariff() {
+        return houseHeatingTariff;
+    }
+
+    public void setHouseHeatingTariff(double houseHeatingTariff) {
+        this.houseHeatingTariff = houseHeatingTariff;
     }
 }
