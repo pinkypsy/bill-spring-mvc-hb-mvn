@@ -38,7 +38,7 @@
     <%--    </div>--%>
 
 </div>
-<a href="${pageContext.request.contextPath}/bill/test">TEST</a>
+<%--<a href="${pageContext.request.contextPath}/bill/test">TEST</a>--%>
 
 <table>
     <tr>
@@ -71,16 +71,16 @@
         </c:url>
         <tr>
             <td>${resultBillTable.id}</td>
-            <td>${resultBillTable.hotWater / 100}</td>
-            <td>${resultBillTable.coldWater / 100}</td>
-            <td>${resultBillTable.sewage / 100}</td>
-            <td>${resultBillTable.electricity / 100}</td>
-            <td>${resultBillTable.gasSupply / 100}</td>
-            <td>${resultBillTable.houseHeating / 100}</td>
-            <td>${resultBillTable.rentService / 100}</td>
-            <td>${resultBillTable.garbageRemoval / 100}</td>
+            <td>${resultBillTable.hotWater}</td>
+            <td>${resultBillTable.coldWater}</td>
+            <td>${resultBillTable.sewage}</td>
+            <td>${resultBillTable.electricity}</td>
+            <td>${resultBillTable.gasSupply}</td>
+            <td>${resultBillTable.houseHeating}</td>
+            <td>${resultBillTable.rentService}</td>
+            <td>${resultBillTable.garbageRemoval}</td>
             <td>${resultBillTable.indicationDate}</td>
-            <td>${resultBillTable.totalToPay / 100}</td>
+            <td>${resultBillTable.totalToPay}</td>
             <td>
 
                 <a href="${detailsLink}">Details</a>
