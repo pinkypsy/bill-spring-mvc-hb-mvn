@@ -55,19 +55,19 @@
                 </tr>
 
                 <tr>
-                    <td><label>Cold Water indication:</label></td>
+                    <td><label>Cold Water indication, m<sup>3</sup>:</label></td>
                     <td><form:input path="countedBillTable.coldWater" /></td>
                 </tr>
 
                 <tr>
-                    <td><label>Electricity Before ${resultBillTable.tariffsTable.electricityTariffDelimiter} kVt Tariff:</label></td>
+                    <td><label>Electricity Tariff Before Tariff Delimiter, kVt:</label></td>
                     <td><form:input path="tariffsTable.electricityBeforeDelimiterTariff"
                                     pattern = "\d+\.?\d*"
                                     title="Use decimal numbers and point as the separator"/></td>
                 </tr>
 
                 <tr>
-                    <td><label>Electricity After ${resultBillTable.tariffsTable.electricityTariffDelimiter} kVt Tariff:</label></td>
+                    <td><label>Electricity Tariff After Tariff Delimiter, kVt:</label></td>
                     <td><form:input path="tariffsTable.electricityAfterDelimiterTariff"
                                     pattern = "\d+\.?\d*"
                                     title="Use decimal numbers and point as the separator"/></td>

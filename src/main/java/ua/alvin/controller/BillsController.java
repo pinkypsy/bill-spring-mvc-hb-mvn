@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ua.alvin.util.MessagePreparator;
 import ua.alvin.util.ResultBillCalculator;
 
 import javax.annotation.PostConstruct;
@@ -29,6 +30,7 @@ public class BillsController {
     private TariffsTable tariffsTable;
 
     private final ResultBillCalculator resultBillCalculator;
+
 
     @Autowired
     public BillsController(@Qualifier(value = "countedBillTableService") TableService countedBillTableService,
@@ -135,16 +137,8 @@ public class BillsController {
 
         ResultBillTable previousResultBillTableByID = (ResultBillTable) resultBillTableService.getBillByID(billId - 1);
 
-        String usagePeriodMessage;
+        String usagePeriodMessage = MessagePreparator.usagePeriod(resultBillTableByID, previousResultBillTableByID);
 
-        if (previousResultBillTableByID != null){
-            usagePeriodMessage = "From " + previousResultBillTableByID.getFormattedFillingDate() + " to " + resultBillTableByID.getFormattedFillingDate();
-        }else usagePeriodMessage = "Total";
-
-//        System.out.println("countedBillTableByID " + countedBillTableByID);
-//        System.out.println("fixedBillTableByID " + fixedBillTableByID);
-//        System.out.println("tariffsTableByID " + tariffsTableByID);
-//        System.out.println("resultBillTableByID " + resultBillTableByID);
 
         model.addAttribute("countedBillTableByID", countedBillTableByID);
         model.addAttribute("previousCountedBillTableByID", previousCountedBillTableByID);

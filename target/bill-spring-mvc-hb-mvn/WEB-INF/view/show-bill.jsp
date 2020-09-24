@@ -40,60 +40,60 @@
         <tr>
             <td>Electricity</td>
 
-            <td>${countedBillTable.electricity}</td>
-            <td>${countedBillTable.electricity - previousCountedBillTable.electricity}</td>
+            <td>${countedBillTableByID.electricity}</td>
+            <td>${countedBillTableByID.electricity - previousCountedBillTableByID.electricity}</td>
 
-            <td style="width: 50%">${tariffsTable.electricityBeforeDelimiterTariff} UAH</td>
-            <td style="width: 50%">${tariffsTable.electricityAfterDelimiterTariff} UAH</td>
-            <td>${resultBillTable.electricity} UAH</td>
+            <td style="width: 50%">${tariffsTableByID.electricityBeforeDelimiterTariff} UAH</td>
+            <td style="width: 50%">${tariffsTableByID.electricityAfterDelimiterTariff} UAH</td>
+            <td>${resultBillTableByID.electricity} UAH</td>
         </tr>
         <tr>
             <td>Cold Water</td>
-            <td>${countedBillTable.coldWater}</td>
-            <td>${countedBillTable.coldWater - previousCountedBillTable.coldWater}</td>
-            <td colspan="2">${tariffsTable.coldWaterTariff} UAH</td>
-            <td>${resultBillTable.coldWater} UAH</td>
+            <td>${countedBillTableByID.coldWater}</td>
+            <td>${countedBillTableByID.coldWater - previousCountedBillTableByID.coldWater}</td>
+            <td colspan="2">${tariffsTableByID.coldWaterTariff} UAH</td>
+            <td>${resultBillTableByID.coldWater} UAH</td>
         </tr>
         <tr>
             <td>Hot Water</td>
-            <td>${countedBillTable.hotWater}</td>
-            <td>${countedBillTable.hotWater - previousCountedBillTable.hotWater}</td>
-            <td colspan="2">${tariffsTable.hotWaterTariff} UAH</td>
-            <td>${resultBillTable.hotWater} UAH</td>
+            <td>${countedBillTableByID.hotWater}</td>
+            <td>${countedBillTableByID.hotWater - previousCountedBillTableByID.hotWater}</td>
+            <td colspan="2">${tariffsTableByID.hotWaterTariff} UAH</td>
+            <td>${resultBillTableByID.hotWater} UAH</td>
         </tr>
         <tr>
             <td>Gas Supply</td>
-            <td>${countedBillTable.gasSupply}</td>
-            <td>${countedBillTable.gasSupply - previousCountedBillTable.gasSupply}</td>
-            <td colspan="2">${tariffsTable.gasSupplyTariff} UAH</td>
-            <td>${resultBillTable.gasSupply} UAH</td>
+            <td>${countedBillTableByID.gasSupply}</td>
+            <td>${countedBillTableByID.gasSupply - previousCountedBillTableByID.gasSupply}</td>
+            <td colspan="2">${tariffsTableByID.gasSupplyTariff} UAH</td>
+            <td>${resultBillTableByID.gasSupply} UAH</td>
         </tr>
         <tr>
             <td>House Heating</td>
-            <td>${countedBillTable.houseHeating}</td>
-            <td>${countedBillTable.houseHeating - previousCountedBillTable.houseHeating}</td>
-            <td colspan="2">${countedBillTable.houseHeating} UAH</td>
-            <td>${resultBillTable.houseHeating} UAH</td>
+            <td>${countedBillTableByID.houseHeating}</td>
+            <td>${countedBillTableByID.houseHeating - previousCountedBillTableByID.houseHeating}</td>
+            <td colspan="2">${countedBillTableByID.houseHeating} UAH</td>
+            <td>${resultBillTableByID.houseHeating} UAH</td>
         </tr>
         <tr>
             <td>Sewage</td>
-            <td colspan="2">${countedBillTable.sewage}</td>
-            <td colspan="2">${tariffsTable.sewageTariff} UAH</td>
-            <td>${resultBillTable.sewage} UAH</td>
+            <td colspan="2">${countedBillTableByID.sewage}</td>
+            <td colspan="2">${tariffsTableByID.sewageTariff} UAH</td>
+            <td>${resultBillTableByID.sewage} UAH</td>
         </tr>
         <tr>
             <td>Rent Service</td>
 <%--            <td colspan="4" style="text-align: right">${resultBillTable.fixedBillTable.rentServicePrice} UAH</td>--%>
-            <td colspan="5" style="text-align: right">${resultBillTable.rentService} UAH</td>
+            <td colspan="5" style="text-align: right">${resultBillTableByID.rentService} UAH</td>
         </tr>
         <tr>
             <td>Garbage Removal</td>
 <%--            <td colspan="2">${resultBillTable.fixedBillTable.garbageRemovalPrice } UAH</td>--%>
-            <td colspan="5" style="text-align: right">${resultBillTable.garbageRemoval} UAH</td>
+            <td colspan="5" style="text-align: right">${resultBillTableByID.garbageRemoval} UAH</td>
         </tr>
         <tr>
             <td><strong>Total to charge:</strong></td>
-            <td colspan="5" style="text-align: right">${resultBillTable.totalToPay} UAH</td>
+            <td colspan="5" style="text-align: right">${resultBillTableByID.totalToPay} UAH</td>
         </tr>
         </tbody>
 
