@@ -52,8 +52,9 @@ public class BillsController {
     public void initTables() {
 
         tariffsTable = new TariffsTable();
-
         TariffsTable previousMonthTariff = (TariffsTable) tariffsTableService.getBillByID(tariffsTableService.getLastInsertedID());
+
+        System.out.println("previousMonthTariff " + previousMonthTariff);
 
         if (previousMonthTariff != null) {
             tariffsTable.setColdWaterTariff(previousMonthTariff.getColdWaterTariff());

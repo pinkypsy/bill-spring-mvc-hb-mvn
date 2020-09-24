@@ -81,7 +81,12 @@ public class ResultBillTableDAOImpl implements TablesDAO {
 
         Session session = sessionFactory.getCurrentSession();
 
-        lastInsertedID = (int) (session.createSQLQuery("SELECT MAX(id) from result_bill").setMaxResults(1).uniqueResult());
+
+        try {
+            lastInsertedID = (int) (session.createSQLQuery("SELECT MAX(id) from result_bill").setMaxResults(1).uniqueResult());
+        } catch (NullPointerException e) {
+            lastInsertedID = 0;
+        }
 
         System.out.println("lastInsertedID in DAO " + lastInsertedID);
         return lastInsertedID;

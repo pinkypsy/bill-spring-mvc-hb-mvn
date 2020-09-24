@@ -60,7 +60,6 @@ public class TariffsTableDAOImpl implements TablesDAO {
         Query<TariffsTable> tariffsTableQuery =
                 session.createQuery("from TariffsTable", TariffsTable.class);
 
-
         return tariffsTableQuery.getResultList();
     }
 
@@ -77,7 +76,11 @@ public class TariffsTableDAOImpl implements TablesDAO {
 
         Session session = sessionFactory.getCurrentSession();
 
-        lastInsertedID = (int) (session.createSQLQuery("SELECT MAX(id) from tariffs").setMaxResults(1).uniqueResult());
+        try {
+            lastInsertedID = (int) (session.createSQLQuery("SELECT MAX(id) from tariffs").setMaxResults(1).uniqueResult());
+        } catch (NullPointerException e) {
+            lastInsertedID = 0;
+        }
 
         System.out.println("lastInsertedID in DAO " + lastInsertedID);
         return lastInsertedID;

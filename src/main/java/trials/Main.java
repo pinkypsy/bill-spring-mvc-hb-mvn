@@ -32,6 +32,8 @@ public class Main {
 
         System.out.println(Math.floor(aDouble * 100));
 
+
+
 //        ci.a();
 //        List<Integer> ab = Arrays.asList(1,2,3,4,5,6);
 //        System.out.println(ab);
@@ -39,6 +41,26 @@ public class Main {
 //        System.out.println(ab);
 
 //        new Ci().a();
+
+
+
+
+
+
+        System.out.println(sumN(3));
+    }
+
+    public static int sumN(int n) {
+        int result = 0;
+        for(int i = 0; i <= n; i++) {
+//            System.out.print(i + " ");
+            //Write code under this line
+            System.out.println(result += i);
+//            System.out.println(result += i);
+//            result = result + i;
+        }
+        return result;
+
 
     }
 
