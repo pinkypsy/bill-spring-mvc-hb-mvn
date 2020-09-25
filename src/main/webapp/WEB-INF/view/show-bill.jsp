@@ -23,32 +23,34 @@
 
 <div id="container">
 
+
+
+<%----%>
     <table>
         <thead>
         <tr>
             <th rowspan="2">Utility Service</th>
             <th colspan="2">Usage</th>
-            <th colspan="2">Tariff Rate</th>
+            <th colspan="2" rowspan="2">Tariff Rate</th>
             <th rowspan="2">Charge</th>
         </tr>
         <tr>
-            <td style="width: 50%">Total</td>
-            <td style="width: 50%">${formFillMessages.get("usagePeriodMessage")}</td>
-            <td style="width: 50%">Before ${formFillMessages.get("delimiterValue")} kWh</td>
-            <td style="width: 50%">After ${formFillMessages.get("delimiterValue")} kWh</td>
-<%--            <td style="width: 50%">${messagePreparator.get("usagePeriodMessage")}</td>--%>
+            <td>Total</td>
+            <td>${formFillMessages.get("usagePeriodMessage")}</td>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td>Electricity</td>
-
-            <td>${countedBillTableByID.electricity}</td>
-            <td>${countedBillTableByID.electricity - previousCountedBillTableByID.electricity}</td>
-
-            <td style="width: 50%">${tariffsTableByID.electricityBeforeDelimiterTariff} UAH</td>
-            <td style="width: 50%">${tariffsTableByID.electricityAfterDelimiterTariff} UAH</td>
-            <td>${resultBillTableByID.electricity} UAH</td>
+            <td rowspan="2">Electricity</td>
+            <td rowspan="2">${countedBillTableByID.electricity}</td>
+            <td rowspan="2">${countedBillTableByID.electricity - previousCountedBillTableByID.electricity}</td>
+            <td>Before ${formFillMessages.get("delimiterValue")} kWh</td>
+            <td>After ${formFillMessages.get("delimiterValue")} kWh</td>
+            <td rowspan="2">${resultBillTableByID.electricity} UAH</td>
+        </tr>
+        <tr>
+            <td>${tariffsTableByID.electricityBeforeDelimiterTariff} UAH</td>
+            <td>${tariffsTableByID.electricityAfterDelimiterTariff} UAH</td>
         </tr>
         <tr>
             <td>Cold Water</td>
