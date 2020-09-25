@@ -136,7 +136,10 @@ and for the remaining 50 kVt: electricityTariff = 168.
 
     public String getFormattedFillingDate() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        System.out.println("simpleDateFormat " + simpleDateFormat);
+        System.out.println("fillingDate " + fillingDate);
         formattedFillingDate = simpleDateFormat.format(fillingDate);
+
         return formattedFillingDate;
     }
 

@@ -1,9 +1,7 @@
 package ua.alvin.controller;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.alvin.entity.*;
-import ua.alvin.util.BillsHub;
 import ua.alvin.service.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,7 +14,9 @@ import ua.alvin.util.ResultBillCalculator;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/bill")
@@ -28,6 +28,7 @@ public class BillsController {
     private final TableService fixedBillTableService;
 
     private TariffsTable tariffsTable;
+    private TariffsTable previousMonthTariff;
 
     private final ResultBillCalculator resultBillCalculator;
 
@@ -52,9 +53,11 @@ public class BillsController {
 
     @PostConstruct
     public void initTables() {
-
+//should I initialize table in other class and invoke its method in addIndications()
         tariffsTable = new TariffsTable();
-        TariffsTable previousMonthTariff = (TariffsTable) tariffsTableService.getBillByID(tariffsTableService.getLastInsertedID());
+
+        System.out.println("tariffsTable " + tariffsTable);
+        previousMonthTariff = (TariffsTable) tariffsTableService.getBillByID(tariffsTableService.getLastInsertedID());
 
         System.out.println("previousMonthTariff " + previousMonthTariff);
 
@@ -64,7 +67,6 @@ public class BillsController {
             tariffsTable.setElectricityBeforeDelimiterTariff(previousMonthTariff.getElectricityBeforeDelimiterTariff());
             tariffsTable.setElectricityAfterDelimiterTariff(previousMonthTariff.getElectricityAfterDelimiterTariff());
         }
-
 
 
         System.out.println("BEAN CONSTRUCTED");
@@ -93,13 +95,14 @@ public class BillsController {
 
         ResultBillTable resultBillTable = new ResultBillTable();
 
-//        resultBillTable.setTariffsTable(new TariffsTable());
+//        Map<String, String> addIndicationMessages = MessagePreparator.addIndicationMessages(tariffsTable);
+
         resultBillTable.setTariffsTable(tariffsTable);
         resultBillTable.setFixedBillTable(new FixedBillTable());
         resultBillTable.setCountedBillTable(new CountedBillTable());
 
-
         model.addAttribute("resultBillTable", resultBillTable);
+//        model.addAttribute("addIndicationMessages", addIndicationMessages);
 
 
         return "fill-bill-form";
@@ -137,8 +140,12 @@ public class BillsController {
 
         ResultBillTable previousResultBillTableByID = (ResultBillTable) resultBillTableService.getBillByID(billId - 1);
 
-        String usagePeriodMessage = MessagePreparator.usagePeriod(resultBillTableByID, previousResultBillTableByID);
+        Map<String, String> formFillMessages = MessagePreparator.detailsMessages(
+                resultBillTableByID,
+                previousResultBillTableByID,
+                tariffsTableByID);
 
+        System.out.println("formFillMessages " + formFillMessages);
 
         model.addAttribute("countedBillTableByID", countedBillTableByID);
         model.addAttribute("previousCountedBillTableByID", previousCountedBillTableByID);
@@ -146,7 +153,7 @@ public class BillsController {
         model.addAttribute("tariffsTableByID", tariffsTableByID);
         model.addAttribute("resultBillTableByID", resultBillTableByID);
         model.addAttribute("previousResultBillTableByID", previousResultBillTableByID);
-        model.addAttribute("usagePeriodMessage", usagePeriodMessage);
+        model.addAttribute("formFillMessages", formFillMessages);
 
         return "show-bill";
     }
@@ -162,21 +169,4 @@ public class BillsController {
         //        FIX-ME
         return "redirect:/bill/addIndicationsForm";
     }
-
-
 }
-//    @RequestMapping("/test")
-//    public String test(Model model) {
-//
-//        ResultBillTable resultBillTable = new ResultBillTable();
-//
-//        resultBillTable.setTariffsTable(new TariffsTable());
-//        resultBillTable.setFixedBillTable(new FixedBillTable());
-//        resultBillTable.setCountedBillTable(new CountedBillTable());
-//
-////        resultBillTable.getCountedBillTable().setElectricity(999);
-//
-//        model.addAttribute("resultBillTable", resultBillTable);
-//
-//        return "test";
-//    }

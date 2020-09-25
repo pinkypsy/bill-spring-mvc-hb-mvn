@@ -28,12 +28,15 @@
         <tr>
             <th rowspan="2">Utility Service</th>
             <th colspan="2">Usage</th>
-            <th colspan="2" rowspan="2">Tariff Rate</th>
+            <th colspan="2">Tariff Rate</th>
             <th rowspan="2">Charge</th>
         </tr>
         <tr>
             <td style="width: 50%">Total</td>
-            <td style="width: 50%">${usagePeriodMessage}</td>
+            <td style="width: 50%">${formFillMessages.get("usagePeriodMessage")}</td>
+            <td style="width: 50%">Before ${formFillMessages.get("delimiterValue")} kWh</td>
+            <td style="width: 50%">After ${formFillMessages.get("delimiterValue")} kWh</td>
+<%--            <td style="width: 50%">${messagePreparator.get("usagePeriodMessage")}</td>--%>
         </tr>
         </thead>
         <tbody>

@@ -53,21 +53,20 @@
                                     pattern = "\d+\.?\d*"
                                     title="Use decimal numbers and point as the separator"/></td>
                 </tr>
-
                 <tr>
                     <td><label>Cold Water indication, m<sup>3</sup>:</label></td>
                     <td><form:input path="countedBillTable.coldWater" /></td>
                 </tr>
 
                 <tr>
-                    <td><label>Electricity Tariff Before Tariff Delimiter, kVt:</label></td>
+                    <td><label>Electricity Price Before Delimiter:</label></td>
                     <td><form:input path="tariffsTable.electricityBeforeDelimiterTariff"
                                     pattern = "\d+\.?\d*"
                                     title="Use decimal numbers and point as the separator"/></td>
                 </tr>
 
                 <tr>
-                    <td><label>Electricity Tariff After Tariff Delimiter, kVt:</label></td>
+                    <td><label>Electricity Price After Delimiter:</label></td>
                     <td><form:input path="tariffsTable.electricityAfterDelimiterTariff"
                                     pattern = "\d+\.?\d*"
                                     title="Use decimal numbers and point as the separator"/></td>

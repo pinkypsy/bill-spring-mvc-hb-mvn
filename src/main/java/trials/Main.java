@@ -19,35 +19,19 @@ public class Main {
        AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(SportConfig.class);
 
-        Int ci = context.getBean("ci", Int.class);
+//        Int ci = context.getBean("ci", Int.class);
 
 
-        BigDecimal bigDecimal = new BigDecimal("583");
+        Boolean a = new Boolean(true);
+        System.out.println("===");
+        System.out.println(a.hashCode());
+        char b = '5';
+        short c = 6;
+        System.out.println(b + c);
+        Integer i = new Integer("10");
 
-        BigDecimal bigDecimal2 = new BigDecimal("96");
+        test(new Ci());
 
-        System.out.println(bigDecimal.divide(bigDecimal2, 4));
-
-        Double aDouble = 13.5;
-
-        System.out.println(Math.floor(aDouble * 100));
-
-
-
-//        ci.a();
-//        List<Integer> ab = Arrays.asList(1,2,3,4,5,6);
-//        System.out.println(ab);
-//        Ci.rev(ab);
-//        System.out.println(ab);
-
-//        new Ci().a();
-
-
-
-
-
-
-        System.out.println(sumN(3));
     }
 
     public static int sumN(int n) {
@@ -62,6 +46,11 @@ public class Main {
         return result;
 
 
+    }
+
+    public static void test(Ci c){
+
+        System.out.println(c.getTest());
     }
 
 
